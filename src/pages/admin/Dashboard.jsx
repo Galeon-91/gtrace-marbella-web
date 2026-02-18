@@ -1,14 +1,44 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../supabase/supabaseClient';
 import { useLanguage } from '../../context/LanguageContext';
 
-// Lazy load de componentes
-const MembershipSection = lazy(() => import('./sections/MembershipSection'));
-const EventsSection = lazy(() => import('./sections/EventsSection'));
-const ContactsSection = lazy(() => import('./sections/ContactsSection'));
-const RegistrationsAdmin = lazy(() => import('./sections/RegistrationsAdmin')); // ⭐ NUEVO
+// Importación directa de secciones
+import MembershipSection from './sections/MembershipSection';
+import EventsSection from './sections/EventsSection';
+import ContactsSection from './sections/ContactsSection';
+import RegistrationsAdmin from './sections/RegistrationsAdmin';
+import VehiclesSection from './sections/VehiclesSection';
+
+// ⭐ HOOK PERSONALIZADO PARA CARGAR IMAGEN DE FONDO DESDE SUPABASE
+const useBackgroundImage = (path = 'backgrounds/dashboard-bg.jpg') => {
+  const [backgroundUrl, setBackgroundUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBackground = async () => {
+      try {
+        // Obtener URL pública de la imagen
+        const { data } = supabase.storage
+          .from('site-assets')
+          .getPublicUrl(path);
+
+        if (data?.publicUrl) {
+          setBackgroundUrl(data.publicUrl);
+        }
+      } catch (error) {
+        console.error('Error loading background:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBackground();
+  }, [path]);
+
+  return { backgroundUrl, loading };
+};
 
 // ============================================
 // SVG ICONOS PARA SIDEBAR
@@ -16,106 +46,46 @@ const RegistrationsAdmin = lazy(() => import('./sections/RegistrationsAdmin')); 
 
 const MembershipIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
-    <motion.path
-      d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-      animate={{ pathLength: [0.8, 1, 0.8] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-    />
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
     <circle cx="9" cy="7" r="4" />
-    <motion.path
-      d="M23 21v-2a4 4 0 0 0-3-3.87"
-      animate={{ pathLength: [0.5, 1, 0.5] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-    />
-    <motion.path
-      d="M16 3.13a4 4 0 0 1 0 7.75"
-      animate={{ pathLength: [0.5, 1, 0.5] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-    />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
   </svg>
 );
 
 const EventsIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-    <motion.line
-      x1="16" y1="2" x2="16" y2="6"
-      animate={{ y2: [6, 7, 6] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.line
-      x1="8" y1="2" x2="8" y2="6"
-      animate={{ y2: [6, 7, 6] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-    />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
     <line x1="3" y1="10" x2="21" y2="10" />
   </svg>
 );
 
-// ⭐ NUEVO: Icono para Inscripciones
 const RegistrationsIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
-    <motion.path
-      d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-      animate={{ pathLength: [0.8, 1, 0.8] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-    />
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
     <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-    <motion.path
-      d="M9 12h6"
-      animate={{ pathLength: [0.5, 1, 0.5] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-    />
-    <motion.path
-      d="M9 16h6"
-      animate={{ pathLength: [0.5, 1, 0.5] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-    />
+    <path d="M9 12h6" />
+    <path d="M9 16h6" />
   </svg>
 );
 
 const ContactsIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
-    <motion.path
-      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-      animate={{ scale: [1, 1.05, 1] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.circle
-      cx="12" cy="11" r="1"
-      animate={{ r: [1, 1.5, 1] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.circle
-      cx="8" cy="11" r="1"
-      animate={{ r: [1, 1.5, 1] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-    />
-    <motion.circle
-      cx="16" cy="11" r="1"
-      animate={{ r: [1, 1.5, 1] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-    />
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    <circle cx="12" cy="11" r="1" />
+    <circle cx="8" cy="11" r="1" />
+    <circle cx="16" cy="11" r="1" />
   </svg>
 );
 
-const CarsIcon = ({ className }) => (
+const VehiclesIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
-    <motion.path
-      d="M5 17h-2v-3l1.5-4.5h15L21 13v4h-2"
-      animate={{ pathLength: [0.9, 1, 0.9] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.circle
-      cx="7" cy="17" r="2"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-    />
-    <motion.circle
-      cx="17" cy="17" r="2"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-    />
+    <path d="M5 17h-2v-3l1.5-4.5h15L21 13v4h-2" />
+    <circle cx="7" cy="17" r="2" />
+    <circle cx="17" cy="17" r="2" />
+    <path d="M8 10h6" />
   </svg>
 );
 
@@ -148,9 +118,9 @@ const translations = {
       dashboard: "Dashboard",
       memberships: "Membresías",
       events: "Eventos",
-      registrations: "Inscripciones", // ⭐ NUEVO
+      registrations: "Inscripciones",
       contacts: "Contactos",
-      cars: "Vehículos",
+      vehicles: "Vehículos",
       settings: "Configuración"
     },
     logout: "Cerrar Sesión",
@@ -164,9 +134,9 @@ const translations = {
       dashboard: "Dashboard",
       memberships: "Memberships",
       events: "Events",
-      registrations: "Registrations", // ⭐ NUEVO
+      registrations: "Registrations",
       contacts: "Contacts",
-      cars: "Vehicles",
+      vehicles: "Vehicles",
       settings: "Settings"
     },
     logout: "Logout",
@@ -174,23 +144,6 @@ const translations = {
     loading: "Loading..."
   }
 };
-
-// ============================================
-// LOADING COMPONENT
-// ============================================
-
-const LoadingScreen = () => (
-  <div className="flex items-center justify-center h-full">
-    <div className="text-center">
-      <motion.div
-        className="w-16 h-16 border-4 border-gt-gold border-t-transparent rounded-full mx-auto mb-4"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-      />
-      <p className="text-gray-400">Cargando...</p>
-    </div>
-  </div>
-);
 
 // ============================================
 // COMPONENTE PRINCIPAL
@@ -201,12 +154,14 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const t = translations[language] || translations.es;
 
+  // ⭐ CARGAR FONDO DESDE SUPABASE
+  const { backgroundUrl, loading: bgLoading } = useBackgroundImage('backgrounds/dashboard-bg.jpg');
+
   const [activeTab, setActiveTab] = useState('memberships');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [adminName, setAdminName] = useState('Admin');
 
-  // Cargar info del admin
-  useState(() => {
+  useEffect(() => {
     const loadAdminInfo = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
@@ -233,27 +188,56 @@ const AdminDashboard = () => {
     { id: 'dashboard', label: t.tabs.dashboard, Icon: DashboardIcon, badge: null },
     { id: 'memberships', label: t.tabs.memberships, Icon: MembershipIcon, badge: '2' },
     { id: 'events', label: t.tabs.events, Icon: EventsIcon, badge: null },
-    { id: 'registrations', label: t.tabs.registrations, Icon: RegistrationsIcon, badge: null }, // ⭐ NUEVO
+    { id: 'registrations', label: t.tabs.registrations, Icon: RegistrationsIcon, badge: null },
     { id: 'contacts', label: t.tabs.contacts, Icon: ContactsIcon, badge: null },
-    { id: 'cars', label: t.tabs.cars, Icon: CarsIcon, badge: null },
+    { id: 'vehicles', label: t.tabs.vehicles, Icon: VehiclesIcon, badge: null },
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex overflow-hidden">
-      {/* Fondo animado */}
+    <div className="min-h-screen bg-black text-white flex overflow-hidden relative">
+      {/* ⭐⭐⭐ FONDO DINÁMICO DESDE SUPABASE ⭐⭐⭐ */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {/* Imagen de fondo del club desde Supabase */}
+        {backgroundUrl && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.35 }}
+            transition={{ duration: 1 }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('${backgroundUrl}')`,
+              filter: 'brightness(0.3) saturate(1.2)'
+            }}
+          />
+        )}
+        
+        {/* Overlay principal con gradiente */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-gt-gold/10 backdrop-blur-sm" />
+        
+        {/* Gradiente dorado adicional */}
         <div className="absolute inset-0 bg-gradient-to-br from-gt-gold/5 via-black to-gt-gold/5" />
-        {[...Array(15)].map((_, i) => (
+        
+        {/* Patrón de puntos dorados */}
+        <div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: `radial-gradient(circle, #D4AF37 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} 
+        />
+        
+        {/* Partículas doradas flotantes - Solo 10 para rendimiento */}
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-gt-gold/30 rounded-full"
+            className="absolute w-1 h-1 bg-gt-gold/40 rounded-full"
             initial={{
               x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
               y: -20,
             }}
             animate={{
               y: (typeof window !== 'undefined' ? window.innerHeight : 1000) + 20,
-              opacity: [0, 0.5, 0]
+              opacity: [0, 0.6, 0]
             }}
             transition={{
               duration: Math.random() * 10 + 15,
@@ -263,6 +247,19 @@ const AdminDashboard = () => {
             }}
           />
         ))}
+
+        {/* Pulso dorado suave */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-gt-gold/5 via-transparent to-gt-gold/5"
+          animate={{
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
       </div>
 
       {/* Sidebar */}
@@ -271,23 +268,47 @@ const AdminDashboard = () => {
         animate={{ width: sidebarOpen ? 280 : 80 }}
         className="relative z-10 bg-gt-gray-dark/80 backdrop-blur-xl border-r border-white/10 flex flex-col"
       >
-        {/* Logo y Toggle */}
+        {/* Logo */}
         <div className="p-6 border-b border-white/10">
           <div className="flex items-center justify-between">
             <AnimatePresence mode="wait">
-              {sidebarOpen && (
+              {sidebarOpen ? (
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   className="flex items-center gap-3"
                 >
+                  <motion.img 
+                    src="/assets/images/logo-gold.png" 
+                    alt="GT Race Marbella"
+                    className="h-16 w-auto object-contain"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="hidden items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-voga font-bold text-black">
+                      GT
+                    </div>
+                    <div>
+                      <h2 className="font-voga font-bold text-lg text-white">GT Race</h2>
+                      <p className="text-xs text-gray-400">Marbella</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex items-center justify-center w-full"
+                >
                   <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-voga font-bold text-black">
                     GT
-                  </div>
-                  <div>
-                    <h2 className="font-voga font-bold text-lg text-white">GT Race</h2>
-                    <p className="text-xs text-gray-400">Marbella</p>
                   </div>
                 </motion.div>
               )}
@@ -417,126 +438,119 @@ const AdminDashboard = () => {
           </motion.div>
 
           {/* Content Area */}
-          <Suspense fallback={<LoadingScreen />}>
-            <AnimatePresence mode="wait">
-              {activeTab === 'memberships' && (
-                <motion.div
-                  key="memberships"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <MembershipSection />
-                </motion.div>
-              )}
-              
-              {activeTab === 'events' && (
-                <motion.div
-                  key="events"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <EventsSection />
-                </motion.div>
-              )}
+          <AnimatePresence mode="wait">
+            {activeTab === 'memberships' && (
+              <motion.div
+                key="memberships"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <MembershipSection />
+              </motion.div>
+            )}
+            
+            {activeTab === 'events' && (
+              <motion.div
+                key="events"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <EventsSection />
+              </motion.div>
+            )}
 
-              {/* ⭐ NUEVO: Sección de Inscripciones */}
-              {activeTab === 'registrations' && (
-                <motion.div
-                  key="registrations"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <RegistrationsAdmin />
-                </motion.div>
-              )}
-              
-              {activeTab === 'contacts' && (
-                <motion.div
-                  key="contacts"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ContactsSection />
-                </motion.div>
-              )}
+            {activeTab === 'registrations' && (
+              <motion.div
+                key="registrations"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <RegistrationsAdmin />
+              </motion.div>
+            )}
+            
+            {activeTab === 'contacts' && (
+              <motion.div
+                key="contacts"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ContactsSection />
+              </motion.div>
+            )}
 
-              {activeTab === 'dashboard' && (
-                <motion.div
-                  key="dashboard"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                  {/* Stats Cards */}
-                  <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-gray-400 text-sm">Membresías Activas</h3>
-                      <MembershipIcon className="w-5 h-5 text-gt-gold" />
-                    </div>
-                    <p className="text-3xl font-bold text-white mb-2">24</p>
-                    <p className="text-xs text-green-400">↑ 12% este mes</p>
+            {activeTab === 'vehicles' && (
+              <motion.div
+                key="vehicles"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <VehiclesSection />
+              </motion.div>
+            )}
+
+            {activeTab === 'dashboard' && (
+              <motion.div
+                key="dashboard"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-gray-400 text-sm">Membresías Activas</h3>
+                    <MembershipIcon className="w-5 h-5 text-gt-gold" />
                   </div>
+                  <p className="text-3xl font-bold text-white mb-2">24</p>
+                  <p className="text-xs text-green-400">↑ 12% este mes</p>
+                </div>
 
-                  <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-gray-400 text-sm">Eventos Próximos</h3>
-                      <EventsIcon className="w-5 h-5 text-gt-gold" />
-                    </div>
-                    <p className="text-3xl font-bold text-white mb-2">3</p>
-                    <p className="text-xs text-blue-400">2 este mes</p>
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-gray-400 text-sm">Eventos Próximos</h3>
+                    <EventsIcon className="w-5 h-5 text-gt-gold" />
                   </div>
+                  <p className="text-3xl font-bold text-white mb-2">3</p>
+                  <p className="text-xs text-blue-400">2 este mes</p>
+                </div>
 
-                  <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-gray-400 text-sm">Mensajes Nuevos</h3>
-                      <ContactsIcon className="w-5 h-5 text-gt-gold" />
-                    </div>
-                    <p className="text-3xl font-bold text-white mb-2">7</p>
-                    <p className="text-xs text-yellow-400">Pendientes</p>
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-gray-400 text-sm">Mensajes Nuevos</h3>
+                    <ContactsIcon className="w-5 h-5 text-gt-gold" />
                   </div>
-                </motion.div>
-              )}
+                  <p className="text-3xl font-bold text-white mb-2">7</p>
+                  <p className="text-xs text-yellow-400">Pendientes</p>
+                </div>
+              </motion.div>
+            )}
 
-              {activeTab === 'cars' && (
-                <motion.div
-                  key="cars"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-center py-20"
-                >
-                  <CarsIcon className="w-20 h-20 mx-auto mb-4 text-gray-600" />
-                  <h3 className="text-xl font-bold text-gray-400 mb-2">Gestión de Vehículos</h3>
-                  <p className="text-gray-500">Próximamente...</p>
-                </motion.div>
-              )}
-
-              {activeTab === 'settings' && (
-                <motion.div
-                  key="settings"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-center py-20"
-                >
-                  <h3 className="text-xl font-bold text-gray-400 mb-2">Configuración</h3>
-                  <p className="text-gray-500">Próximamente...</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </Suspense>
+            {activeTab === 'settings' && (
+              <motion.div
+                key="settings"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="text-center py-20"
+              >
+                <h3 className="text-xl font-bold text-gray-400 mb-2">Configuración</h3>
+                <p className="text-gray-500">Próximamente...</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </main>
     </div>

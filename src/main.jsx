@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { LanguageProvider } from './context/LanguageContext';
-import { NotificationProvider } from './context/NotificationContext'; // ⭐ NUEVO
+import { NotificationProvider } from './context/NotificationContext'; // NUEVO
 import './styles/index.css';
 import './styles/fonts.css';
 
-// ⭐ YA NO NECESITAS:
+// He quitado seximente referencias a react-toastify, ya que ahora utilizamos un sistema de notificaciones personalizado a través del NotificationProvider. Esto nos permite tener un control más directo sobre cómo se muestran las notificaciones en nuestra aplicación, y nos da la flexibilidad de personalizarlas según nuestras necesidades específicas.:
 // import { ToastContainer } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <LanguageProvider>
-        <NotificationProvider> {/* ⭐ NUEVO - Reemplaza ToastContainer */}
+        <NotificationProvider> {/* Con esto reemplazo el ToastContainer antiguo que tenía */}
           <App />
         </NotificationProvider>
       </LanguageProvider>
@@ -27,12 +27,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // CAMBIOS REALIZADOS:
 // ============================================
 //
-// ❌ ELIMINADO:
+// ❌ Elimino:
 // - import ToastContainer from 'react-toastify'
 // - import 'react-toastify/dist/ReactToastify.css'
 // - <ToastContainer /> component
 //
-// ✅ AGREGADO:
+// ✅ Agrego:
 // - import NotificationProvider
 // - <NotificationProvider> wrapper
 //

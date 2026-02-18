@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -7,7 +7,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
-// Loading de las páginas
+// Loading de las páginas PÚBLICAS
 const Home = lazy(() => import('./pages/Home'));
 const Club = lazy(() => import('./pages/Club'));
 const Membership = lazy(() => import('./pages/Membership'));
@@ -22,6 +22,10 @@ const Sponsors = lazy(() => import('./pages/Sponsors'));
 const Contact = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+// Vehículos Premium (Catálogo de venta)
+const Vehicles = lazy(() => import('./pages/Vehicles'));
+const VehicleDetail = lazy(() => import('./pages/VehicleDetail'));
+
 // Página principal de servicios
 const Services = lazy(() => import('./pages/Services'));
 
@@ -31,17 +35,20 @@ const Wrapping = lazy(() => import('./pages/services/Wrapping'));
 const CarHotel = lazy(() => import('./pages/services/CarHotel'));
 const Racing = lazy(() => import('./pages/services/Racing'));
 
-// Páginas de admin - SOLO Login y Dashboard unificado
+// ⭐ ADMIN - SOLO Login y Dashboard
 const AdminLogin = lazy(() => import('./pages/admin/Login'));
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 
-// ⭐ YA NO IMPORTAMOS: CarsAdmin, EventsAdmin, MembershipAdmin, ContactAdmin
-// Esos componentes ahora se importan DENTRO del Dashboard como sections
-
 function App() {
+  const location = useLocation();
+  
+  // ⭐ Detectar si estamos en rutas admin
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   return (
     <div className="min-h-screen bg-gt-black text-white flex flex-col">
-      <Navbar />
+      {/* ⭐ Navbar SOLO en rutas públicas */}
+      {!isAdminRoute && <Navbar />}
       
       <main className="flex-grow">
         <Suspense fallback={<LoadingSpinner />}>
@@ -52,10 +59,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/club" element={<Club />} />
             <Route path="/membership" element={<Membership />} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/cars/:id" element={<CarDetail />} />
+            <Route path="/cars" element={<Vehicles />} />
+            <Route path="/cars/:id" element={<VehicleDetail />} />
             <Route path="/car-request" element={<CarRequest />} />
             <Route path="/sell-car" element={<SellCar />} />
+            
+            {/* Vehículos Premium */}
+            <Route path="/vehicles" element={<Vehicles />} />
+            <Route path="/vehicles/:id" element={<VehicleDetail />} />
             
             {/* Servicios */}
             <Route path="/services" element={<Services />} />
@@ -74,13 +85,13 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             
             {/* ========================================== */}
-            {/* RUTAS DE ADMIN                             */}
+            {/* RUTAS DE ADMIN - SOLO 2 RUTAS ⭐⭐⭐        */}
             {/* ========================================== */}
             
-            {/* Login - Sin protección */}
+            {/* 1. Login - Sin protección */}
             <Route path="/admin/login" element={<AdminLogin />} />
             
-            {/* Dashboard Unificado - UNA SOLA RUTA ⭐ */}
+            {/* 2. Dashboard - Captura TODAS las rutas /admin/* */}
             <Route 
               path="/admin/*" 
               element={
@@ -91,18 +102,17 @@ function App() {
             />
             
             {/* 
-              ⭐ IMPORTANTE: Ya NO necesitas estas rutas:
+              ⭐⭐⭐ IMPORTANTE - YA NO EXISTEN ESTAS RUTAS:
               
-              ❌ /admin/cars
-              ❌ /admin/events  
-              ❌ /admin/membership
-              ❌ /admin/contacts
+              ❌ /admin/membership → Eliminada
+              ❌ /admin/events     → Eliminada
+              ❌ /admin/contacts   → Eliminada
+              ❌ /admin/cars       → Eliminada
+              ❌ /admin/vehicles   → Eliminada
+              ❌ /admin/registrations → Eliminada
               
-              Ahora TODO se maneja dentro del Dashboard con sidebar/tabs.
-              La ruta /admin/* captura cualquier subruta y siempre muestra el Dashboard.
-              
-              El usuario navega entre secciones clickeando los tabs del sidebar,
-              NO cambiando la URL.
+              AHORA TODO se maneja dentro del Dashboard con tabs.
+              La navegación es por cambio de `activeTab`, NO por URL.
             */}
             
             {/* ========================================== */}
@@ -114,9 +124,10 @@ function App() {
         </Suspense>
       </main>
       
-      <Footer />
-      <WhatsAppButton />
-      <ScrollToTop />
+      {/* ⭐ Footer, WhatsApp y ScrollToTop SOLO en rutas públicas */}
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <WhatsAppButton />}
+      {!isAdminRoute && <ScrollToTop />}
     </div>
   );
 }

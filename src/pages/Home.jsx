@@ -1,9 +1,28 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { useSupabaseAsset } from '../hooks/useSupabaseAsset';
 
 const Home = () => {
   const { t } = useLanguage();
+
+  // ⭐ CARGAR VIDEO DESDE SUPABASE
+  const { url: heroVideoUrl } = useSupabaseAsset('videos/hero-video.mp4');
+
+  // ⭐ CARGAR IMÁGENES DE SERVICIOS DESDE SUPABASE
+  const { url: clubEventoUrl } = useSupabaseAsset('services/club-evento.jpg');
+  const { url: ventaCountachUrl } = useSupabaseAsset('services/venta-countach.jpg');
+  const { url: competicionPilotosUrl } = useSupabaseAsset('services/competicion-pilotos.jpg');
+  const { url: garageMulticolorUrl } = useSupabaseAsset('services/garage-multicolor.jpg');
+  const { url: tallerGarageUrl } = useSupabaseAsset('services/taller-garage.jpg');
+
+  // ⭐ CARGAR IMÁGENES DEL GARAGE DESDE SUPABASE
+  const { url: garagePlataformasUrl } = useSupabaseAsset('gallery/garage-plataformas.jpg');
+
+  // ⭐ CARGAR IMÁGENES DE EVENTOS DESDE SUPABASE
+  const { url: concursoBellezaUrl } = useSupabaseAsset('events/concurso-belleza3.png');
+  const { url: circuitoProfesionalUrl } = useSupabaseAsset('events/circuito-profesional.jpg');
+  const { url: eventoTrackdayUrl } = useSupabaseAsset('events/eventotrackday.jpg');
 
   // Servicios principales basados en fotos reales - ORDEN ACTUALIZADO POR CLIENTE
   const services = [
@@ -13,7 +32,7 @@ const Home = () => {
       titleEs: 'Club Exclusivo',
       description: 'Únete a la comunidad más selecta de Marbella',
       descriptionEs: 'Únete a la comunidad más selecta de Marbella',
-      image: '/assets/images/club-evento.jpg',
+      imageUrl: clubEventoUrl, // Desde Supabase
       link: '/membership'
     },
     // 2º - Venta de coches
@@ -22,7 +41,7 @@ const Home = () => {
       titleEs: 'Venta de coches',
       description: 'Colección exclusiva de los vehículos más excepcionales del mundo',
       descriptionEs: 'Colección exclusiva de los vehículos más excepcionales del mundo',
-      image: '/assets/images/venta-countach.jpg',
+      imageUrl: ventaCountachUrl, // Desde Supabase
       link: '/services/sales'
     },
     // 3º - Race Team
@@ -31,7 +50,7 @@ const Home = () => {
       titleEs: 'Race Team',
       description: 'Participa en competiciones profesionales internacionales',
       descriptionEs: 'Participa en competiciones profesionales internacionales',
-      image: '/assets/images/competicion-pilotos.jpg',
+      imageUrl: competicionPilotosUrl, // Desde Supabase
       link: '/services/racing'
     },
     // 4º - Car Hotel
@@ -40,7 +59,7 @@ const Home = () => {
       titleEs: 'Car Hotel',
       description: 'Hotel de cinco estrellas para automóviles de alta gama',
       descriptionEs: 'Hotel de cinco estrellas para automóviles de alta gama',
-      image: '/assets/images/garage-multicolor.jpg',
+      imageUrl: garageMulticolorUrl, // Desde Supabase
       link: '/services/car-hotel'
     },
     // 5º - Taller Premium
@@ -49,7 +68,7 @@ const Home = () => {
       titleEs: 'Taller Premium',
       description: 'Mantenimiento y personalización de alto nivel',
       descriptionEs: 'Mantenimiento y personalización de alto nivel',
-      image: '/assets/images/taller-garage.jpg',
+      imageUrl: tallerGarageUrl, // Desde Supabase
       link: '/services/workshop'
     }
   ];
@@ -64,19 +83,21 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* HERO SECTION - Con video de fondo */}
+      {/* HERO SECTION - Con video de fondo desde Supabase */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Video de fondo */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover brightness-110"
-          style={{ filter: 'brightness(1.05) contrast(0.95)' }}
-        >
-          <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
-        </video>
+        {/* Video de fondo desde Supabase */}
+        {heroVideoUrl && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover brightness-110"
+            style={{ filter: 'brightness(1.05) contrast(0.95)' }}
+          >
+            <source src={heroVideoUrl} type="video/mp4" />
+          </video>
+        )}
         
         {/* Overlay gradient REDUCIDO para ver mejor el video */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10" />
@@ -88,15 +109,7 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* 🎨 LOGO CON VOGA */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold mb-6">
-              <span className="text-gt-gold">GT RACE</span>
-              <br />
-              <span className="text-white">MARBELLA</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Luxury Car Center · Sales & Rent a Car · Car Club · Race Team · Workshop
-            </p>
+            {/* LOGO CON VOGA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/cars" className="btn-primary text-lg px-8 py-4">
                 Ver Colección
@@ -133,7 +146,7 @@ const Home = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                {/* 🎨 NÚMEROS CON VOGA */}
+                {/* NÚMEROS CON VOGA */}
                 <div className="text-4xl md:text-5xl font-voga font-bold text-gt-gold mb-2">
                   {stat.number}
                 </div>
@@ -155,7 +168,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            {/* 🎨 TÍTULO CON VOGA */}
+            {/* TÍTULO CON VOGA */}
             <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
               <span className="text-white">Nuestros </span>
               <span className="text-gt-gold">Servicios</span>
@@ -180,17 +193,19 @@ const Home = () => {
                 >
                   {/* Imagen con zoom hover como me dijo Hori */}
                   <div className="h-64 overflow-hidden relative">
-                    <img 
-                      src={service.image} 
-                      alt={service.titleEs}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    {service.imageUrl && (
+                      <img 
+                        src={service.imageUrl} 
+                        alt={service.titleEs}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                   </div>
                   
                   {/* Contenido */}
                   <div className="p-6">
-                    {/* 🎨 TÍTULO DE SERVICIO CON VOGA */}
+                    {/* TÍTULO DE SERVICIO CON VOGA */}
                     <h3 className="text-2xl font-voga font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
                       {service.titleEs}
                     </h3>
@@ -211,7 +226,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* THE GARAGE - Sección especial con fotos del garage multicolor (Prueba supeditada por Saud) */}
+      {/* THE GARAGE - Sección especial con fotos del garage multicolor */}
       <section className="py-20 bg-gradient-to-b from-gt-black via-gt-gray-dark to-gt-black">
         <div className="container-custom px-4">
           <motion.div
@@ -220,7 +235,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            {/* 🎨 TÍTULO "THE GARAGE" CON VOGA */}
+            {/* TÍTULO "THE GARAGE" CON VOGA */}
             <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
               <span className="text-white">The </span>
               <span className="text-gt-gold">Garage</span>
@@ -239,14 +254,16 @@ const Home = () => {
               viewport={{ once: true }}
               className="relative h-96 rounded-lg overflow-hidden group"
             >
-              <img 
-                src="/assets/images/garage-multicolor.jpg" 
-                alt="Garage GT Race Marbella"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              {garageMulticolorUrl && (
+                <img 
+                  src={garageMulticolorUrl} 
+                  alt="Garage GT Race Marbella"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
               <div className="absolute bottom-6 left-6 z-20">
-                {/* 🎨 SUBTÍTULO CON VOGA */}
+                {/* SUBTÍTULO CON VOGA */}
                 <h3 className="text-2xl font-voga font-bold text-white mb-2">
                   Luces Circulares Icónicas
                 </h3>
@@ -262,14 +279,16 @@ const Home = () => {
               transition={{ delay: 0.1 }}
               className="relative h-96 rounded-lg overflow-hidden group"
             >
-              <img 
-                src="/assets/images/garage-plataformas.jpg" 
-                alt="Plataformas iluminadas GT Race"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              {garagePlataformasUrl && (
+                <img 
+                  src={garagePlataformasUrl} 
+                  alt="Plataformas iluminadas GT Race"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
               <div className="absolute bottom-6 left-6 z-20">
-                {/* 🎨 SUBTÍTULO CON VOGA */}
+                {/* SUBTÍTULO CON VOGA */}
                 <h3 className="text-2xl font-voga font-bold text-white mb-2">
                   Plataformas Iluminadas
                 </h3>
@@ -296,7 +315,7 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <div className="inline-block px-4 py-2 bg-gt-gold/10 rounded-full mb-6">
-                {/* 🎨 BADGE CON VOGA */}
+                {/* BADGE CON VOGA */}
                 <span className="text-gt-gold font-voga font-semibold flex items-center text-sm uppercase tracking-widest">
                   {/* Icono SVG personalizadito con bandera de carreras */}
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -305,7 +324,7 @@ const Home = () => {
                   GT RACE TEAM
                 </span>
               </div>
-              {/* 🎨 TÍTULO CON VOGA */}
+              {/* TÍTULO CON VOGA */}
               <h2 className="text-4xl md:text-5xl font-voga font-bold mb-6">
                 <span className="text-white">Competición </span>
                 <span className="text-gt-gold">Profesional</span>
@@ -356,14 +375,16 @@ const Home = () => {
             >
               {/* Imagen real del McLaren dorado de su garage */}
               <div className="relative rounded-lg overflow-hidden shadow-2xl group">
-                <img 
-                  src="/assets/images/competicion-pilotos.jpg" 
-                  alt="GT Race Team McLaren"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {competicionPilotosUrl && (
+                  <img 
+                    src={competicionPilotosUrl} 
+                    alt="GT Race Team McLaren"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
                 <div className="absolute inset-0 border-4 border-gt-gold/20 rounded-lg" />
               </div>
-              {/* 🎨 BADGE CON VOGA */}
+              {/* BADGE CON VOGA */}
               <div className="absolute -bottom-6 -right-6 bg-gt-gold text-black px-6 py-4 rounded-lg font-voga font-bold text-xl shadow-xl">
                 Competición Real
               </div>
@@ -381,7 +402,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            {/* 🎨 TÍTULO CON VOGA */}
+            {/* TÍTULO CON VOGA */}
             <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
               <span className="text-white">Eventos </span>
               <span className="text-gt-gold">Exclusivos</span>
@@ -396,7 +417,7 @@ const Home = () => {
               {
                 title: 'Concursos de Elegancia',
                 description: 'En los mejores campos de golf de la Costa del Sol',
-                image: '/assets/images/concurso-belleza3.png',
+                imageUrl: concursoBellezaUrl, // ⭐ Desde Supabase
                 svgIcon: (
                   <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
@@ -406,7 +427,7 @@ const Home = () => {
               {
                 title: 'Track Days',
                 description: 'Días exclusivos en circuitos profesionales',
-                image: '/assets/images/circuito-profesional.jpg',
+                imageUrl: circuitoProfesionalUrl, // ⭐ Desde Supabase
                 svgIcon: (
                   <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
@@ -416,7 +437,7 @@ const Home = () => {
               {
                 title: 'Social Events',
                 description: 'Networking con la comunidad luxury car de Marbella',
-                image: '/assets/images/evento-trackday.jpg',
+                imageUrl: eventoTrackdayUrl, // ⭐ Desde Supabase
                 svgIcon: (
                   <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
@@ -432,13 +453,15 @@ const Home = () => {
                 transition={{ delay: index * 0.1 }}
                 className="group bg-gt-black rounded-lg overflow-hidden border border-gt-gray-light hover:border-gt-gold transition-all duration-300"
               >
-                {/* Imagen de fondo con overlay como me dijo Hori */}
+                {/* Imagen de fondo con overlay */}
                 <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  {event.imageUrl && (
+                    <img 
+                      src={event.imageUrl}
+                      alt={event.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                   {/* SVG icono flotante */}
                   <div className="absolute top-4 right-4 text-gt-gold opacity-80">
@@ -448,7 +471,7 @@ const Home = () => {
                 
                 {/* Contenido */}
                 <div className="p-6">
-                  {/* 🎨 TÍTULO DE EVENTO CON VOGA */}
+                  {/* TÍTULO DE EVENTO CON VOGA */}
                   <h3 className="text-2xl font-voga font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
                     {event.title}
                   </h3>
@@ -483,13 +506,13 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center max-w-4xl mx-auto"
           >
-            {/* 🎨 TÍTULO FINAL CON VOGA */}
+            {/* TÍTULO FINAL CON VOGA */}
             <h2 className="text-4xl md:text-6xl font-voga font-bold mb-6">
               <span className="text-white">Únete a la </span>
               <span className="text-gt-gold">Comunidad</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Experimenta el mundo de los supercoches con acceso exclusivo a nuestra colección, 
+              Experimenta el mundo del motor con acceso exclusivo a nuestra colección, 
               eventos VIP y servicios premium.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

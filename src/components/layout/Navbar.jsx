@@ -23,7 +23,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      // ⭐ Aparece después de 100px de scroll
+      setScrolled(window.scrollY > 100);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -64,11 +65,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-black/40 backdrop-blur-2xl shadow-2xl border-b border-gt-gold/10'
-          : 'bg-black/20 backdrop-blur-xl border-b border-white/5'
-      }`}
+      className={`
+        fixed top-0 left-0 right-0 z-50 
+        transition-all duration-500 ease-out
+        ${scrolled
+          ? 'translate-y-0 opacity-100 bg-black/40 backdrop-blur-2xl shadow-2xl border-b border-gt-gold/10'
+          : '-translate-y-full opacity-0'
+        }
+      `}
     >
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
