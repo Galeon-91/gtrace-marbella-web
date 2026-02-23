@@ -1,0 +1,8 @@
+[33m85558f5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: rebase (abort): returning to refs/heads/main
+[33m9cb41d9[m HEAD@{1}: checkout: moving from main to 9cb41d9
+[33m85558f5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{2}: checkout: moving from 9cb41d90467502167c99a4d591fa6a86f9cc632c to main
+[33m9cb41d9[m HEAD@{3}: commit: feat: Formulario Club funcional con Supabase - solicitudes membresía, poner fotos en supabase, preaprar y optimizar home y club
+[33mc5bcc14[m HEAD@{4}: commit: actualización web
+[33m5501b9f[m HEAD@{5}: pull origin main --rebase (start): checkout 5501b9fa996611b67391877b7830a9b8a73bacaa
+[33m85558f5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{6}: commit: actualizacion de pagina
+[33m3605c7b[m HEAD@{7}: commit (initial): Arreglos GT Race Marbella

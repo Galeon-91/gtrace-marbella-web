@@ -819,6 +819,7 @@ const TransmissionIcon = () => (
     />
   </svg>
 );
+<<<<<<< HEAD
 
 export { 
   WrenchIcon, 
@@ -830,6 +831,8 @@ export {
   OilIcon, 
   TransmissionIcon 
 };
+=======
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
 // ============================================
 // COMPONENTE PRINCIPAL
 // ============================================
@@ -1308,12 +1311,20 @@ const Workshop = () => {
               className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                        border border-gt-gold/30 rounded-full mb-6"
             >
+<<<<<<< HEAD
               <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+=======
+              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                 GT Race Workshop
               </span>
             </motion.div>
 
+<<<<<<< HEAD
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 
+=======
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-march font-bold text-white mb-6 
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                          drop-shadow-2xl leading-tight">
               {t.heroTitle}
             </h1>
@@ -1371,7 +1382,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.statsTitle}
             </h2>
           </motion.div>
@@ -1393,7 +1408,11 @@ const Workshop = () => {
                 className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
                          hover:border-gt-gold/50 transition-all duration-300 text-center"
               >
+<<<<<<< HEAD
                 <p className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">
+=======
+                <p className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                   {stat.value}
                 </p>
                 <p className="text-gray-300 font-semibold">
@@ -1417,7 +1436,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.servicesTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1467,7 +1490,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.whyTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1487,7 +1514,11 @@ const Workshop = () => {
                 className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
                          hover:border-gt-gold/50 transition-all duration-300"
               >
+<<<<<<< HEAD
                 <h3 className="text-2xl font-voga font-bold text-gt-gold mb-4">
+=======
+                <h3 className="text-2xl font-march font-bold text-gt-gold mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                   {reason.title}
                 </h3>
                 <p className="text-gray-300 leading-relaxed">
@@ -1511,7 +1542,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.processTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1533,7 +1568,11 @@ const Workshop = () => {
                   className="flex gap-8 items-start"
                 >
                   <div className="flex-shrink-0 w-20 h-20 rounded-full bg-gt-gold text-black 
+<<<<<<< HEAD
                                 flex items-center justify-center text-2xl font-voga font-bold 
+=======
+                                flex items-center justify-center text-2xl font-march font-bold 
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                                 shadow-lg shadow-gt-gold/50">
                     {step.number}
                   </div>
@@ -1543,7 +1582,11 @@ const Workshop = () => {
                     className="flex-grow bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10
                              hover:border-gt-gold/50 transition-all duration-300"
                   >
+<<<<<<< HEAD
                     <h3 className="text-2xl font-voga font-bold text-white mb-3">
+=======
+                    <h3 className="text-2xl font-march font-bold text-white mb-3">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                       {step.title}
                     </h3>
                     <p className="text-gray-300 leading-relaxed">
@@ -1569,7 +1612,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.formTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1753,7 +1800,11 @@ const Workshop = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+<<<<<<< HEAD
             <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+=======
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.testimonialsTitle}
             </h2>
           </motion.div>
@@ -1808,7 +1859,11 @@ const Workshop = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gt-gold/10 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
+<<<<<<< HEAD
               <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">
+=======
+              <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
+>>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                 {t.ctaTitle}
               </h2>
               <p className="text-xl text-gray-300 mb-8">
