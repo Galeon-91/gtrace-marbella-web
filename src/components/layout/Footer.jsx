@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { supabase } from '../../../supabase/supabaseClient';
 
-// Iconos inline para evitar problemas de imports
+// ============================================
+// ICONOS SVG INLINE
+// ============================================
+
 const FacebookIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -39,7 +44,11 @@ const LocationIcon = ({ className = "w-5 h-5" }) => (
 );
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const quickLinks = [
     { path: '/', label: t('nav.home') },
@@ -67,10 +76,58 @@ const Footer = () => {
     },
   ];
 
+  // ⭐ FUNCIÓN NEWSLETTER
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+    
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError(language === 'es' ? 'Por favor, introduce un email válido' : 'Please enter a valid email');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Insertar en Supabase
+      const { error: dbError } = await supabase
+        .from('newsletter_subscribers')
+        .insert([
+          { 
+            email: email.toLowerCase().trim(),
+            subscribed_at: new Date().toISOString(),
+            language: language
+          }
+        ]);
+
+      if (dbError) {
+        // Si el email ya existe (unique constraint)
+        if (dbError.code === '23505') {
+          setError(language === 'es' ? 'Este email ya está suscrito' : 'This email is already subscribed');
+        } else {
+          throw dbError;
+        }
+      } else {
+        setSuccess(true);
+        setEmail('');
+        setTimeout(() => setSuccess(false), 5000);
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      setError(language === 'es' ? 'Error al suscribirse. Inténtalo de nuevo.' : 'Error subscribing. Please try again.');
+    }
+    
+    setLoading(false);
+  };
+
   return (
     <footer className="bg-gt-gray-dark border-t border-gt-gray-light">
       <div className="container-custom px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
           {/* About */}
           <div className="space-y-4">
             <h3 className="text-2xl font-heading font-bold">
@@ -92,8 +149,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-300 hover:text-gt-gold transition-colors 
-                               text-sm"
+                    className="text-gray-300 hover:text-gt-gold transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -124,10 +180,10 @@ const Footer = () => {
               <li className="flex items-center space-x-3 text-gray-300 text-sm">
                 <EmailIcon className="w-5 h-5 text-gt-gold flex-shrink-0" />
                 <a
-                  href="mailto:info@gtracemarbella.com"
+                  href="mailto:members@gtracemarbella.com"
                   className="hover:text-gt-gold transition-colors"
                 >
-                  info@gtracemarbella.com
+                  members@gtracemarbella.com
                 </a>
               </li>
             </ul>
@@ -163,21 +219,40 @@ const Footer = () => {
               <p className="text-gray-300 text-sm mb-3">
                 {t('footer.newsletterText')}
               </p>
-              <form className="flex" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Tu email"
-                  className="flex-1 px-4 py-2 bg-gt-gray border border-gt-gray-light 
-                             rounded-l-md text-white text-sm focus:outline-none 
-                             focus:border-gt-gold"
-                />
-                <button
-                  type="submit"
-                  className="bg-gt-gold text-gt-black px-4 py-2 rounded-r-md 
-                             font-medium hover:bg-gt-gold-light transition-colors"
-                >
-                  →
-                </button>
+              <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+                <div className="flex">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={language === 'es' ? 'Tu email' : 'Your email'}
+                    disabled={loading}
+                    className="flex-1 px-4 py-2 bg-gt-gray border border-gt-gray-light 
+                               rounded-l-md text-white text-sm focus:outline-none 
+                               focus:border-gt-gold disabled:opacity-50"
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-gt-gold text-gt-black px-4 py-2 rounded-r-md 
+                               font-medium hover:bg-gt-gold-light transition-colors
+                               disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? '...' : '→'}
+                  </button>
+                </div>
+                
+                {/* Success Message */}
+                {success && (
+                  <p className="text-green-400 text-xs">
+                    {language === 'es' ? '¡Suscrito correctamente!' : 'Successfully subscribed!'}
+                  </p>
+                )}
+                
+                {/* Error Message */}
+                {error && (
+                  <p className="text-red-400 text-xs">{error}</p>
+                )}
               </form>
             </div>
           </div>
@@ -185,8 +260,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gt-gray-light">
-          <div className="flex flex-col md:flex-row justify-between items-center 
-                          space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
               © {new Date().getFullYear()} GT RACE MARBELLA. {t('footer.rights')}
             </p>
@@ -195,13 +269,13 @@ const Footer = () => {
                 to="/privacy"
                 className="text-gray-400 hover:text-gt-gold transition-colors"
               >
-                Política de Privacidad
+                {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
               </Link>
               <Link
                 to="/terms"
                 className="text-gray-400 hover:text-gt-gold transition-colors"
               >
-                Términos y Condiciones
+                {language === 'es' ? 'Términos y Condiciones' : 'Terms and Conditions'}
               </Link>
             </div>
           </div>
@@ -209,7 +283,9 @@ const Footer = () => {
           {/* Hecho con ❤️ por Ismaín */}
           <div className="mt-6 pt-6 border-t border-gt-gray-light/50">
             <div className="flex justify-center items-center space-x-2">
-              <span className="text-gray-400 text-sm">Hecho con</span>
+              <span className="text-gray-400 text-sm">
+                {language === 'es' ? 'Hecho con' : 'Made with'}
+              </span>
               <svg
                 className="w-5 h-5 text-gt-gold animate-heartbeat"
                 fill="currentColor"
@@ -222,7 +298,9 @@ const Footer = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="text-gray-400 text-sm">por</span>
+              <span className="text-gray-400 text-sm">
+                {language === 'es' ? 'por' : 'by'}
+              </span>
               <span className="text-gt-gold font-semibold text-sm hover:text-gt-gold-light transition-colors">
                 Ismaín
               </span>

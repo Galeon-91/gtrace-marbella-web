@@ -26,17 +26,17 @@ const CrownIcon = () => (
       strokeWidth="2"
       fill="none"
     />
-    <motion.circle cx="50" cy="25" r="3" fill="currentColor" 
-      animate={{ scale: [1, 1.3, 1] }} 
-      transition={{ duration: 2, repeat: Infinity }} 
+    <motion.circle cx="50" cy="25" r="3" fill="currentColor"
+      animate={{ scale: [1, 1.3, 1] }}
+      transition={{ duration: 2, repeat: Infinity }}
     />
-    <motion.circle cx="30" cy="45" r="3" fill="currentColor" 
-      animate={{ scale: [1, 1.3, 1] }} 
-      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }} 
+    <motion.circle cx="30" cy="45" r="3" fill="currentColor"
+      animate={{ scale: [1, 1.3, 1] }}
+      transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
     />
-    <motion.circle cx="70" cy="45" r="3" fill="currentColor" 
-      animate={{ scale: [1, 1.3, 1] }} 
-      transition={{ duration: 2, repeat: Infinity, delay: 0.6 }} 
+    <motion.circle cx="70" cy="45" r="3" fill="currentColor"
+      animate={{ scale: [1, 1.3, 1] }}
+      transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
     />
   </motion.svg>
 );
@@ -112,13 +112,13 @@ const VIPIcon = () => (
     />
     <rect x="10" y="30" width="80" height="40" rx="10" stroke="currentColor" strokeWidth="2" fill="none" />
     <text x="50" y="58" textAnchor="middle" fill="currentColor" fontSize="20" fontWeight="bold">VIP</text>
-    <motion.circle cx="20" cy="20" r="3" fill="currentColor" 
-      animate={{ opacity: [1, 0, 1] }} 
-      transition={{ duration: 1.5, repeat: Infinity }} 
+    <motion.circle cx="20" cy="20" r="3" fill="currentColor"
+      animate={{ opacity: [1, 0, 1] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
     />
-    <motion.circle cx="80" cy="20" r="3" fill="currentColor" 
-      animate={{ opacity: [1, 0, 1] }} 
-      transition={{ duration: 1.5, repeat: Infinity, delay: 0.75 }} 
+    <motion.circle cx="80" cy="20" r="3" fill="currentColor"
+      animate={{ opacity: [1, 0, 1] }}
+      transition={{ duration: 1.5, repeat: Infinity, delay: 0.75 }}
     />
   </svg>
 );
@@ -171,10 +171,10 @@ const Membership = () => {
     numberOfCars: '1',
     howDidYouHear: 'google',
     additionalInfo: '',
-    
+
     // Intención coche
     carIntention: 'none', // 'none', 'buy', 'sell'
-    
+
     // Vender coche
     sellCarBrand: '',
     sellCarModel: '',
@@ -190,10 +190,10 @@ const Membership = () => {
     sellCarVIN: '',
     sellCarPrice: '',
     sellCarNotes: '',
-    
+
     // Comprar coche
     buyCarDescription: '',
-    
+
     password: '',
     confirmPassword: '',
     acceptTerms: false,
@@ -208,10 +208,10 @@ const Membership = () => {
       heroDescription: 'Accede a experiencias únicas, eventos exclusivos y servicios premium diseñados para los amantes de los coches de lujo',
       ctaButton: 'Elige Tu Plan',
       learnMore: 'Conocer Beneficios',
-      
+
       plansTitle: 'Planes de Membresía',
       plansSubtitle: 'Elige el plan perfecto para ti',
-      
+
       silverName: 'Silver',
       silverPrice: '1,500',
       silverPeriod: '/año',
@@ -226,7 +226,7 @@ const Membership = () => {
         'Merchandising de bienvenida',
         'App móvil del club'
       ],
-      
+
       goldName: 'Gold',
       goldPrice: '3,500',
       goldPeriod: '/año',
@@ -243,7 +243,7 @@ const Membership = () => {
         'Acceso a sala VIP del club',
         '2 invitaciones de guest pass/año'
       ],
-      
+
       platinumName: 'Platinum',
       platinumPrice: '7,500',
       platinumPeriod: '/año',
@@ -262,34 +262,34 @@ const Membership = () => {
         '5 invitaciones de guest pass/año',
         'Placa de membresía personalizada'
       ],
-      
+
       mostPopular: 'Más Popular',
       selectPlan: 'Seleccionar Plan',
-      
+
       benefitsTitle: 'Beneficios de Ser Miembro',
       benefitsSubtitle: 'Experiencias únicas diseñadas para ti',
-      
+
       benefit1Title: 'Eventos Exclusivos',
       benefit1Desc: 'Accede a eventos privados, test drives, track days y experiencias únicas con los mejores coches del mundo',
-      
+
       benefit2Title: 'Servicios Premium',
       benefit2Desc: 'Descuentos especiales en detailing, wrapping, Car Hotel y todos nuestros servicios de mantenimiento',
-      
+
       benefit3Title: 'Networking Elite',
       benefit3Desc: 'Conoce a otros entusiastas, coleccionistas y profesionales del mundo del motor en un ambiente exclusivo',
-      
+
       benefit4Title: 'Atención Personalizada',
       benefit4Desc: 'Concierge dedicado, prioridad en reservas y atención VIP en todas tus interacciones con el club',
-      
+
       benefit5Title: 'Acceso a Racing',
       benefit5Desc: 'Participa en nuestro programa de racing, desde iniciación hasta competición profesional',
-      
+
       benefit6Title: 'Red Internacional',
       benefit6Desc: 'Acceso a clubes asociados en Europa y el mundo para extender tu experiencia más allá de Marbella',
-      
+
       comparisonTitle: 'Compara los Planes',
       comparisonSubtitle: 'Encuentra el plan perfecto según tus necesidades',
-      
+
       feature: 'Característica',
       basicAccess: 'Acceso a eventos',
       discounts: 'Descuentos en servicios',
@@ -300,7 +300,7 @@ const Membership = () => {
       guestPasses: 'Guest passes/año',
       internationalAccess: 'Red internacional',
       racingAccess: 'Acceso Racing Team',
-      
+
       monthly: 'Mensuales',
       unlimited: 'Ilimitados',
       none: 'No incluido',
@@ -308,23 +308,23 @@ const Membership = () => {
       basic: 'Básico',
       priority: 'Prioritario',
       vip: 'VIP Total',
-      
+
       formTitle: 'Solicitud de Membresía',
       formSubtitle: 'Complete el formulario para unirse',
-      
+
       personalInfo: 'Información Personal',
       firstName: 'Nombre',
       lastName: 'Apellidos',
       email: 'Email',
       phone: 'Teléfono',
       birthDate: 'Fecha de Nacimiento',
-      
+
       addressInfo: 'Dirección',
       address: 'Dirección',
       city: 'Ciudad',
       postalCode: 'Código Postal',
       country: 'País',
-      
+
       additionalInfo: 'Información Adicional',
       livesInMarbella: '¿Vive en Marbella?',
       livesYes: 'Sí',
@@ -339,12 +339,12 @@ const Membership = () => {
       hearInstagramAd: 'Instagram (anuncio)',
       hearOther: 'Otro',
       additionalNotes: 'Información adicional',
-      
+
       carIntentionTitle: '¿Está interesado en comprar o vender un coche?',
       carIntentionNone: 'Ninguno',
       carIntentionBuy: 'Comprar un coche',
       carIntentionSell: 'Vender mi coche',
-      
+
       sellCarTitle: 'Información del Coche a Vender',
       sellCarBrand: 'Marca',
       sellCarModel: 'Modelo',
@@ -370,65 +370,65 @@ const Membership = () => {
       sellCarVIN: 'Número VIN (opcional)',
       sellCarPrice: 'Precio solicitado (€)',
       sellCarNotes: 'Notas adicionales',
-      
+
       buyCarTitle: 'Describe el coche que buscas',
       buyCarDescription: 'Incluye marca, modelo, año, presupuesto, color y características que buscas',
-      
+
       accountInfo: 'Seguridad',
       password: 'Contraseña',
       confirmPassword: 'Confirmar Contraseña',
-      
+
       acceptTerms: 'Acepto los términos y condiciones',
       acceptMarketing: 'Deseo recibir comunicaciones comerciales',
-      
+
       submitButton: 'Enviar Solicitud',
       submitting: 'Enviando...',
-      
+
       successTitle: '¡Solicitud Enviada!',
       successMessage: 'Nos pondremos en contacto contigo en las próximas 24-48 horas para finalizar tu membresía.',
       backToPlans: 'Volver a Planes',
-      
+
       faqTitle: 'Preguntas Frecuentes',
       faqSubtitle: 'Todo lo que necesitas saber',
-      
+
       faq1Q: '¿Cómo funciona el proceso de membresía?',
       faq1A: 'Una vez envíes tu solicitud, nuestro equipo la revisará y te contactará en 24-48 horas. Programaremos una visita a nuestras instalaciones y finalizaremos el proceso de alta.',
-      
+
       faq2Q: '¿Puedo cambiar mi plan más adelante?',
       faq2A: 'Sí, puedes actualizar tu membresía en cualquier momento. Solo pagarás la diferencia prorrateada.',
-      
+
       faq3Q: '¿Los descuentos son acumulativos?',
       faq3A: 'Los descuentos de membresía no son acumulativos con otras promociones, se aplicará siempre el mayor descuento disponible.',
-      
+
       faq4Q: '¿Qué incluye el Car Hotel?',
       faq4A: 'Almacenamiento seguro con control de clima, carga de batería, limpieza mensual y seguro incluido.',
-      
+
       faq5Q: '¿Puedo llevar invitados a los eventos?',
       faq5A: 'Sí, cada plan incluye guest passes que permiten a tus invitados disfrutar de eventos seleccionados contigo.',
-      
+
       faq6Q: '¿La membresía incluye seguro para mi vehículo?',
       faq6A: 'El Car Hotel incluye seguro durante el almacenamiento. Para eventos, se requiere tu propio seguro con cobertura adecuada.',
-      
+
       testimonialsTitle: 'Lo Que Dicen Nuestros Miembros',
       testimonialsSubtitle: 'Experiencias reales de la comunidad GT Race',
-      
-      testimonial1Name: 'Carlos Martínez',
-      testimonial1Role: 'Miembro Platinum desde 2023',
-      testimonial1Text: 'GT Race Marbella ha superado todas mis expectativas. Los eventos son espectaculares y la atención es impecable. El acceso al Racing Team ha sido una experiencia única.',
-      
-      testimonial2Name: 'Laura Sánchez',
-      testimonial2Role: 'Miembro Gold desde 2024',
-      testimonial2Text: 'Como coleccionista, el Car Hotel es perfecto para mi Porsche. La tranquilidad de saber que está en manos expertas no tiene precio. Los descuentos en servicios son excelentes.',
-      
-      testimonial3Name: 'Miguel Ángel Torres',
-      testimonial3Role: 'Miembro Silver desde 2024',
-      testimonial3Text: 'Empecé con Silver y ya estoy pensando en actualizar a Gold. La comunidad es increíble y los eventos mensuales siempre superan las expectativas.',
-      
+
+      testimonial1Name: 'Danielle Penny',
+      testimonial1Role: 'Miembro Gold desde 2025',
+      testimonial1Text: 'Best car club! Such a great group of members and staff ! The trips are something else can’t wait for the next one ! And saud & his wife are so lovely so glad myself & husband joined x',
+
+      testimonial2Name: 'DC',
+      testimonial2Role: 'Primer Miembro Gold en 2025',
+      testimonial2Text: 'The best car club anywhere looked after by car enthusiasts and professionals in everything that is done in this limited members exclusive environment. Great job in your first year and many to come with me a part of it as your very first member!!',
+
+      testimonial3Name: 'Chakra Fénix',
+      testimonial3Role: 'Miembro Gold desde 2025',
+      testimonial3Text: 'The only word to describe them is perfection.',
+
       ctaTitle: '¿Listo para Unirte?',
       ctaDescription: 'Forma parte de la comunidad más exclusiva de entusiastas del automóvil en la Costa del Sol',
       ctaButton1: 'Ver Planes',
       ctaButton2: 'Contactar',
-      
+
       errors: {
         fillAll: 'Por favor, completa todos los campos obligatorios',
         emailInvalid: 'Email no válido',
@@ -444,10 +444,10 @@ const Membership = () => {
       heroDescription: 'Access unique experiences, exclusive events and premium services designed for luxury car lovers',
       ctaButton: 'Choose Your Plan',
       learnMore: 'Learn Benefits',
-      
+
       plansTitle: 'Membership Plans',
       plansSubtitle: 'Choose the perfect plan for you',
-      
+
       silverName: 'Silver',
       silverPrice: '1,500',
       silverPeriod: '/year',
@@ -462,7 +462,7 @@ const Membership = () => {
         'Welcome merchandise',
         'Club mobile app'
       ],
-      
+
       goldName: 'Gold',
       goldPrice: '3,500',
       goldPeriod: '/year',
@@ -479,7 +479,7 @@ const Membership = () => {
         'Access to club VIP lounge',
         '2 guest passes/year'
       ],
-      
+
       platinumName: 'Platinum',
       platinumPrice: '7,500',
       platinumPeriod: '/year',
@@ -498,34 +498,34 @@ const Membership = () => {
         '5 guest passes/year',
         'Personalized membership plaque'
       ],
-      
+
       mostPopular: 'Most Popular',
       selectPlan: 'Select Plan',
-      
+
       benefitsTitle: 'Member Benefits',
       benefitsSubtitle: 'Unique experiences designed for you',
-      
+
       benefit1Title: 'Exclusive Events',
       benefit1Desc: 'Access private events, test drives, track days and unique experiences with the world\'s best cars',
-      
+
       benefit2Title: 'Premium Services',
       benefit2Desc: 'Special discounts on detailing, wrapping, Car Hotel and all our maintenance services',
-      
+
       benefit3Title: 'Elite Networking',
       benefit3Desc: 'Meet other enthusiasts, collectors and motorsport professionals in an exclusive environment',
-      
+
       benefit4Title: 'Personalized Service',
       benefit4Desc: 'Dedicated concierge, booking priority and VIP attention in all your club interactions',
-      
+
       benefit5Title: 'Racing Access',
       benefit5Desc: 'Participate in our racing program, from initiation to professional competition',
-      
+
       benefit6Title: 'International Network',
       benefit6Desc: 'Access to partner clubs in Europe and worldwide to extend your experience beyond Marbella',
-      
+
       comparisonTitle: 'Compare Plans',
       comparisonSubtitle: 'Find the perfect plan for your needs',
-      
+
       feature: 'Feature',
       basicAccess: 'Event access',
       discounts: 'Service discounts',
@@ -536,7 +536,7 @@ const Membership = () => {
       guestPasses: 'Guest passes/year',
       internationalAccess: 'International network',
       racingAccess: 'Racing Team access',
-      
+
       monthly: 'Monthly',
       unlimited: 'Unlimited',
       none: 'Not included',
@@ -544,23 +544,23 @@ const Membership = () => {
       basic: 'Basic',
       priority: 'Priority',
       vip: 'Full VIP',
-      
+
       formTitle: 'Membership Application',
       formSubtitle: 'Complete the form to join',
-      
+
       personalInfo: 'Personal Information',
       firstName: 'First Name',
       lastName: 'Last Name',
       email: 'Email',
       phone: 'Phone',
       birthDate: 'Birth Date',
-      
+
       addressInfo: 'Address',
       address: 'Address',
       city: 'City',
       postalCode: 'Postal Code',
       country: 'Country',
-      
+
       additionalInfo: 'Additional Information',
       livesInMarbella: 'Do you live in Marbella?',
       livesYes: 'Yes',
@@ -575,12 +575,12 @@ const Membership = () => {
       hearInstagramAd: 'Instagram (ad)',
       hearOther: 'Other',
       additionalNotes: 'Additional information',
-      
+
       carIntentionTitle: 'Are you interested in buying or selling a car?',
       carIntentionNone: 'None',
       carIntentionBuy: 'Buy a car',
       carIntentionSell: 'Sell my car',
-      
+
       sellCarTitle: 'Car Information for Sale',
       sellCarBrand: 'Brand',
       sellCarModel: 'Model',
@@ -606,65 +606,65 @@ const Membership = () => {
       sellCarVIN: 'VIN number (optional)',
       sellCarPrice: 'Asking price (€)',
       sellCarNotes: 'Additional notes',
-      
+
       buyCarTitle: 'Describe the car you are looking for',
       buyCarDescription: 'Include brand, model, year, budget, color and features you are looking for',
-      
+
       accountInfo: 'Security',
       password: 'Password',
       confirmPassword: 'Confirm Password',
-      
+
       acceptTerms: 'I accept the terms and conditions',
       acceptMarketing: 'I want to receive marketing communications',
-      
+
       submitButton: 'Submit Application',
       submitting: 'Submitting...',
-      
+
       successTitle: 'Application Sent!',
       successMessage: 'We will contact you within 24-48 hours to finalize your membership.',
       backToPlans: 'Back to Plans',
-      
+
       faqTitle: 'Frequently Asked Questions',
       faqSubtitle: 'Everything you need to know',
-      
+
       faq1Q: 'How does the membership process work?',
       faq1A: 'Once you submit your application, our team will review it and contact you within 24-48 hours. We\'ll schedule a visit to our facilities and finalize the registration process.',
-      
+
       faq2Q: 'Can I change my plan later?',
       faq2A: 'Yes, you can upgrade your membership at any time. You\'ll only pay the prorated difference.',
-      
+
       faq3Q: 'Are discounts cumulative?',
       faq3A: 'Membership discounts are not cumulative with other promotions; the highest available discount will always be applied.',
-      
+
       faq4Q: 'What does Car Hotel include?',
       faq4A: 'Secure climate-controlled storage, battery charging, monthly cleaning, and insurance included.',
-      
+
       faq5Q: 'Can I bring guests to events?',
       faq5A: 'Yes, each plan includes guest passes that allow your guests to enjoy selected events with you.',
-      
+
       faq6Q: 'Does membership include insurance for my vehicle?',
       faq6A: 'Car Hotel includes insurance during storage. For events, you need your own insurance with adequate coverage.',
-      
+
       testimonialsTitle: 'What Our Members Say',
       testimonialsSubtitle: 'Real experiences from the GT Race community',
-      
-      testimonial1Name: 'Carlos Martínez',
-      testimonial1Role: 'Platinum Member since 2023',
-      testimonial1Text: 'GT Race Marbella has exceeded all my expectations. The events are spectacular and the service is impeccable. Access to the Racing Team has been a unique experience.',
-      
-      testimonial2Name: 'Laura Sánchez',
-      testimonial2Role: 'Gold Member since 2024',
-      testimonial2Text: 'As a collector, the Car Hotel is perfect for my Porsche. The peace of mind knowing it\'s in expert hands is priceless. Service discounts are excellent.',
-      
-      testimonial3Name: 'Miguel Ángel Torres',
-      testimonial3Role: 'Silver Member since 2024',
-      testimonial3Text: 'I started with Silver and I\'m already thinking about upgrading to Gold. The community is amazing and monthly events always exceed expectations.',
-      
+
+      testimonial1Name: 'Danielle Penny',
+      testimonial1Role: 'Gold Member since 2025',
+      testimonial1Text: 'Best car club! Such a great group of members and staff ! The trips are something else can’t wait for the next one ! And saud & his wife are so lovely so glad myself & husband joined x',
+
+      testimonial2Name: 'DC',
+      testimonial2Role: 'First Gold Member since 2025',
+      testimonial2Text: 'The best car club anywhere looked after by car enthusiasts and professionals in everything that is done in this limited members exclusive environment. Great job in your first year and many to come with me a part of it as your very first member!!',
+
+      testimonial3Name: 'Chakra Fénix',
+      testimonial3Role: 'Gold Member since 2025',
+      testimonial3Text: 'The only word to describe them is perfection.',
+
       ctaTitle: 'Ready to Join?',
       ctaDescription: 'Become part of the most exclusive community of car enthusiasts on the Costa del Sol',
       ctaButton1: 'View Plans',
       ctaButton2: 'Contact',
-      
+
       errors: {
         fillAll: 'Please fill in all required fields',
         emailInvalid: 'Invalid email',
@@ -704,18 +704,6 @@ const Membership = () => {
       borderColor: 'border-gt-gold',
       popular: true
     },
-    {
-      id: 'platinum',
-      name: content.platinumName,
-      price: content.platinumPrice,
-      period: content.platinumPeriod,
-      description: content.platinumDescription,
-      features: content.platinumFeatures,
-      icon: DiamondIcon,
-      color: 'from-purple-500 to-indigo-600',
-      borderColor: 'border-purple-500',
-      popular: false
-    }
   ];
 
   // Beneficios
@@ -787,7 +775,7 @@ const Membership = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+
     const validationErrors = validateForm();
     if (validationErrors.length > 0) {
       setError(validationErrors.join('. '));
@@ -824,7 +812,7 @@ const Membership = () => {
         how_did_you_hear: formData.howDidYouHear,
         additional_info: formData.additionalInfo,
         status: 'pending',
-        
+
         // Intención coche
         car_intention: formData.carIntention
       };
@@ -895,7 +883,7 @@ const Membership = () => {
     setSelectedPlan(planId);
     setShowForm(true);
     setTimeout(() => {
-      document.getElementById('membership-form')?.scrollIntoView({ 
+      document.getElementById('membership-form')?.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
@@ -904,11 +892,11 @@ const Membership = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      
+
       {/* HERO SECTION */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gt-gold/10 via-transparent to-transparent" />
-        
+
         <div className="container mx-auto max-w-7xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -958,7 +946,7 @@ const Membership = () => {
               >
                 {content.ctaButton}
               </button>
-              
+
               <button
                 onClick={() => document.getElementById('benefits')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="px-10 py-5 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 w-full sm:w-auto"
@@ -1011,7 +999,7 @@ const Membership = () => {
             <p className="text-xl text-gray-300">{content.plansSubtitle}</p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {plans.map((plan, index) => {
               const Icon = plan.icon;
               return (
@@ -1039,10 +1027,7 @@ const Membership = () => {
 
                   <h3 className="text-3xl font-voga font-bold text-white mb-2 text-center">{plan.name}</h3>
 
-                  <div className="text-center mb-4">
-                    <span className="text-5xl font-bold text-gt-gold">€{plan.price}</span>
-                    <span className="text-gray-400">{plan.period}</span>
-                  </div>
+                  {/* Precios removidos por solicitud del cliente */}
 
                   <p className="text-gray-300 text-center mb-8">{plan.description}</p>
 
@@ -1060,10 +1045,10 @@ const Membership = () => {
                   <button
                     onClick={() => handlePlanSelect(plan.id)}
                     className={`w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300
-                              ${plan.popular 
-                                ? 'bg-gt-gold text-black hover:bg-gt-gold-light hover:scale-105 shadow-lg shadow-gt-gold/50'
-                                : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
-                              }`}
+                              ${plan.popular
+                        ? 'bg-gt-gold text-black hover:bg-gt-gold-light hover:scale-105 shadow-lg shadow-gt-gold/50'
+                        : 'bg-white/10 border border-white/20 text-white hover:bg-white/20'
+                      }`}
                   >
                     {content.selectPlan}
                   </button>
@@ -1081,11 +1066,11 @@ const Membership = () => {
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">500+</div>
+              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">200+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Miembros' : 'Members'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">1000+</div>
+              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">50+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Eventos' : 'Events'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-center">
@@ -1093,7 +1078,7 @@ const Membership = () => {
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Coches' : 'Cars'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">15+</div>
+              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">3+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Países' : 'Countries'}</div>
             </motion.div>
           </div>
@@ -1137,103 +1122,8 @@ const Membership = () => {
       </section>
 
       {/* TABLA COMPARACIÓN */}
-      <section className="relative py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">{content.comparisonTitle}</h2>
-            <p className="text-xl text-gray-300">{content.comparisonSubtitle}</p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-2xl rounded-3xl p-4 md:p-8 border border-white/10 overflow-x-auto"
-          >
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-4 px-4 text-gray-400 font-semibold">{content.feature}</th>
-                  <th className="text-center py-4 px-4">
-                    <div className="text-2xl font-voga font-bold text-white mb-2">Silver</div>
-                    <div className="text-gt-gold">€1,500</div>
-                  </th>
-                  <th className="text-center py-4 px-4 bg-gt-gold/10 rounded-t-xl">
-                    <div className="text-2xl font-voga font-bold text-white mb-2">Gold</div>
-                    <div className="text-gt-gold">€3,500</div>
-                  </th>
-                  <th className="text-center py-4 px-4">
-                    <div className="text-2xl font-voga font-bold text-white mb-2">Platinum</div>
-                    <div className="text-gt-gold">€7,500</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.basicAccess}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">{content.monthly}</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">{content.unlimited}</td>
-                  <td className="py-4 px-4 text-center text-white">{content.unlimited}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.discounts}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">10%</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">20%</td>
-                  <td className="py-4 px-4 text-center text-white">30%</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.carHotel}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">5</td>
-                  <td className="py-4 px-4 text-center text-white">{content.unlimited}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.trackDays}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">{content.included}</td>
-                  <td className="py-4 px-4 text-center text-white">{content.included}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.vipEvents}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">2/año</td>
-                  <td className="py-4 px-4 text-center text-white">{content.unlimited}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.concierge}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">{content.basic}</td>
-                  <td className="py-4 px-4 text-center text-white">{content.priority}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.guestPasses}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">2</td>
-                  <td className="py-4 px-4 text-center text-white">5</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.internationalAccess}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">-</td>
-                  <td className="py-4 px-4 text-center text-white">{content.included}</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-4 px-4 text-gray-300">{content.racingAccess}</td>
-                  <td className="py-4 px-4 text-center text-gray-400">-</td>
-                  <td className="py-4 px-4 text-center text-white bg-gt-gold/5">-</td>
-                  <td className="py-4 px-4 text-center text-white">{content.included}</td>
-                </tr>
-              </tbody>
-            </table>
-          </motion.div>
-        </div>
-      </section>
-
+      {/* Sección eliminada por solicitud del cliente */}
 
       {/* FORMULARIO */}
       {showForm && !success && (
@@ -1247,10 +1137,10 @@ const Membership = () => {
               <div className="text-center mb-8">
                 <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-4">{content.formTitle}</h2>
                 <p className="text-xl text-gray-300 mb-6">{content.formSubtitle}</p>
-                
+
                 <div className="inline-flex items-center px-6 py-3 rounded-xl bg-gt-gold/20 border border-gt-gold/30">
                   <span className="text-gt-gold font-semibold">
-                    {language === 'es' ? 'Plan seleccionado: ' : 'Selected plan: '} 
+                    {language === 'es' ? 'Plan seleccionado: ' : 'Selected plan: '}
                     {plans.find(p => p.id === selectedPlan)?.name}
                   </span>
                 </div>
@@ -1263,7 +1153,7 @@ const Membership = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-8">
-                
+
                 {/* INFORMACIÓN PERSONAL */}
                 <div>
                   <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.personalInfo}</h3>
@@ -1380,9 +1270,9 @@ const Membership = () => {
                     {['none', 'buy', 'sell'].map((option) => (
                       <label key={option}
                         className={`flex-1 flex items-center justify-center px-6 py-4 rounded-xl border-2 cursor-pointer transition-all duration-300
-                                  ${formData.carIntention === option 
-                                    ? 'bg-gt-gold/20 border-gt-gold text-gt-gold' 
-                                    : 'bg-white/5 border-white/10 text-gray-300 hover:border-white/30'}`}>
+                                  ${formData.carIntention === option
+                            ? 'bg-gt-gold/20 border-gt-gold text-gt-gold'
+                            : 'bg-white/5 border-white/10 text-gray-300 hover:border-white/30'}`}>
                         <input type="radio" name="carIntention" value={option} checked={formData.carIntention === option} onChange={handleInputChange} className="hidden" />
                         <span className="font-semibold">
                           {option === 'none' && content.carIntentionNone}
@@ -1525,7 +1415,13 @@ const Membership = () => {
                   <div className="flex items-start">
                     <input type="checkbox" name="acceptTerms" checked={formData.acceptTerms} onChange={handleInputChange} required
                       className="mt-1 mr-3 w-5 h-5 text-gt-gold bg-white/5 border-white/10 rounded focus:ring-gt-gold focus:ring-offset-0" />
-                    <label className="text-gray-300">{content.acceptTerms} *</label>
+                    <label className="text-gray-300">
+                      {language === 'es' ? 'Acepto los ' : 'I accept the '}
+                      <Link to="/terms" target="_blank" className="text-gt-gold hover:underline">
+                        {language === 'es' ? 'términos y condiciones' : 'terms and conditions'}
+                      </Link>
+                      {' *'}
+                    </label>
                   </div>
                   <div className="flex items-start">
                     <input type="checkbox" name="acceptMarketing" checked={formData.acceptMarketing} onChange={handleInputChange}
@@ -1641,7 +1537,7 @@ const Membership = () => {
           </motion.div>
         </div>
       </section>
-            {/* WHY CHOOSE US */}
+      {/* WHY CHOOSE US */}
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -1665,7 +1561,7 @@ const Membership = () => {
                     {language === 'es' ? 'Ubicación Privilegiada' : 'Prime Location'}
                   </h3>
                   <p className="text-gray-300">
-                    {language === 'es' 
+                    {language === 'es'
                       ? 'En el corazón de Puerto Banús, rodeados de las mejores boutiques y restaurantes de la Costa del Sol'
                       : 'In the heart of Puerto Banús, surrounded by the best boutiques and restaurants on the Costa del Sol'}
                   </p>
@@ -1808,7 +1704,7 @@ const Membership = () => {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 };

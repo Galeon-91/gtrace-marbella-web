@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import { HelmetProvider } from 'react-helmet-async'; // ← AGREGADO
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import WhatsAppButton from './components/common/WhatsAppButton';
@@ -34,6 +35,11 @@ const Detailing = lazy(() => import('./pages/services/Detailing'));
 const Wrapping = lazy(() => import('./pages/services/Wrapping'));
 const CarHotel = lazy(() => import('./pages/services/CarHotel'));
 const Racing = lazy(() => import('./pages/services/Racing'));
+const Workshop = lazy(() => import('./pages/services/Workshop')); // ← AGREGADO
+
+// Páginas legales
+const Privacy = lazy(() => import('./pages/Privacy')); // ← AGREGADO
+const Terms = lazy(() => import('./pages/Terms')); // ← AGREGADO
 
 // ⭐ ADMIN - SOLO Login y Dashboard
 const AdminLogin = lazy(() => import('./pages/admin/Login'));
@@ -46,89 +52,84 @@ function App() {
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen bg-gt-black text-white flex flex-col">
-      {/* ⭐ Navbar SOLO en rutas públicas */}
-      {!isAdminRoute && <Navbar />}
-      
-      <main className="flex-grow">
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            {/* ========================================== */}
-            {/* RUTAS PÚBLICAS                             */}
-            {/* ========================================== */}
-            <Route path="/" element={<Home />} />
-            <Route path="/club" element={<Club />} />
-            <Route path="/membership" element={<Membership />} />
-            <Route path="/cars" element={<Vehicles />} />
-            <Route path="/cars/:id" element={<VehicleDetail />} />
-            <Route path="/car-request" element={<CarRequest />} />
-            <Route path="/sell-car" element={<SellCar />} />
-            
-            {/* Vehículos Premium */}
-            <Route path="/vehicles" element={<Vehicles />} />
-            <Route path="/vehicles/:id" element={<VehicleDetail />} />
-            
-            {/* Servicios */}
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/detailing" element={<Detailing />} />
-            <Route path="/services/wrapping" element={<Wrapping />} />
-            <Route path="/services/car-hotel" element={<CarHotel />} />
-            <Route path="/services/racing" element={<Racing />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            
-            {/* Eventos */}
-            <Route path="/events" element={<Events />} />
-            <Route path="/events/:id" element={<EventDetail />} />
-            
-            {/* Otras */}
-            <Route path="/sponsors" element={<Sponsors />} />
-            <Route path="/contact" element={<Contact />} />
-            
-            {/* ========================================== */}
-            {/* RUTAS DE ADMIN - SOLO 2 RUTAS ⭐⭐⭐        */}
-            {/* ========================================== */}
-            
-            {/* 1. Login - Sin protección */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            
-            {/* 2. Dashboard - Captura TODAS las rutas /admin/* */}
-            <Route 
-              path="/admin/*" 
-              element={
-                <ProtectedRoute requireAdmin={true}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* 
-              ⭐⭐⭐ IMPORTANTE - YA NO EXISTEN ESTAS RUTAS:
+    <HelmetProvider> {/* ← AGREGADO - WRAPPER PRINCIPAL */}
+      <div className="min-h-screen bg-gt-black text-white flex flex-col">
+        {/* ⭐ Navbar SOLO en rutas públicas */}
+        {!isAdminRoute && <Navbar />}
+        
+        <main className="flex-grow">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
+              {/* ========================================== */}
+              {/* RUTAS PÚBLICAS                             */}
+              {/* ========================================== */}
+              <Route path="/" element={<Home />} />
+              <Route path="/club" element={<Club />} />
+              <Route path="/membership" element={<Membership />} />
+              <Route path="/cars" element={<Vehicles />} />
+              <Route path="/cars/:id" element={<VehicleDetail />} />
+              <Route path="/car-request" element={<CarRequest />} />
+              <Route path="/sell-car" element={<SellCar />} />
               
-              ❌ /admin/membership → Eliminada
-              ❌ /admin/events     → Eliminada
-              ❌ /admin/contacts   → Eliminada
-              ❌ /admin/cars       → Eliminada
-              ❌ /admin/vehicles   → Eliminada
-              ❌ /admin/registrations → Eliminada
+              {/* Vehículos Premium */}
+              <Route path="/vehicles" element={<Vehicles />} />
+              <Route path="/vehicles/:id" element={<VehicleDetail />} />
               
-              AHORA TODO se maneja dentro del Dashboard con tabs.
-              La navegación es por cambio de `activeTab`, NO por URL.
-            */}
-            
-            {/* ========================================== */}
-            {/* 404                                        */}
-            {/* ========================================== */}
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" replace />} />
-          </Routes>
-        </Suspense>
-      </main>
-      
-      {/* ⭐ Footer, WhatsApp y ScrollToTop SOLO en rutas públicas */}
-      {!isAdminRoute && <Footer />}
-      {!isAdminRoute && <WhatsAppButton />}
-      {!isAdminRoute && <ScrollToTop />}
-    </div>
+              {/* Servicios */}
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/detailing" element={<Detailing />} />
+              <Route path="/services/wrapping" element={<Wrapping />} />
+              <Route path="/services/car-hotel" element={<CarHotel />} />
+              <Route path="/services/racing" element={<Racing />} />
+              <Route path="/services/workshop" element={<Workshop />} /> {/* ← AGREGADO */}
+              <Route path="/services/:slug" element={<ServiceDetail />} />
+              
+              {/* Eventos */}
+              <Route path="/events" element={<Events />} />
+              <Route path="/events/:id" element={<EventDetail />} />
+              
+              {/* Páginas Legales - AGREGADAS */}
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              
+              {/* Otras */}
+              <Route path="/sponsors" element={<Sponsors />} />
+              <Route path="/contact" element={<Contact />} />
+
+
+              
+              {/* ========================================== */}
+              {/* RUTAS DE ADMIN - SOLO 2 RUTAS ⭐⭐⭐        */}
+              {/* ========================================== */}
+              
+              {/* 1. Login - Sin protección */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              
+              {/* 2. Dashboard - Captura TODAS las rutas /admin/* */}
+              <Route 
+                path="/admin/*" 
+                element={
+                  <ProtectedRoute requireAdmin={true}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* ========================================== */}
+              {/* 404                                        */}
+              {/* ========================================== */}
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/404" replace />} />
+            </Routes>
+          </Suspense>
+        </main>
+        
+        {/* ⭐ Footer, WhatsApp y ScrollToTop SOLO en rutas públicas */}
+        {!isAdminRoute && <Footer />}
+        {!isAdminRoute && <WhatsAppButton />}
+        {!isAdminRoute && <ScrollToTop />}
+      </div>
+    </HelmetProvider>
   );
 }
 

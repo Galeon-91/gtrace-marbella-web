@@ -360,7 +360,7 @@ const Events = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      
+
       {/* ============================================ */}
       {/* HERO SECTION */}
       {/* ============================================ */}
@@ -368,7 +368,7 @@ const Events = () => {
         {/* Background con gradientes animados */}
         <div className="absolute inset-0 bg-gradient-to-br from-gt-gold/10 via-black to-gt-gold/5" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gt-gold/20 via-transparent to-transparent" />
-        
+
         {/* Partículas doradas flotantes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(30)].map((_, i) => (
@@ -409,7 +409,7 @@ const Events = () => {
         {/* Contenido Hero */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            
+
             {/* Icono animado */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
@@ -499,11 +499,10 @@ const Events = () => {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setCategoryFilter(cat.value)}
-                className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 ${
-                  categoryFilter === cat.value
+                className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 ${categoryFilter === cat.value
                     ? 'bg-gradient-to-r from-gt-gold to-yellow-600 text-black shadow-lg shadow-gt-gold/50'
                     : 'bg-white/5 backdrop-blur-sm text-white border border-white/10 hover:bg-white/10 hover:border-gt-gold/50'
-                }`}
+                  }`}
               >
                 <cat.Icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                 <span className="hidden sm:inline">{cat.label}</span>
@@ -518,9 +517,9 @@ const Events = () => {
       {/* ============================================ */}
       <section id="upcoming-events" className="relative py-16 sm:py-20 lg:py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-gt-gray-dark/30 to-black" />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -616,9 +615,9 @@ const Events = () => {
       {/* EVENTOS FINALIZADOS */}
       {/* ============================================ */}
       <section id="finished-events" className="relative py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-black via-gt-gray-dark/20 to-black">
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -786,14 +785,14 @@ const EventCard = ({ event, index, categories, getCategoryInfo, formatShortDate,
 
       {/* Contenido */}
       <div className="p-6">
-        
+
         {/* Fecha destacada */}
         <div className="flex items-center gap-4 mb-4">
           <div className="flex flex-col items-center justify-center w-16 h-16 bg-gt-gold/20 border border-gt-gold/50 rounded-xl">
             <span className="text-2xl font-bold text-gt-gold">{dateInfo.day}</span>
             <span className="text-xs text-gt-gold uppercase">{dateInfo.month}</span>
           </div>
-          
+
           <div className="flex-1">
             <h3 className="text-xl font-voga font-bold text-white mb-1 line-clamp-2 group-hover:text-gt-gold transition-colors">
               {event.title}
@@ -809,7 +808,7 @@ const EventCard = ({ event, index, categories, getCategoryInfo, formatShortDate,
               <span className="line-clamp-1">{event.location}</span>
             </div>
           )}
-          
+
           {spotsLeft && (
             <div className="flex items-center gap-2">
               <span className="text-gt-gold">👥</span>
@@ -817,19 +816,11 @@ const EventCard = ({ event, index, categories, getCategoryInfo, formatShortDate,
             </div>
           )}
 
-          {event.price > 0 && (
-            <div className="flex items-center gap-2">
-              <span className="text-gt-gold">💰</span>
-              <span className="font-semibold text-gt-gold">{event.price}€</span>
-            </div>
-          )}
-
-          {event.price === 0 && (
-            <div className="flex items-center gap-2">
-              <span className="text-green-400">✓</span>
-              <span className="font-semibold text-green-400">{t.event.freeEvent}</span>
-            </div>
-          )}
+          {/* PRECIO OCULTO - Solo visible en admin */}
+          <div className="flex items-center gap-2">
+            <span className="text-gt-gold">ℹ️</span>
+            <span className="font-semibold text-gt-gold">Consultar precio</span>
+          </div>
         </div>
 
         {/* Botón de acción */}
@@ -896,7 +887,7 @@ const EventModal = ({ event, setShowModal, getCategoryInfo, formatDate, t, langu
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            
+
             {/* Badge de categoría */}
             <div className="absolute bottom-4 left-4 px-4 py-2 bg-gt-gold/90 backdrop-blur-sm rounded-full flex items-center gap-2">
               <catInfo.Icon className="w-5 h-5 text-black" />

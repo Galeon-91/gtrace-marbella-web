@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { supabase } from '../../supabase/supabaseClient';
 import { useLanguage } from '../context/LanguageContext';
 import { FUEL_TYPES, BODY_TYPES, TRANSMISSIONS, ECO_LABELS } from '../utils/Vehicleconstants';
+import TechCar from '../components/TechCar';
 
 const VehicleDetail = () => {
   const { id } = useParams();
@@ -112,14 +113,14 @@ const VehicleDetail = () => {
   return (
     <div className="min-h-screen bg-black text-white py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Back Button */}
         <Link to="/vehicles" className="inline-flex items-center gap-2 text-gray-400 hover:text-gt-gold transition-colors mb-8">
           {t.back}
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
+
           {/* Galería de Imágenes */}
           <div>
             <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} className="bg-gray-900 rounded-2xl overflow-hidden mb-4">
@@ -139,7 +140,7 @@ const VehicleDetail = () => {
             <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }}>
               <h1 className="text-4xl sm:text-5xl font-voga font-bold mb-2">{vehicle.marca} {vehicle.modelo}</h1>
               <p className="text-xl text-gray-400 mb-6">{vehicle.year}</p>
-              
+
               <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mb-6">
                 <p className="text-5xl font-bold text-gt-gold mb-2">{vehicle.price?.toLocaleString()}€</p>
                 {vehicle.monthly_payment && <p className="text-gray-400">Desde {vehicle.monthly_payment}€/mes</p>}
@@ -189,7 +190,7 @@ const VehicleDetail = () => {
         {/* Especificaciones Técnicas */}
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
           <h2 className="text-3xl font-voga font-bold mb-6 text-gt-gold">{t.specs}</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {vehicle.seats && (
               <div className="flex items-center gap-3">
@@ -224,7 +225,7 @@ const VehicleDetail = () => {
         {/* Prestaciones y Consumo - Estilo OcasionPlus */}
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
           <h2 className="text-3xl font-voga font-bold mb-8 text-center text-gt-gold">{t.performance}</h2>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {vehicle.max_speed && (
               <div className="text-center">
@@ -277,31 +278,11 @@ const VehicleDetail = () => {
         {(vehicle.length_cm || vehicle.weight_kg || vehicle.trunk_liters || vehicle.tank_liters) && (
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
             <h2 className="text-3xl font-voga font-bold mb-8 text-center text-gt-gold">{t.dimensions}</h2>
-            
-            <div className="flex justify-center mb-8">
-              <svg viewBox="0 0 400 200" className="w-full max-w-md text-gt-gold">
-                <g stroke="currentColor" strokeWidth="2" fill="none">
-                  <rect x="50" y="80" width="300" height="80" rx="10" />
-                  <circle cx="100" cy="160" r="20" />
-                  <circle cx="300" cy="160" r="20" />
-                  <path d="M 50 100 Q 100 50 200 50 Q 300 50 350 100" />
-                </g>
-                {vehicle.length_cm && (
-                  <g>
-                    <line x1="50" y1="190" x2="350" y2="190" stroke="currentColor" strokeWidth="1" markerEnd="url(#arrowhead)" />
-                    <text x="200" y="195" textAnchor="middle" fill="currentColor" fontSize="14">{(vehicle.length_cm / 100).toFixed(2)}m</text>
-                  </g>
-                )}
-                {vehicle.width_cm && (
-                  <g>
-                    <line x1="360" y1="80" x2="360" y2="160" stroke="currentColor" strokeWidth="1" />
-                    <text x="375" y="120" fill="currentColor" fontSize="14">{(vehicle.width_cm / 100).toFixed(2)}m</text>
-                  </g>
-                )}
-              </svg>
-            </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {/* ⭐ NUEVO: Coche tecnológico animado */}
+            <TechCar />
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8">
               {vehicle.weight_kg && (
                 <div>
                   <p className="text-sm text-gray-400">{t.weight}</p>
@@ -323,6 +304,7 @@ const VehicleDetail = () => {
             </div>
           </motion.div>
         )}
+
       </div>
     </div>
   );

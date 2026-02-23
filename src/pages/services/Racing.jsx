@@ -2,6 +2,23 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { supabase } from '../../../supabase/supabaseClient';
+
+// ============================================
+// 🔍 DEBUG - VER URLs EN CONSOLE
+// ============================================
+console.log('🏎️ RACING.JSX CARGADO');
+console.log('📦 Supabase:', supabase ? '✅ OK' : '❌ ERROR');
+
+// ============================================
+// FUNCIÓN PARA OBTENER URL PÚBLICA DE SUPABASE
+// ============================================
+
+const getSupabaseUrl = (path) => {
+  const { data } = supabase.storage.from('site-assets').getPublicUrl(path);
+  console.log(`🔗 ${path} → ${data.publicUrl}`);
+  return data.publicUrl;
+};
 
 // ============================================
 // BANDERA DE CARRERAS ANIMADA
@@ -11,7 +28,6 @@ const AnimatedRaceFlag = () => {
   return (
     <div className="relative w-full h-64">
       <svg viewBox="0 0 400 300" className="w-full h-full">
-        {/* Asta de la bandera */}
         <motion.rect
           x="50"
           y="50"
@@ -21,9 +37,7 @@ const AnimatedRaceFlag = () => {
           opacity="0.8"
         />
         
-        {/* Bandera ondeando */}
         <g>
-          {/* Patrón de cuadros blancos y negros */}
           {[0, 1, 2, 3].map((row) => (
             [0, 1, 2, 3, 4].map((col) => (
               <motion.rect
@@ -49,7 +63,6 @@ const AnimatedRaceFlag = () => {
           ))}
         </g>
 
-        {/* Líneas de movimiento */}
         {[0, 1, 2, 3, 4].map((i) => (
           <motion.line
             key={`line-${i}`}
@@ -74,7 +87,6 @@ const AnimatedRaceFlag = () => {
           />
         ))}
 
-        {/* Texto decorativo */}
         <motion.text
           x="200"
           y="280"
@@ -102,7 +114,7 @@ const AnimatedNumber = ({ value, suffix = '', color = 'text-white', duration = 2
   
   useEffect(() => {
     const interval = setInterval(() => {
-      const randomVariation = (Math.random() - 0.5) * 0.1; // ±5% variation
+      const randomVariation = (Math.random() - 0.5) * 0.1;
       const newValue = value * (1 + randomVariation);
       setDisplayValue(newValue);
     }, duration);
@@ -118,6 +130,100 @@ const AnimatedNumber = ({ value, suffix = '', color = 'text-white', duration = 2
     >
       {displayValue.toFixed(color.includes('gold') ? 0 : 1)}{suffix}
     </motion.span>
+  );
+};
+
+// ============================================
+// TIEMPOS DE SECTOR EN VIVO
+// ============================================
+
+const LiveSectorTimes = ({ language }) => {
+  const [sectorTimes, setSectorTimes] = useState([
+    { sector: 1, time: 28.234, isBest: true },
+    { sector: 2, time: 32.112, isBest: false },
+    { sector: 3, time: 24.221, isBest: true }
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSectorTimes(prev => prev.map(sector => {
+        const variation = (Math.random() - 0.5) * 1.0;
+        const newTime = Math.max(20, sector.time + variation);
+        
+        return {
+          ...sector,
+          time: parseFloat(newTime.toFixed(3)),
+          isBest: newTime < 29
+        };
+      }));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const totalTime = sectorTimes.reduce((sum, sector) => sum + sector.time, 0);
+
+  return (
+    <div className="space-y-4">
+      {sectorTimes.map((sector) => (
+        <motion.div
+          key={sector.sector}
+          animate={{
+            scale: sector.isBest ? [1, 1.02, 1] : 1,
+            borderColor: sector.isBest ? ['rgba(212, 175, 55, 0.5)', 'rgba(212, 175, 55, 0.8)', 'rgba(212, 175, 55, 0.5)'] : 'rgba(255, 255, 255, 0.1)'
+          }}
+          transition={{ duration: 0.5 }}
+          className={`p-4 rounded-xl ${
+            sector.isBest
+              ? 'bg-gt-gold/20 border-2 border-gt-gold/50'
+              : 'bg-white/5 border border-white/10'
+          }`}
+        >
+          <div className="flex justify-between items-center mb-2">
+            <p className="text-gray-400 text-sm">
+              {language === 'es' ? 'Sector' : 'Sector'} {sector.sector}
+            </p>
+            {sector.isBest && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="text-gt-gold text-xs font-bold"
+              >
+                ✓ {language === 'es' ? 'MEJOR' : 'BEST'}
+              </motion.span>
+            )}
+          </div>
+          <motion.p
+            key={sector.time}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            className={`text-3xl font-voga font-bold ${
+              sector.isBest ? 'text-gt-gold' : 'text-white'
+            }`}
+          >
+            {sector.time.toFixed(3)}
+          </motion.p>
+        </motion.div>
+      ))}
+
+      <motion.div
+        animate={{ scale: [1, 1.01, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="p-4 rounded-xl bg-gradient-to-r from-gt-gold/20 to-transparent border border-gt-gold/30"
+      >
+        <p className="text-gray-400 text-sm mb-2">
+          {language === 'es' ? 'Tiempo Total' : 'Total Time'}
+        </p>
+        <motion.p
+          key={totalTime}
+          initial={{ scale: 1.05 }}
+          animate={{ scale: 1 }}
+          className="text-4xl font-voga font-bold text-gt-gold"
+        >
+          {totalTime.toFixed(3)}
+        </motion.p>
+      </motion.div>
+    </div>
   );
 };
 
@@ -326,12 +432,111 @@ const Racing = () => {
   const { language } = useLanguage();
   const [activeChampionship, setActiveChampionship] = useState('f4');
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState('');
   const [stats, setStats] = useState({
     races: 0,
     wins: 0,
     podiums: 0,
     points: 0
   });
+
+  // ============================================
+  // GALERÍA DE FOTOS - URLS DIRECTAS DE SUPABASE
+  // ============================================
+  
+  const galleryImages = [
+    {
+      url: getSupabaseUrl('racing/gallery/carrera1.png'),
+      alt: language === 'es' ? 'Carrera 1' : 'Race 1',
+      category: 'f4'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera10.jpg'),
+      alt: language === 'es' ? 'Carrera 10' : 'Race 10',
+      category: 'porsche'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera11.jpg'),
+      alt: language === 'es' ? 'Carrera 11' : 'Race 11',
+      category: 'cava'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera12.jpg'),
+      alt: language === 'es' ? 'Carrera 12' : 'Race 12',
+      category: 'team'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera13.jpg'),
+      alt: language === 'es' ? 'Carrera 13' : 'Race 13',
+      category: 'podium'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera2.png'),
+      alt: language === 'es' ? 'Carrera 2' : 'Race 2',
+      category: 'preparation'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera3.jpg'),
+      alt: language === 'es' ? 'Carrera 3' : 'Race 3',
+      category: 'f4'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera4.jpg'),
+      alt: language === 'es' ? 'Carrera 4' : 'Race 4',
+      category: 'porsche'
+    },
+    {
+      url: getSupabaseUrl('racing/gallery/carrera5.jpg'),
+      alt: language === 'es' ? 'Carrera 5' : 'Race 5',
+      category: 'cava'
+    }
+  ];
+
+  // ============================================
+  // VIDEOS - URLS DIRECTAS CON DURACIONES REALES
+  // ============================================
+  
+  const videos = [
+    {
+      url: getSupabaseUrl('racing/videos/carrera.mp4'),
+      thumbnail: getSupabaseUrl('racing/videos/carrera.mp4'),
+      title: language === 'es' ? 'Adrenalina en estado puro' : 'Pure Adrenaline',
+      duration: '0:12', // 12 segundos
+      category: 'highlights'
+    },
+    {
+      url: getSupabaseUrl('racing/videos/carrera1.mp4'),
+      thumbnail: getSupabaseUrl('racing/videos/carrera1.mp4'),
+      title: language === 'es' ? 'Detrás de Escenas' : 'Behind the Scenes',
+      duration: '0:28', // 28 segundos
+      category: 'bts'
+    },
+    {
+      url: getSupabaseUrl('racing/videos/carrera2.mp4'),
+      thumbnail: getSupabaseUrl('racing/videos/carrera2.mp4'),
+      title: language === 'es' ? 'Simulación de Carrera' : 'Race Simulation',
+      duration: '0:12', // 12 segundos
+      category: 'interview'
+    },
+    {
+      url: getSupabaseUrl('racing/videos/carrera3.mp4'),
+      thumbnail: getSupabaseUrl('racing/videos/carrera3.mp4'),
+      title: language === 'es' ? 'Vive la emoción de la competición' : 'Feel the Competition',
+      duration: '0:25', // 25 segundos
+      category: 'action'
+    }
+  ];
+
+  // ============================================
+  // SPONSORS - URLS DIRECTAS
+  // ============================================
+  
+  const sponsors = {
+    gold: getSupabaseUrl('racing/thumbnails/legend-sponsor-3.png'),
+    silver: getSupabaseUrl('racing/thumbnails/pro-sponsors.png'),
+    bronze: getSupabaseUrl('racing/thumbnails/rookie-sponsors.png')
+  };
 
   // Animación de estadísticas
   useEffect(() => {
@@ -392,7 +597,7 @@ const Racing = () => {
       videosTitle: 'Videos del Equipo',
       videosSubtitle: 'Revive la emoción de la pista',
       
-      statsTitle: 'Temporada 2024',
+      statsTitle: 'Temporada 2025',
       races: 'Carreras',
       wins: 'Victorias',
       podiums: 'Podios',
@@ -438,7 +643,7 @@ const Racing = () => {
       videosTitle: 'Team Videos',
       videosSubtitle: 'Relive the track excitement',
       
-      statsTitle: '2024 Season',
+      statsTitle: '2025 Season',
       races: 'Races',
       wins: 'Wins',
       podiums: 'Podiums',
@@ -518,76 +723,6 @@ const Racing = () => {
   ];
 
   // ============================================
-  // GALERÍA DE FOTOS - PLACEHOLDER
-  // El usuario reemplazará estas URLs
-  // ============================================
-
-  const galleryImages = [
-    {
-      url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
-      alt: language === 'es' ? 'F4 en Acción' : 'F4 in Action',
-      category: 'f4'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200',
-      alt: language === 'es' ? 'Porsche en Pista' : 'Porsche on Track',
-      category: 'porsche'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1566024287939-1f1b5c5d8d3c?w=1200',
-      alt: language === 'es' ? 'CAVA Championship' : 'CAVA Championship',
-      category: 'cava'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=1200',
-      alt: language === 'es' ? 'Equipo en Boxes' : 'Team in Pits',
-      category: 'team'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
-      alt: language === 'es' ? 'Victoria en Podio' : 'Victory on Podium',
-      category: 'podium'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200',
-      alt: language === 'es' ? 'Preparación Pre-Carrera' : 'Pre-Race Preparation',
-      category: 'preparation'
-    }
-  ];
-
-  // ============================================
-  // VIDEOS - PLACEHOLDER
-  // El usuario reemplazará estos datos
-  // ============================================
-
-  const videos = [
-    {
-      thumbnail: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      title: language === 'es' ? 'Highlights Temporada 2024' : '2024 Season Highlights',
-      duration: '5:32',
-      category: 'highlights'
-    },
-    {
-      thumbnail: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800',
-      title: language === 'es' ? 'Detrás de Escenas' : 'Behind the Scenes',
-      duration: '8:15',
-      category: 'bts'
-    },
-    {
-      thumbnail: 'https://images.unsplash.com/photo-1566024287939-1f1b5c5d8d3c?w=800',
-      title: language === 'es' ? 'Entrevista Pilotos' : 'Driver Interviews',
-      duration: '12:45',
-      category: 'interview'
-    },
-    {
-      thumbnail: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800',
-      title: language === 'es' ? 'Mejor Adelantamiento' : 'Best Overtake',
-      duration: '2:18',
-      category: 'action'
-    }
-  ];
-
-  // ============================================
   // SERVICIOS PARA PILOTOS
   // ============================================
 
@@ -638,18 +773,23 @@ const Racing = () => {
     setCurrentGalleryIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 
+  const openVideoModal = (videoUrl) => {
+  setCurrentVideoUrl(videoUrl);
+  setVideoModalOpen(true);
+};
+
+const closeVideoModal = () => {
+  setVideoModalOpen(false);
+  setCurrentVideoUrl('');
+};
+  
   return (
     <div className="min-h-screen bg-black pt-20">
       
-      {/* ============================================ */}
-      {/* HERO SECTION CON COCHE F4 ANIMADO */}
-      {/* ============================================ */}
-      
+      {/* HERO SECTION */}
       <section className="relative py-20 px-4 overflow-hidden min-h-[95vh] flex items-center">
-        {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-gt-gray-dark via-black to-black" />
         
-        {/* Líneas de velocidad animadas */}
         <motion.div
           className="absolute inset-0 opacity-20"
           initial={{ x: -100 }}
@@ -679,7 +819,6 @@ const Racing = () => {
           ))}
         </motion.div>
 
-        {/* Orbes de fondo */}
         <div className="absolute top-20 left-10 w-96 h-96 bg-gt-gold/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-gt-gold/5 rounded-full blur-3xl animate-pulse" 
              style={{animationDelay: '1s'}} />
@@ -687,13 +826,11 @@ const Racing = () => {
         <div className="relative z-10 container mx-auto max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
-            {/* Contenido Izquierda */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -705,7 +842,6 @@ const Racing = () => {
                 </span>
               </motion.div>
 
-              {/* Título Principal */}
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 
                            drop-shadow-2xl leading-tight">
                 {t.title}
@@ -715,7 +851,6 @@ const Racing = () => {
                 {t.subtitle}
               </p>
 
-              {/* CTAs */}
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/contact"
@@ -736,7 +871,6 @@ const Racing = () => {
               </div>
             </motion.div>
 
-            {/* Coche F4 Animado Derecha */}
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -747,7 +881,6 @@ const Racing = () => {
                 <AnimatedRaceFlag />
               </div>
               
-              {/* Stats rápidas */}
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -774,10 +907,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* ESTADÍSTICAS DE TEMPORADA */}
-      {/* ============================================ */}
-      
+      {/* ESTADÍSTICAS */}
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/50 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -792,101 +922,40 @@ const Racing = () => {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                       hover:border-gt-gold/50 transition-all duration-300 text-center"
-            >
-              <motion.p
-                className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+            {[
+              { value: stats.races, label: t.races, delay: 0.1 },
+              { value: stats.wins, label: t.wins, delay: 0.2 },
+              { value: stats.podiums, label: t.podiums, delay: 0.3 },
+              { value: stats.points, label: t.points, delay: 0.4 }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ type: "spring", delay: 0.2 }}
+                transition={{ delay: stat.delay }}
+                className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
+                         hover:border-gt-gold/50 transition-all duration-300 text-center"
               >
-                {stats.races}
-              </motion.p>
-              <p className="text-gray-300 font-semibold text-lg">
-                {t.races}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                       hover:border-gt-gold/50 transition-all duration-300 text-center"
-            >
-              <motion.p
-                className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", delay: 0.3 }}
-              >
-                {stats.wins}
-              </motion.p>
-              <p className="text-gray-300 font-semibold text-lg">
-                {t.wins}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                       hover:border-gt-gold/50 transition-all duration-300 text-center"
-            >
-              <motion.p
-                className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", delay: 0.4 }}
-              >
-                {stats.podiums}
-              </motion.p>
-              <p className="text-gray-300 font-semibold text-lg">
-                {t.podiums}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                       hover:border-gt-gold/50 transition-all duration-300 text-center"
-            >
-              <motion.p
-                className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", delay: 0.5 }}
-              >
-                {stats.points}
-              </motion.p>
-              <p className="text-gray-300 font-semibold text-lg">
-                {t.points}
-              </p>
-            </motion.div>
+                <motion.p
+                  className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", delay: stat.delay + 0.1 }}
+                >
+                  {stat.value}
+                </motion.p>
+                <p className="text-gray-300 font-semibold text-lg">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* CAMPEONATOS - DETALLADO */}
-      {/* ============================================ */}
-      
+      {/* CAMPEONATOS */}
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -903,7 +972,6 @@ const Racing = () => {
             </p>
           </motion.div>
 
-          {/* Tabs de Campeonatos */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {championships.map((championship) => (
               <button
@@ -923,7 +991,6 @@ const Racing = () => {
             ))}
           </div>
 
-          {/* Contenido del Campeonato Activo */}
           {championships.map((championship) => (
             championship.id === activeChampionship && (
               <motion.div
@@ -934,12 +1001,10 @@ const Racing = () => {
                 className={`relative bg-white/5 backdrop-blur-2xl rounded-3xl p-8 lg:p-12 
                           border border-white/10 overflow-hidden`}
               >
-                {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${championship.gradient} 
                               opacity-50`} />
 
                 <div className="relative z-10 grid lg:grid-cols-2 gap-12">
-                  {/* Info */}
                   <div>
                     <div className="w-20 h-20 text-gt-gold mb-6">
                       {championship.icon}
@@ -957,7 +1022,6 @@ const Racing = () => {
                       {championship.details}
                     </p>
 
-                    {/* Features */}
                     <div className="grid grid-cols-2 gap-4">
                       {championship.features.map((feature, index) => (
                         <div
@@ -971,7 +1035,6 @@ const Racing = () => {
                     </div>
                   </div>
 
-                  {/* Stats */}
                   <div className="space-y-6">
                     <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
                       <p className="text-gray-400 mb-2">
@@ -1007,11 +1070,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
       {/* GALERÍA DE FOTOS */}
-      {/* El usuario reemplazará las imágenes */}
-      {/* ============================================ */}
-      
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -1029,7 +1088,6 @@ const Racing = () => {
           </motion.div>
 
           <div className="relative">
-            {/* Carrusel Principal */}
             <motion.div
               key={currentGalleryIndex}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -1042,9 +1100,12 @@ const Racing = () => {
                 src={galleryImages[currentGalleryIndex].url}
                 alt={galleryImages[currentGalleryIndex].alt}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  console.error('Error cargando imagen:', galleryImages[currentGalleryIndex].url);
+                  e.target.src = 'https://via.placeholder.com/1920x1080/1a1a1a/d4af37?text=Imagen+no+disponible';
+                }}
               />
               
-              {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent
                             flex items-end">
                 <div className="p-8 w-full">
@@ -1057,7 +1118,6 @@ const Racing = () => {
                 </div>
               </div>
 
-              {/* Controles */}
               <button
                 onClick={prevGalleryImage}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full
@@ -1085,7 +1145,6 @@ const Racing = () => {
               </button>
             </motion.div>
 
-            {/* Thumbnails */}
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-6">
               {galleryImages.map((image, index) => (
                 <motion.button
@@ -1102,12 +1161,14 @@ const Racing = () => {
                     src={image.url}
                     alt={image.alt}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/400x225/1a1a1a/d4af37?text=...';
+                    }}
                   />
                 </motion.button>
               ))}
             </div>
 
-            {/* Indicadores */}
             <div className="flex justify-center gap-2 mt-6">
               {galleryImages.map((_, index) => (
                 <button
@@ -1121,24 +1182,11 @@ const Racing = () => {
                 />
               ))}
             </div>
-
-            {/* Nota para el usuario */}
-            <div className="mt-8 p-6 bg-gt-gold/10 backdrop-blur-xl border border-gt-gold/30 rounded-2xl">
-              <p className="text-gray-300 text-center">
-                {language === 'es' 
-                  ? '📸 Aquí podrás añadir tus propias fotos de carreras. Simplemente reemplaza las URLs en el código.' 
-                  : '📸 Here you can add your own race photos. Simply replace the URLs in the code.'}
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* SECCIÓN DE VIDEOS */}
-      {/* El usuario añadirá sus videos aquí */}
-      {/* ============================================ */}
-      
+      {/* VIDEOS DEL EQUIPO */}
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -1164,19 +1212,21 @@ const Racing = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
+                 onClick={() => openVideoModal(video.url)}
                 className="relative bg-white/5 backdrop-blur-2xl rounded-2xl overflow-hidden 
                          border border-white/10 hover:border-gt-gold/50 transition-all duration-300 
                          cursor-pointer group"
               >
-                {/* Thumbnail */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img
+                <div className="relative aspect-video overflow-hidden bg-black">
+                  <video
                     src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover"
+                    muted
+                    onError={(e) => {
+                      console.error('Error cargando video:', video.thumbnail);
+                    }}
                   />
                   
-                  {/* Play Button */}
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center
                                 group-hover:bg-black/60 transition-colors">
                     <motion.div
@@ -1190,14 +1240,12 @@ const Racing = () => {
                     </motion.div>
                   </div>
 
-                  {/* Duration */}
                   <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/80 backdrop-blur-sm 
                                 rounded text-white text-sm font-semibold">
                     {video.duration}
                   </div>
                 </div>
 
-                {/* Info */}
                 <div className="p-4">
                   <h3 className="text-white font-semibold mb-2 line-clamp-2">
                     {video.title}
@@ -1209,22 +1257,10 @@ const Racing = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Nota para el usuario */}
-          <div className="mt-8 p-6 bg-gt-gold/10 backdrop-blur-xl border border-gt-gold/30 rounded-2xl">
-            <p className="text-gray-300 text-center">
-              {language === 'es' 
-                ? '🎥 Aquí podrás añadir tus videos de carreras. Usa YouTube, Vimeo o videos directos.' 
-                : '🎥 Here you can add your race videos. Use YouTube, Vimeo or direct videos.'}
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* ============================================ */}
       {/* SERVICIOS PARA PILOTOS */}
-      {/* ============================================ */}
-      
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/50 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -1268,10 +1304,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
       {/* ÚNETE AL EQUIPO */}
-      {/* ============================================ */}
-      
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-5xl">
           <motion.div
@@ -1313,7 +1346,6 @@ const Racing = () => {
                 </Link>
               </div>
 
-              {/* Features del equipo */}
               <div className="grid md:grid-cols-3 gap-6 mt-12">
                 <div className="text-center">
                   <div className="w-16 h-16 text-gt-gold mx-auto mb-3">
@@ -1362,10 +1394,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
       {/* CTA FINAL */}
-      {/* ============================================ */}
-      
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-5xl">
           <motion.div
@@ -1404,10 +1433,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* SPONSORS Y PARTNERS */}
-      {/* ============================================ */}
-      
+      {/* DATOS Y TELEMETRÍA */}
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -1438,10 +1464,8 @@ const Racing = () => {
                 {language === 'es' ? 'Análisis de Velocidad' : 'Speed Analysis'}
               </h3>
 
-              {/* Gráfico simulado de velocidad */}
               <div className="relative h-48 bg-black/30 rounded-xl mb-6 overflow-hidden">
                 <svg className="w-full h-full" viewBox="0 0 300 150">
-                  {/* Grid background */}
                   {[...Array(8)].map((_, i) => (
                     <line
                       key={`h-${i}`}
@@ -1465,11 +1489,10 @@ const Racing = () => {
                     />
                   ))}
                   
-                  {/* Línea de velocidad */}
                   <motion.polyline
                     points="0,140 30,120 60,110 90,100 120,80 150,60 180,50 210,45 240,40 270,35 300,30"
                     fill="none"
-                    stroke="#D4AF37"
+                    stroke="#35d116"
                     strokeWidth="2.5"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
@@ -1478,13 +1501,11 @@ const Racing = () => {
                   />
                 </svg>
 
-                {/* Label */}
                 <div className="absolute top-2 left-2 text-gt-gold text-xs font-semibold">
                   {language === 'es' ? 'Velocidad (km/h)' : 'Speed (km/h)'}
                 </div>
               </div>
 
-              {/* Stats de velocidad */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400">{language === 'es' ? 'Vel. Máxima' : 'Top Speed'}</span>
@@ -1518,7 +1539,6 @@ const Racing = () => {
                 {language === 'es' ? 'Telemetría en Vivo' : 'Live Telemetry'}
               </h3>
 
-              {/* Datos de telemetría */}
               <div className="space-y-4">
                 {[
                   { label: language === 'es' ? 'RPM Motor' : 'Engine RPM', baseValue: 8750, color: 'text-red-500', duration: 1200 },
@@ -1549,7 +1569,7 @@ const Racing = () => {
               </div>
             </motion.div>
 
-            {/* Panel derecho - Sectores */}
+            {/* Panel derecho - Sectores EN VIVO */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -1560,58 +1580,13 @@ const Racing = () => {
                 {language === 'es' ? 'Tiempos por Sector' : 'Sector Times'}
               </h3>
 
-              {/* Sectores */}
-              <div className="space-y-4">
-                {[
-                  { sector: 1, time: '28.234', best: true },
-                  { sector: 2, time: '32.112', best: false },
-                  { sector: 3, time: '24.221', best: true }
-                ].map((sector) => (
-                  <div
-                    key={sector.sector}
-                    className={`p-4 rounded-xl ${
-                      sector.best
-                        ? 'bg-gt-gold/20 border-2 border-gt-gold/50'
-                        : 'bg-white/5 border border-white/10'
-                    }`}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <p className="text-gray-400 text-sm">
-                        {language === 'es' ? 'Sector' : 'Sector'} {sector.sector}
-                      </p>
-                      {sector.best && (
-                        <span className="text-gt-gold text-xs font-bold">
-                          ✓ {language === 'es' ? 'MEJOR' : 'BEST'}
-                        </span>
-                      )}
-                    </div>
-                    <p className={`text-3xl font-voga font-bold ${
-                      sector.best ? 'text-gt-gold' : 'text-white'
-                    }`}>
-                      {sector.time}
-                    </p>
-                  </div>
-                ))}
-
-                {/* Tiempo total */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-gt-gold/20 to-transparent border border-gt-gold/30">
-                  <p className="text-gray-400 text-sm mb-2">
-                    {language === 'es' ? 'Tiempo Total' : 'Total Time'}
-                  </p>
-                  <p className="text-4xl font-voga font-bold text-gt-gold">
-                    1:24.567
-                  </p>
-                </div>
-              </div>
+              <LiveSectorTimes language={language} />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* SECCIÓN EXTRA - HISTORIA DEL EQUIPO */}
-      {/* ============================================ */}
-      
+      {/* HISTORIA DEL EQUIPO */}
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <motion.div
@@ -1630,15 +1605,13 @@ const Racing = () => {
             </p>
           </motion.div>
 
-          {/* Timeline vertical */}
           <div className="relative">
-            {/* Línea vertical */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gt-gold via-gt-gold/50 to-transparent" />
 
             <div className="space-y-12">
               {[
                 {
-                  year: '2018',
+                  year: '2025',
                   title: language === 'es' ? 'Fundación del Equipo' : 'Team Foundation',
                   description: language === 'es' 
                     ? 'GT Race Team nace con la visión de formar pilotos profesionales y competir al más alto nivel en los principales campeonatos europeos.'
@@ -1646,51 +1619,27 @@ const Racing = () => {
                   highlight: true
                 },
                 {
-                  year: '2019',
-                  title: language === 'es' ? 'Primera Victoria F4' : 'First F4 Victory',
+                  year: '2025',
+                  title: language === 'es' ? 'Primer trofeo Porsche Cup Sprint Challenge' : 'First Porsche Cup Sprint Challenge trophy',
                   description: language === 'es'
-                    ? 'Conseguimos nuestra primera victoria en el campeonato de Fórmula 4 Nórdica, estableciendo las bases para futuras victorias.'
-                    : 'We achieve our first victory in the Nordic Formula 4 championship, laying the groundwork for future wins.',
+                    ? 'En noviembre conseguimos alzarnos con el campeonato ibérico de la Porsche Cup Sprint Challenge, estableciendo las bases para futuras victorias.'
+                    : 'In November we managed to win the Iberian championship of the Porsche Cup Sprint Challenge, laying the foundations for future victories.',
                   highlight: false
                 },
                 {
-                  year: '2020',
-                  title: language === 'es' ? 'Expansión Porsche Sprint' : 'Porsche Sprint Expansion',
+                  year: '2025',
+                  title: language === 'es' ? 'Participación CAVA' : 'CAVA Competition' ,
                   description: language === 'es'
-                    ? 'Entrada en el Porsche Sprint Challenge Ibérica con dos coches, expandiendo nuestro alcance competitivo a nuevos desafíos.'
-                    : 'Entry into the Porsche Sprint Challenge Iberica with two cars, expanding our competitive reach to new challenges.',
-                  highlight: false
-                },
-                {
-                  year: '2021',
-                  title: language === 'es' ? 'Campeones CAVA' : 'CAVA Champions',
-                  description: language === 'es'
-                    ? 'Primer campeonato regional ganado. 15 victorias en una temporada histórica que marca un hito en la historia del equipo.'
-                    : 'First regional championship won. 15 victories in a historic season that marks a milestone in team history.',
+                    ? 'En octubre participamos en el campeonato CAVA. Carreras, adrenalina y emoción en una temporada histórica que marca un hito en la historia del equipo.'
+                    : 'In October we participated in the CAVA championship. Racing, adrenaline and excitement in a historic season that marks a milestone in the team\'s history.',
                   highlight: true
                 },
                 {
-                  year: '2022',
-                  title: language === 'es' ? 'Mejor Temporada F4' : 'Best F4 Season',
-                  description: language === 'es'
-                    ? 'Récord de podios y poles en Fórmula 4. 3 pilotos en el top 5 del campeonato, demostrando la calidad de nuestro programa de desarrollo.'
-                    : 'Record of podiums and poles in Formula 4. 3 drivers in the top 5 of the championship, demonstrating the quality of our development program.',
-                  highlight: false
-                },
-                {
-                  year: '2023',
-                  title: language === 'es' ? 'Reconocimiento Internacional' : 'International Recognition',
-                  description: language === 'es'
-                    ? 'Premio al mejor equipo emergente de automovilismo europeo. Expansión del equipo técnico y nuevas instalaciones de última generación.'
-                    : 'Award for best emerging European motorsport team. Technical team expansion and new state-of-the-art facilities.',
-                  highlight: true
-                },
-                {
-                  year: '2024',
+                  year: '2026',
                   title: language === 'es' ? 'Nueva Era de Excelencia' : 'New Era of Excellence',
                   description: language === 'es'
-                    ? 'Ampliación del equipo con 9 pilotos en competición. Nuevas alianzas estratégicas y tecnología de punta para seguir compitiendo al más alto nivel.'
-                    : 'Team expansion with 9 drivers in competition. New strategic alliances and cutting-edge technology to continue competing at the highest level.',
+                    ? 'Ampliación del equipo con 5 pilotos en competición. Nuevas alianzas estratégicas y tecnología de punta para seguir compitiendo al más alto nivel.'
+                    : 'Team expansion with 5 drivers in competition. New strategic alliances and cutting-edge technology to continue competing at the highest level.',
                   highlight: false
                 }
               ].map((milestone, index) => (
@@ -1702,7 +1651,6 @@ const Racing = () => {
                   transition={{ duration: 0.5 }}
                   className="flex gap-8 items-start"
                 >
-                  {/* Year badge */}
                   <div className={`flex-shrink-0 w-20 h-20 rounded-full flex items-center justify-center
                                 ${milestone.highlight 
                                   ? 'bg-gt-gold text-black scale-110' 
@@ -1710,7 +1658,6 @@ const Racing = () => {
                     <span className="text-lg font-voga font-bold">{milestone.year}</span>
                   </div>
 
-                  {/* Content card */}
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     className={`flex-grow bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border transition-all duration-300 ${
@@ -1735,10 +1682,7 @@ const Racing = () => {
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* SECCIÓN EXTRA - TESTIMONIOS */}
-      {/* ============================================ */}
-      
+      {/* TESTIMONIOS */}
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div
@@ -1794,7 +1738,6 @@ const Racing = () => {
                 className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
                          hover:border-gt-gold/30 transition-all duration-300"
               >
-                {/* Image */}
                 <div className="relative w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-gt-gold">
                   <img
                     src={testimonial.image}
@@ -1803,15 +1746,12 @@ const Racing = () => {
                   />
                 </div>
 
-                {/* Quote icon */}
                 <div className="text-gt-gold text-5xl mb-4 font-serif">"</div>
 
-                {/* Quote */}
                 <p className="text-gray-300 mb-6 leading-relaxed italic">
                   {testimonial.quote}
                 </p>
 
-                {/* Rating stars */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 text-gt-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -1820,7 +1760,6 @@ const Racing = () => {
                   ))}
                 </div>
 
-                {/* Author info */}
                 <div className="border-t border-white/10 pt-6">
                   <p className="text-white font-semibold text-lg">{testimonial.name}</p>
                   <p className="text-gray-400">{testimonial.role}</p>
@@ -1831,148 +1770,234 @@ const Racing = () => {
         </div>
       </section>
 
+{/* PATROCINADORES */}
+<section className="relative py-20 px-4">
+  <div className="container mx-auto max-w-7xl">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+        {language === 'es' ? 'Nuestros Patrocinadores' : 'Our Sponsors'}
+      </h2>
+      <p className="text-xl text-gray-300">
+        {language === 'es' 
+          ? 'Gracias por hacer posible nuestro sueño' 
+          : 'Thank you for making our dream possible'}
+      </p>
+    </motion.div>
+
+    <div className="grid md:grid-cols-3 gap-8 mb-12">
+      
       {/* ============================================ */}
-      {/* SECCIÓN EXTRA - PATROCINADORES */}
+      {/* LEGEND SPONSORS */}
+      {/* ============================================ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative bg-gradient-to-br from-gt-gold/30 via-gt-gold/20 to-transparent 
+                 backdrop-blur-2xl rounded-3xl p-8 border-2 border-gt-gold/50 text-center
+                 overflow-hidden group hover:scale-105 transition-all duration-500"
+      >
+        {/* Brillo animado */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gt-gold/20 to-transparent
+                      translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        
+        <div className="relative z-10">
+          {/* Marco del logo mejorado */}
+          <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden bg-black/30 
+                        border-2 border-gt-gold/30 p-6 flex items-center justify-center
+                        shadow-2xl shadow-gt-gold/50 backdrop-blur-xl">
+            <img
+              src={sponsors.gold}
+              alt="Legend Sponsors"
+              className="w-full h-full object-contain filter drop-shadow-2xl"
+              onError={(e) => {
+                console.error('Error cargando logo legend:', sponsors.gold);
+                e.target.style.display = 'none';
+              }}
+            />
+          </div>
+          
+          <div className="w-20 h-20 mx-auto mb-4 text-gt-gold">
+            <TrophyIcon />
+          </div>
+          
+          <h3 className="text-3xl font-voga font-bold text-gt-gold mb-2 tracking-wide">
+            LEGEND SPONSORS
+          </h3>
+          
+          <div className="h-1 w-24 mx-auto mb-4 bg-gradient-to-r from-transparent via-gt-gold to-transparent" />
+          
+          <p className="text-gray-200 text-sm font-semibold mb-4 uppercase tracking-wider">
+            {language === 'es' ? 'Máxima visibilidad en coches y equipamiento' : 'Maximum visibility on cars and equipment'}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* ============================================ */}
+      {/* PRO SPONSORS */}
+      {/* ============================================ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+        className="relative bg-gradient-to-br from-gray-300/20 via-gray-400/10 to-transparent 
+                 backdrop-blur-2xl rounded-3xl p-8 border-2 border-gray-300/40 text-center
+                 overflow-hidden group hover:scale-105 transition-all duration-500"
+      >
+        {/* Brillo animado */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300/20 to-transparent
+                      translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        
+        <div className="relative z-10">
+          {/* Marco del logo mejorado */}
+          <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden bg-black/30 
+                        border-2 border-gray-300/30 p-6 flex items-center justify-center
+                        shadow-2xl shadow-gray-300/30 backdrop-blur-xl">
+            <img
+              src={sponsors.silver}
+              alt="Pro Sponsors"
+              className="w-full h-full object-contain filter drop-shadow-2xl"
+              onError={(e) => {
+                console.error('Error cargando logo pro:', sponsors.silver);
+                e.target.style.display = 'none';
+              }}
+            />
+          </div>
+          
+          <div className="w-20 h-20 mx-auto mb-4 text-gray-300">
+            <SpeedIcon />
+          </div>
+          
+          <h3 className="text-3xl font-voga font-bold text-gray-200 mb-2 tracking-wide">
+            PRO SPONSORS
+          </h3>
+          
+          <div className="h-1 w-24 mx-auto mb-4 bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+          
+          <p className="text-gray-300 text-sm font-semibold mb-4 uppercase tracking-wider">
+            {language === 'es' ? 'Presencia destacada en medios y eventos' : 'Featured presence in media and events'}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* ============================================ */}
+      {/* ROOKIE SPONSORS */}
+      {/* ============================================ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="relative bg-gradient-to-br from-orange-400/20 via-red-500/10 to-transparent 
+                 backdrop-blur-2xl rounded-3xl p-8 border-2 border-orange-400/40 text-center
+                 overflow-hidden group hover:scale-105 transition-all duration-500"
+      >
+        {/* Brillo animado */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-400/20 to-transparent
+                      translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        
+        <div className="relative z-10">
+          {/* Marco del logo mejorado */}
+          <div className="w-56 h-56 mx-auto mb-6 rounded-2xl overflow-hidden bg-black/30 
+                        border-2 border-orange-400/30 p-6 flex items-center justify-center
+                        shadow-2xl shadow-orange-400/30 backdrop-blur-xl">
+            <img
+              src={sponsors.bronze}
+              alt="Rookie Sponsors"
+              className="w-full h-full object-contain filter drop-shadow-2xl"
+              onError={(e) => {
+                console.error('Error cargando logo rookie:', sponsors.bronze);
+                e.target.style.display = 'none';
+              }}
+            />
+          </div>
+          
+          <div className="w-20 h-20 mx-auto mb-4 text-orange-400">
+            <HelmetIcon />
+          </div>
+          
+          <h3 className="text-3xl font-voga font-bold text-orange-300 mb-2 tracking-wide">
+            ROOKIE SPONSORS
+          </h3>
+          
+          <div className="h-1 w-24 mx-auto mb-4 bg-gradient-to-r from-transparent via-orange-400 to-transparent" />
+          
+          <p className="text-gray-200 text-sm font-semibold mb-4 uppercase tracking-wider">
+            {language === 'es' ? 'Colaboración y visibilidad en redes' : 'Collaboration and social media visibility'}
+          </p>
+        </div>
+      </motion.div>
+    </div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center"
+    >
+      <p className="text-gray-300 mb-6 text-lg">
+        {language === 'es' 
+          ? '¿Interesado en patrocinar al equipo?' 
+          : 'Interested in sponsoring the team?'}
+      </p>
+      <Link
+        to="/contact"
+        className="inline-block px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
+                 hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
+                 shadow-lg shadow-gt-gold/50"
+      >
+        {language === 'es' ? 'Contáctanos' : 'Contact Us'}
+      </Link>
+    </motion.div>
+  </div>
+</section>
+
+      {/* ============================================ */}
+      {/* VIDEO MODAL */}
       {/* ============================================ */}
       
-      <section className="relative py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {videoModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={closeVideoModal}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 
+                     backdrop-blur-sm p-4"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl 
+                       overflow-hidden shadow-2xl"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-              {language === 'es' ? 'Nuestros Patrocinadores' : 'Our Sponsors'}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {language === 'es' 
-                ? 'Gracias por hacer posible nuestro sueño' 
-                : 'Thank you for making our dream possible'}
-            </p>
+            <video
+              src={currentVideoUrl}
+              controls
+              autoPlay
+              className="w-full h-full"
+            />
+            
+            <button
+              onClick={closeVideoModal}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 
+                         backdrop-blur-xl border border-white/20 text-white
+                         hover:bg-white/20 transition-all duration-300 flex items-center 
+                         justify-center"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </motion.div>
-
-          {/* Grid de sponsors placeholders */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
-            {[...Array(10)].map((_, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10
-                         hover:border-gt-gold/50 transition-all duration-300 flex items-center justify-center
-                         aspect-square"
-              >
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 text-gray-400 opacity-50">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="2" y="2" width="20" height="20" rx="4"/>
-                      <text x="12" y="15" textAnchor="middle" fontSize="8" fill="black">LOGO</text>
-                    </svg>
-                  </div>
-                  <p className="text-gray-500 text-xs">
-                    Sponsor {index + 1}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Sponsor tiers */}
-          <div className="grid md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 backdrop-blur-2xl 
-                       rounded-3xl p-8 border border-yellow-500/30 text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 text-yellow-500">
-                <TrophyIcon />
-              </div>
-              <h3 className="text-2xl font-voga font-bold text-white mb-2">Gold</h3>
-              <p className="text-yellow-500 font-semibold mb-4">
-                {language === 'es' ? 'Patrocinador Principal' : 'Main Sponsor'}
-              </p>
-              <p className="text-gray-300 text-sm">
-                {language === 'es' 
-                  ? 'Máxima visibilidad en coches y equipamiento' 
-                  : 'Maximum visibility on cars and equipment'}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-gray-400/20 to-gray-600/20 backdrop-blur-2xl 
-                       rounded-3xl p-8 border border-gray-400/30 text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 text-gray-400">
-                <SpeedIcon />
-              </div>
-              <h3 className="text-2xl font-voga font-bold text-white mb-2">Silver</h3>
-              <p className="text-gray-400 font-semibold mb-4">
-                {language === 'es' ? 'Patrocinador Oficial' : 'Official Sponsor'}
-              </p>
-              <p className="text-gray-300 text-sm">
-                {language === 'es' 
-                  ? 'Presencia destacada en medios y eventos' 
-                  : 'Featured presence in media and events'}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-2xl 
-                       rounded-3xl p-8 border border-orange-500/30 text-center"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 text-orange-500">
-                <HelmetIcon />
-              </div>
-              <h3 className="text-2xl font-voga font-bold text-white mb-2">Bronze</h3>
-              <p className="text-orange-500 font-semibold mb-4">
-                {language === 'es' ? 'Patrocinador Asociado' : 'Associate Sponsor'}
-              </p>
-              <p className="text-gray-300 text-sm">
-                {language === 'es' 
-                  ? 'Colaboración y visibilidad en redes' 
-                  : 'Collaboration and social media visibility'}
-              </p>
-            </motion.div>
-          </div>
-
-          {/* CTA para sponsors */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 text-center"
-          >
-            <p className="text-gray-300 mb-6 text-lg">
-              {language === 'es' 
-                ? '¿Interesado en patrocinar al equipo?' 
-                : 'Interested in sponsoring the team?'}
-            </p>
-            <Link
-              to="/contact"
-              className="inline-block px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
-                       hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
-                       shadow-lg shadow-gt-gold/50"
-            >
-              {language === 'es' ? 'Contáctanos' : 'Contact Us'}
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        </motion.div>
+      )}
 
     </div>
   );

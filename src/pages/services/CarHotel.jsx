@@ -191,8 +191,8 @@ const CarHotel = () => {
               </p>
               <p className="text-gray-300">
                 {language === 'es' 
-                  ? 'Solo 15 plazas disponibles. Reserva tu espacio exclusivo ahora.' 
-                  : 'Only 15 spaces available. Reserve your exclusive space now.'}
+                  ? 'Plazas limitadas disponibles. Reserva tu espacio exclusivo ahora.' 
+                  : 'Limited places available. Reserve your exclusive space now.'}
               </p>
             </div>
           </motion.div>

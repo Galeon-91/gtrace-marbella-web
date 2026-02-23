@@ -2,6 +2,13 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { supabase } from '../../supabase/supabaseClient';
+
+// Función para obtener URL de Supabase
+const getSupabaseUrl = (path) => {
+  const { data } = supabase.storage.from('site-assets').getPublicUrl(path);
+  return data.publicUrl;
+};
 
 // ============================================
 // ICONOS SVG PERSONALIZADOS ANIMADOS
@@ -189,7 +196,28 @@ const RacingIcon = () => (
 const Services = () => {
   const { language } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const videoUrl = getSupabaseUrl('videos/GT_Race.mp4');
+
+  // Funciones para video modal
+  const openVideoModal = () => {
+    setVideoModalOpen(true);
+  };
+
+  const closeVideoModal = () => {
+    setVideoModalOpen(false);
+  };
+
+  // Cerrar con ESC
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && videoModalOpen) {
+        closeVideoModal();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [videoModalOpen]);
 
   const content = {
     es: {
@@ -430,8 +458,7 @@ const Services = () => {
       </section>
 
       {/* ============================================ */}
-      {/* SECCIÓN DE VIDEO */}
-      {/* El usuario podrá reemplazar el video más tarde */}
+      {/* SECCIÓN DE VIDEO CON FONDO BONITO */}
       {/* ============================================ */}
       
       <section className="relative py-20 px-4">
@@ -459,70 +486,37 @@ const Services = () => {
             className="relative bg-white/5 backdrop-blur-2xl rounded-3xl overflow-hidden 
                      border border-white/10 aspect-video group"
           >
-            {/* PLACEHOLDER PARA VIDEO */}
-            {/* El usuario reemplazará esto con su video */}
-            
-            {!isVideoPlaying ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gt-gold/20 to-black/80">
-                <button
-                  onClick={() => setIsVideoPlaying(true)}
-                  className="relative z-10 group/play"
+            {/* Video Preview con fondo bonito */}
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gt-gold/20 to-black/80">
+              <button
+                onClick={openVideoModal}
+                className="relative z-10 group/play"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-24 h-24 rounded-full bg-gt-gold flex items-center justify-center
+                           shadow-2xl shadow-gt-gold/50 transition-all duration-300
+                           group-hover/play:shadow-gt-gold/80"
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-24 h-24 rounded-full bg-gt-gold flex items-center justify-center
-                             shadow-2xl shadow-gt-gold/50 transition-all duration-300
-                             group-hover/play:shadow-gt-gold/80"
-                  >
-                    <svg className="w-10 h-10 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </motion.div>
-                  <p className="mt-4 text-white font-semibold">
-                    {language === 'es' ? 'Reproducir Video' : 'Play Video'}
-                  </p>
-                </button>
+                  <svg className="w-10 h-10 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </motion.div>
+                <p className="mt-4 text-white font-semibold">
+                  {language === 'es' ? 'Reproducir Video' : 'Play Video'}
+                </p>
+              </button>
 
-                {/* Imagen de fondo placeholder */}
-                <div className="absolute inset-0 -z-10">
-                  <img
-                    src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200"
-                    alt="GT Race Marbella"
-                    className="w-full h-full object-cover opacity-50"
-                  />
-                </div>
+              {/* Imagen de fondo bonita */}
+              <div className="absolute inset-0 -z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200"
+                  alt="GT Race Marbella"
+                  className="w-full h-full object-cover opacity-50"
+                />
               </div>
-            ) : (
-              <div className="w-full h-full bg-black flex items-center justify-center">
-                {/* AQUÍ EL USUARIO PONDRÁ SU VIDEO */}
-                {/* Ejemplo con iframe de YouTube/Vimeo: */}
-                {/* <iframe 
-                     src="TU_URL_DE_VIDEO" 
-                     className="w-full h-full"
-                     allow="autoplay; fullscreen"
-                     allowFullScreen
-                   ></iframe> */}
-                
-                {/* Por ahora, placeholder */}
-                <div className="text-center text-white p-8">
-                  <p className="text-2xl font-voga mb-4">
-                    {language === 'es' ? '📹 Video Placeholder' : '📹 Video Placeholder'}
-                  </p>
-                  <p className="text-gray-400">
-                    {language === 'es' 
-                      ? 'Aquí irá tu video de presentación' 
-                      : 'Your presentation video will go here'}
-                  </p>
-                  <button
-                    onClick={() => setIsVideoPlaying(false)}
-                    className="mt-4 px-6 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors"
-                  >
-                    {language === 'es' ? 'Cerrar' : 'Close'}
-                  </button>
-                </div>
-              </div>
-            )}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -792,6 +786,66 @@ const Services = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* ============================================ */}
+      {/* MODAL DE VIDEO */}
+      {/* ============================================ */}
+      
+      {videoModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={closeVideoModal}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 
+                     backdrop-blur-sm p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl aspect-video bg-black rounded-2xl 
+                       overflow-hidden shadow-2xl border-2 border-gt-gold/30"
+          >
+            <video
+              src={videoUrl}
+              controls
+              autoPlay
+              className="w-full h-full"
+              onError={(e) => {
+                console.error('❌ Error cargando video:', videoUrl);
+              }}
+            />
+            
+            <button
+              onClick={closeVideoModal}
+              className="absolute top-4 right-4 w-12 h-12 rounded-full 
+                         bg-white/10 backdrop-blur-xl border-2 border-white/20 
+                         text-white hover:bg-gt-gold hover:text-black 
+                         hover:border-gt-gold hover:scale-110 
+                         transition-all duration-300 
+                         flex items-center justify-center group z-10"
+            >
+              <svg 
+                className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M6 18L18 6M6 6l12 12" 
+                />
+              </svg>
+            </button>
+          </motion.div>
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm">
+            {language === 'es' ? 'Presiona ESC o haz click fuera para cerrar' : 'Press ESC or click outside to close'}
+          </div>
+        </motion.div>
+      )}
 
     </div>
   );

@@ -3,12 +3,58 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 
-// Icono inline para evitar problemas de imports
+// ============================================
+// ICONOS Y BANDERAS SVG INLINE
+// ============================================
+
+// Icono de teléfono
 const PhoneIcon = ({ className = "w-5 h-5" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
   </svg>
 );
+
+// Bandera Española 🇪🇸
+const SpainFlag = ({ className = "w-6 h-4" }) => (
+  <svg viewBox="0 0 30 20" className={className}>
+    {/* Franja roja superior */}
+    <rect width="30" height="5" fill="#AA151B" />
+    {/* Franja amarilla central */}
+    <rect y="5" width="30" height="10" fill="#F1BF00" />
+    {/* Franja roja inferior */}
+    <rect y="15" width="30" height="5" fill="#AA151B" />
+    {/* Escudo simplificado en el centro */}
+    <g transform="translate(11, 10)">
+      <rect x="0" y="-2.5" width="8" height="5" fill="#AA151B" stroke="#F1BF00" strokeWidth="0.4" rx="0.5" />
+      <circle cx="4" cy="0" r="1.2" fill="#F1BF00" />
+      <rect x="2.5" y="-1" width="3" height="2" fill="#F1BF00" />
+    </g>
+  </svg>
+);
+
+// Bandera del Reino Unido 🇬🇧
+const UKFlag = ({ className = "w-6 h-4" }) => (
+  <svg viewBox="0 0 30 20" className={className}>
+    {/* Fondo azul */}
+    <rect width="30" height="20" fill="#012169" />
+    
+    {/* Aspas blancas (cruz de San Andrés) */}
+    <path d="M 0,0 L 30,20 M 30,0 L 0,20" stroke="white" strokeWidth="3.5" />
+    
+    {/* Aspas rojas (cruz de San Patricio) */}
+    <path d="M 0,0 L 30,20 M 30,0 L 0,20" stroke="#C8102E" strokeWidth="2" />
+    
+    {/* Cruz blanca vertical y horizontal (cruz de San Jorge) */}
+    <path d="M 15,0 L 15,20 M 0,10 L 30,10" stroke="white" strokeWidth="5" />
+    
+    {/* Cruz roja vertical y horizontal */}
+    <path d="M 15,0 L 15,20 M 0,10 L 30,10" stroke="#C8102E" strokeWidth="3" />
+  </svg>
+);
+
+// ============================================
+// COMPONENTE NAVBAR
+// ============================================
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +69,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // ⭐ Aparece después de 100px de scroll
       setScrolled(window.scrollY > 100);
     };
 
@@ -36,7 +81,7 @@ const Navbar = () => {
   }, [location]);
 
   // ============================================
-  // MENÚ DE NAVEGACIÓN - ORDEN DEL CLIENTE
+  // MENÚ DE NAVEGACIÓN
   // ============================================
   const navLinks = [
     { path: '/', label: 'Inicio', labelEn: 'Home' },
@@ -58,7 +103,6 @@ const Navbar = () => {
     { path: '/contact', label: 'Contáctanos', labelEn: 'Contact Us' },
   ];
 
-  // Helper para obtener label según idioma
   const getLabel = (link) => {
     return language === 'es' ? link.label : (link.labelEn || link.label);
   };
@@ -76,16 +120,17 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
+          
           {/* Logo */}
           <Link to="/" className="flex items-center group relative z-10">
-            <img 
-              src="/assets/images/logo-gold.png" 
-              alt="GT Race Marbella" 
-              className="h-14 w-auto transition-all duration-300 group-hover:scale-110 group-hover:brightness-110 drop-shadow-2xl"
+            <img
+              src="/assets/images/logo-gold.png"
+              alt="GT Race Marbella"
+              className="h-20 md:h-24 lg:h-24 w-auto transition-all duration-300 group-hover:scale-110 group-hover:brightness-110 drop-shadow-2xl"
             />
           </Link>
 
-          {/* Desktop Navigation - Centrado y profesional */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <div key={link.path} className="relative group">
@@ -101,27 +146,18 @@ const Navbar = () => {
                   `}
                 >
                   {getLabel(link)}
-                  {/* Underline animado */}
                   <span className={`
                     absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gt-gold
                     transition-all duration-300
                     ${location.pathname === link.path || (link.subMenu && location.pathname.startsWith('/services'))
-                      ? 'w-3/4' 
+                      ? 'w-3/4'
                       : 'w-0 group-hover:w-3/4'
                     }
                   `} />
                 </Link>
 
-                {/* Submenu con glass morphism */}
                 {link.subMenu && (
-                  <div
-                    className="absolute left-0 top-full mt-2 w-64 
-                               bg-black/60 backdrop-blur-2xl
-                               border border-gt-gold/20 rounded-2xl shadow-2xl
-                               opacity-0 invisible group-hover:opacity-100 
-                               group-hover:visible transition-all duration-300
-                               overflow-hidden"
-                  >
+                  <div className="absolute left-0 top-full mt-2 w-64 bg-black/60 backdrop-blur-2xl border border-gt-gold/20 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
                     {link.subMenu.map((subLink) => (
                       <Link
                         key={subLink.path}
@@ -140,10 +176,7 @@ const Navbar = () => {
                         <span className="flex items-center">
                           <span className={`
                             w-1.5 h-1.5 rounded-full mr-3
-                            ${location.pathname === subLink.path
-                              ? 'bg-gt-gold'
-                              : 'bg-gt-gold/50'
-                            }
+                            ${location.pathname === subLink.path ? 'bg-gt-gold' : 'bg-gt-gold/50'}
                           `} />
                           {language === 'es' ? subLink.label : (subLink.labelEn || subLink.label)}
                         </span>
@@ -155,34 +188,43 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right Side Actions - Alineación perfecta */}
+          {/* Right Side Actions */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Phone con glass morphism */}
+            
+            {/* Phone */}
             <a
               href="tel:+34687999427"
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl
                          bg-white/5 backdrop-blur-lg border border-white/10
                          text-white/90 hover:text-gt-gold hover:bg-gt-gold/10 
-                         hover:border-gt-gold/30 transition-all duration-300
-                         group"
+                         hover:border-gt-gold/30 transition-all duration-300 group"
             >
               <PhoneIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="text-[15px] font-medium">+34 687 99 94 27</span>
             </a>
 
-            {/* Language Toggle con glass */}
+            {/* Language Toggle con BANDERAS SVG */}
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2.5 rounded-xl text-[15px] font-semibold
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-[15px] font-semibold
                          bg-white/5 backdrop-blur-lg border border-white/10
                          text-white/90 hover:bg-gt-gold hover:text-black
-                         hover:border-gt-gold transition-all duration-300
-                         min-w-[60px]"
+                         hover:border-gt-gold transition-all duration-300"
             >
-              {language === 'es' ? 'EN' : 'ES'}
+              {language === 'es' ? (
+                <>
+                  <UKFlag className="w-6 h-4" />
+                  <span>UK</span>
+                </>
+              ) : (
+                <>
+                  <SpainFlag className="w-6 h-4" />
+                  <span>ES</span>
+                </>
+              )}
             </button>
 
-            {/* CTA Button - Premium - "HÁGASE SOCIO" */}
+            {/* CTA Button */}
             <Link
               to="/membership"
               className="px-6 py-2.5 rounded-xl text-[15px] font-semibold
@@ -194,7 +236,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button - Mejorado */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-lg text-white
@@ -203,33 +245,18 @@ const Navbar = () => {
                        transition-all duration-300"
             aria-label="Toggle menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu - Glass morphism */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -237,8 +264,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-black/60 backdrop-blur-2xl 
-                       border-t border-gt-gold/10"
+            className="lg:hidden bg-black/60 backdrop-blur-2xl border-t border-gt-gold/10"
           >
             <div className="px-6 py-6 space-y-2 max-h-[calc(100vh-5rem)] overflow-y-auto">
               {navLinks.map((link) => (
@@ -256,8 +282,7 @@ const Navbar = () => {
                   >
                     {getLabel(link)}
                   </Link>
-                  
-                  {/* Submenu móvil */}
+
                   {link.subMenu && (
                     <div className="pl-4 space-y-1 mt-2">
                       {link.subMenu.map((subLink) => (
@@ -265,8 +290,7 @@ const Navbar = () => {
                           key={subLink.path}
                           to={subLink.path}
                           className={`
-                            flex items-center px-4 py-2.5 rounded-lg
-                            text-[14px] 
+                            flex items-center px-4 py-2.5 rounded-lg text-[14px] 
                             hover:bg-white/5 transition-all duration-200
                             ${location.pathname === subLink.path
                               ? 'text-gt-gold bg-gt-gold/10'
@@ -276,10 +300,7 @@ const Navbar = () => {
                         >
                           <span className={`
                             w-1.5 h-1.5 rounded-full mr-3
-                            ${location.pathname === subLink.path
-                              ? 'bg-gt-gold'
-                              : 'bg-gt-gold/50'
-                            }
+                            ${location.pathname === subLink.path ? 'bg-gt-gold' : 'bg-gt-gold/50'}
                           `} />
                           {language === 'es' ? subLink.label : (subLink.labelEn || subLink.label)}
                         </Link>
@@ -291,6 +312,7 @@ const Navbar = () => {
 
               {/* Actions móvil */}
               <div className="pt-4 mt-4 border-t border-white/10 space-y-3">
+                
                 {/* Phone */}
                 <a
                   href="tel:+34687999427"
@@ -303,7 +325,7 @@ const Navbar = () => {
                   <span className="text-[15px] font-medium">+34 687 99 94 27</span>
                 </a>
 
-                {/* Language */}
+                {/* Language con BANDERAS SVG */}
                 <button
                   onClick={toggleLanguage}
                   className="w-full flex items-center justify-between px-4 py-3
@@ -313,10 +335,22 @@ const Navbar = () => {
                              hover:border-gt-gold transition-all duration-300"
                 >
                   <span>{language === 'es' ? 'Idioma' : 'Language'}</span>
-                  <span className="font-semibold">{language === 'es' ? 'Español' : 'English'}</span>
+                  <div className="flex items-center gap-2">
+                    {language === 'es' ? (
+                      <>
+                        <UKFlag className="w-6 h-4" />
+                        <span className="font-semibold">English</span>
+                      </>
+                    ) : (
+                      <>
+                        <SpainFlag className="w-6 h-4" />
+                        <span className="font-semibold">Español</span>
+                      </>
+                    )}
+                  </div>
                 </button>
 
-                {/* CTA - "HÁGASE SOCIO" */}
+                {/* CTA */}
                 <Link
                   to="/membership"
                   className="block text-center px-6 py-3 rounded-xl

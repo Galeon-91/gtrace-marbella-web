@@ -294,7 +294,7 @@ const EventDetail = () => {
 
       if (error) throw error;
       setEvent(data);
-      
+
       if (data) {
         fetchRelatedEvents(data.category);
         // ⭐ NUEVO: Verificar plazas disponibles
@@ -459,7 +459,7 @@ const EventDetail = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      
+
       {/* ============================================ */}
       {/* HERO SECTION CON IMAGEN/VIDEO */}
       {/* ============================================ */}
@@ -489,7 +489,7 @@ const EventDetail = () => {
               <CategoryIcon className="w-64 h-64 text-gt-gold/20" />
             </div>
           )}
-          
+
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
         </div>
@@ -497,7 +497,7 @@ const EventDetail = () => {
         {/* Content */}
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
-            
+
             {/* Back Button */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -567,7 +567,7 @@ const EventDetail = () => {
               <div className="flex items-center gap-2">
                 <MoneyIcon className="w-5 h-5 text-gt-gold" />
                 <span className="font-bold text-gt-gold">
-                  {event.price > 0 ? `${event.price}€ ${t.perPerson}` : t.free}
+                  Consultar al club
                 </span>
               </div>
             </motion.div>
@@ -585,11 +585,10 @@ const EventDetail = () => {
                   whileTap={{ scale: isFull ? 1 : 0.95 }}
                   onClick={() => !isFull && setShowRegisterModal(true)} // ⭐ NUEVO
                   disabled={isFull} // ⭐ NUEVO
-                  className={`px-8 py-4 text-lg font-bold rounded-xl shadow-2xl transition-all ${
-                    isFull 
-                      ? 'bg-gray-600 text-gray-300 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-gt-gold to-yellow-600 text-black shadow-gt-gold/50 hover:shadow-gt-gold/70'
-                  }`}
+                  className={`px-8 py-4 text-lg font-bold rounded-xl shadow-2xl transition-all ${isFull
+                    ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-gt-gold to-yellow-600 text-black shadow-gt-gold/50 hover:shadow-gt-gold/70'
+                    }`}
                 >
                   {isFull ? t.eventFull : t.register}
                 </motion.button>
@@ -615,10 +614,10 @@ const EventDetail = () => {
       <section className="relative py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-black via-gt-gray-dark/30 to-black">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            
+
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">
-              
+
               {/* Description */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -698,7 +697,7 @@ const EventDetail = () => {
                 viewport={{ once: true }}
                 className="sticky top-24 space-y-6"
               >
-                
+
                 {/* Event Details Card */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 space-y-6">
                   <h3 className="text-xl font-voga font-bold text-white border-b border-white/10 pb-4">
@@ -740,10 +739,13 @@ const EventDetail = () => {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-gray-400 text-sm">
                       <MoneyIcon className="w-5 h-5 text-gt-gold" />
-                      <span>{t.price}</span>
+                      <span>Precio</span>
                     </div>
-                    <p className="text-gt-gold font-bold text-2xl pl-7">
-                      {event.price > 0 ? `${event.price}€` : t.free}
+                    <p className="text-gt-gold font-bold text-lg pl-7">
+                      Consultar al club
+                    </p>
+                    <p className="text-sm text-gray-400 pl-7">
+                      Contacta con nosotros para más información
                     </p>
                   </div>
 
@@ -753,11 +755,10 @@ const EventDetail = () => {
                       <ClockIcon className="w-5 h-5 text-gt-gold" />
                       <span>{t.status}</span>
                     </div>
-                    <p className={`font-semibold pl-7 ${
-                      event.status === 'upcoming' ? 'text-green-400' :
+                    <p className={`font-semibold pl-7 ${event.status === 'upcoming' ? 'text-green-400' :
                       event.status === 'finished' ? 'text-gray-400' :
-                      'text-yellow-400'
-                    }`}>
+                        'text-yellow-400'
+                      }`}>
                       {getStatusLabel(event.status)}
                     </p>
                   </div>
@@ -869,7 +870,7 @@ const RelatedEventCard = ({ event, index, formatShortDate, categoryIcons, getCat
     >
       <Link to={`/events/${event.id}`}>
         <div className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 hover:border-gt-gold/50 transition-all duration-500 h-full">
-          
+
           {/* Image */}
           <div className="relative h-48 overflow-hidden bg-gt-gray-dark">
             {event.image_url ? (
@@ -886,7 +887,7 @@ const RelatedEventCard = ({ event, index, formatShortDate, categoryIcons, getCat
               </div>
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            
+
             {/* Category Badge */}
             <div className="absolute top-3 left-3 px-3 py-1 bg-gt-gold/90 backdrop-blur-sm rounded-full flex items-center gap-2">
               <CategoryIcon className="w-4 h-4 text-black" />
@@ -901,7 +902,7 @@ const RelatedEventCard = ({ event, index, formatShortDate, categoryIcons, getCat
                 <span className="text-xl font-bold text-gt-gold">{dateInfo.day}</span>
                 <span className="text-xs text-gt-gold uppercase">{dateInfo.month}</span>
               </div>
-              
+
               <h3 className="text-lg font-voga font-bold text-white line-clamp-2 group-hover:text-gt-gold transition-colors flex-1">
                 {event.title}
               </h3>
@@ -954,7 +955,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -1011,7 +1012,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
             <input
               type="text"
               value={formData.full_name}
-              onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
               className={`w-full px-4 py-3 bg-white/5 border ${errors.full_name ? 'border-red-500' : 'border-white/10'} rounded-xl text-white focus:outline-none focus:border-gt-gold`}
             />
             {errors.full_name && <p className="text-red-400 text-sm mt-1">{errors.full_name}</p>}
@@ -1022,7 +1023,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
             <input
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-xl text-white focus:outline-none focus:border-gt-gold`}
             />
             {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
@@ -1033,7 +1034,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
             <input
               type="tel"
               value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className={`w-full px-4 py-3 bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl text-white focus:outline-none focus:border-gt-gold`}
             />
             {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
@@ -1044,7 +1045,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
             <input
               type="text"
               value={formData.company}
-              onChange={(e) => setFormData({...formData, company: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
               className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-gt-gold"
             />
           </div>
@@ -1056,7 +1057,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
               min="1"
               max="10"
               value={formData.spots_reserved}
-              onChange={(e) => setFormData({...formData, spots_reserved: parseInt(e.target.value)})}
+              onChange={(e) => setFormData({ ...formData, spots_reserved: parseInt(e.target.value) })}
               className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-gt-gold"
             />
           </div>
@@ -1065,18 +1066,13 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
             <label className="block text-sm font-medium text-gray-300 mb-2">{t.notes}</label>
             <textarea
               value={formData.notes}
-              onChange={(e) => setFormData({...formData, notes: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows="3"
               className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-gt-gold resize-none"
             />
           </div>
 
-          {event.price > 0 && (
-            <div className="bg-gt-gold/10 border border-gt-gold/30 rounded-xl p-4">
-              <p className="text-gray-300 mb-1">Total a pagar:</p>
-              <p className="text-gt-gold font-bold text-2xl">{event.price * formData.spots_reserved}€</p>
-            </div>
-          )}
+          {/* PRECIO OCULTO - El pago se gestiona por separado */}
 
           <div className="flex gap-4">
             <button

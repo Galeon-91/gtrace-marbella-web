@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async'; // ⭐ NUEVO
 import App from './App';
 import { LanguageProvider } from './context/LanguageContext';
-import { NotificationProvider } from './context/NotificationContext'; // NUEVO
+import { NotificationProvider } from './context/NotificationContext';
 import './styles/index.css';
 import './styles/fonts.css';
 
@@ -13,13 +14,15 @@ import './styles/fonts.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <LanguageProvider>
-        <NotificationProvider> {/* Con esto reemplazo el ToastContainer antiguo que tenía */}
-          <App />
-        </NotificationProvider>
-      </LanguageProvider>
-    </BrowserRouter>
+    <HelmetProvider> {/* ⭐ NUEVO - Wrapper para SEO */}
+      <BrowserRouter>
+        <LanguageProvider>
+          <NotificationProvider>
+            <App />
+          </NotificationProvider>
+        </LanguageProvider>
+      </BrowserRouter>
+    </HelmetProvider> {/* ⭐ NUEVO - Cierre del wrapper */}
   </React.StrictMode>
 );
 
@@ -35,5 +38,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // ✅ Agrego:
 // - import NotificationProvider
 // - <NotificationProvider> wrapper
+// - import HelmetProvider (SEO) ⭐ NUEVO
+// - <HelmetProvider> wrapper ⭐ NUEVO
 //
 // ============================================

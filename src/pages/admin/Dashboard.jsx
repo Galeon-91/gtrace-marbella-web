@@ -10,6 +10,9 @@ import EventsSection from './sections/EventsSection';
 import ContactsSection from './sections/ContactsSection';
 import RegistrationsAdmin from './sections/RegistrationsAdmin';
 import VehiclesSection from './sections/VehiclesSection';
+import DashboardStats from './sections/DashboardStats';
+import WorkshopAdmin from '../../pages/admin/WorkshopAdmin'; // ← NUEVO
+import WrappingAdmin from '../../pages/admin/WrappingAdmin'; // ← NUEVO
 
 // ⭐ HOOK PERSONALIZADO PARA CARGAR IMAGEN DE FONDO DESDE SUPABASE
 const useBackgroundImage = (path = 'backgrounds/dashboard-bg.jpg') => {
@@ -98,6 +101,21 @@ const DashboardIcon = ({ className }) => (
   </svg>
 );
 
+// ← NUEVOS ICONOS
+const WorkshopIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+  </svg>
+);
+
+const WrappingIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    <path d="M3 9h18" />
+    <path d="M9 21V9" />
+  </svg>
+);
+
 const LogoutIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -121,6 +139,8 @@ const translations = {
       registrations: "Inscripciones",
       contacts: "Contactos",
       vehicles: "Vehículos",
+      workshop: "Taller", // ← NUEVO
+      wrapping: "Wrapping", // ← NUEVO
       settings: "Configuración"
     },
     logout: "Cerrar Sesión",
@@ -137,6 +157,8 @@ const translations = {
       registrations: "Registrations",
       contacts: "Contacts",
       vehicles: "Vehicles",
+      workshop: "Workshop", // ← NUEVO
+      wrapping: "Wrapping", // ← NUEVO
       settings: "Settings"
     },
     logout: "Logout",
@@ -170,7 +192,7 @@ const AdminDashboard = () => {
           .select('full_name')
           .eq('id', user.id)
           .single();
-        
+
         if (data?.full_name) {
           setAdminName(data.full_name);
         }
@@ -191,6 +213,8 @@ const AdminDashboard = () => {
     { id: 'registrations', label: t.tabs.registrations, Icon: RegistrationsIcon, badge: null },
     { id: 'contacts', label: t.tabs.contacts, Icon: ContactsIcon, badge: null },
     { id: 'vehicles', label: t.tabs.vehicles, Icon: VehiclesIcon, badge: null },
+    { id: 'workshop', label: t.tabs.workshop, Icon: WorkshopIcon, badge: null }, // ← NUEVO
+    { id: 'wrapping', label: t.tabs.wrapping, Icon: WrappingIcon, badge: null }, // ← NUEVO
   ];
 
   return (
@@ -199,7 +223,7 @@ const AdminDashboard = () => {
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Imagen de fondo del club desde Supabase */}
         {backgroundUrl && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.35 }}
             transition={{ duration: 1 }}
@@ -210,22 +234,22 @@ const AdminDashboard = () => {
             }}
           />
         )}
-        
+
         {/* Overlay principal con gradiente */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-gt-gold/10 backdrop-blur-sm" />
-        
+
         {/* Gradiente dorado adicional */}
         <div className="absolute inset-0 bg-gradient-to-br from-gt-gold/5 via-black to-gt-gold/5" />
-        
+
         {/* Patrón de puntos dorados */}
-        <div 
-          className="absolute inset-0 opacity-10" 
+        <div
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle, #D4AF37 1px, transparent 1px)`,
             backgroundSize: '50px 50px'
-          }} 
+          }}
         />
-        
+
         {/* Partículas doradas flotantes - Solo 10 para rendimiento */}
         {[...Array(10)].map((_, i) => (
           <motion.div
@@ -279,10 +303,10 @@ const AdminDashboard = () => {
                   exit={{ opacity: 0, x: -20 }}
                   className="flex items-center gap-3"
                 >
-                  <motion.img 
-                    src="/assets/images/logo-gold.png" 
+                  <motion.img
+                    src="/assets/images/logo-gold.png"
                     alt="GT Race Marbella"
-                    className="h-16 w-auto object-contain"
+                    className="h-30 w-auto object-contain"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.2 }}
                     onError={(e) => {
@@ -313,7 +337,7 @@ const AdminDashboard = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-            
+
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -363,11 +387,10 @@ const AdminDashboard = () => {
                   whileHover={{ x: 5 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
-                    isActive
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${isActive
                       ? 'bg-gt-gold text-black shadow-lg shadow-gt-gold/30'
                       : 'text-gray-400 hover:bg-white/5 hover:text-white'
-                  }`}
+                    }`}
                 >
                   <item.Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-black' : ''}`} />
                   <AnimatePresence mode="wait">
@@ -450,7 +473,7 @@ const AdminDashboard = () => {
                 <MembershipSection />
               </motion.div>
             )}
-            
+
             {activeTab === 'events' && (
               <motion.div
                 key="events"
@@ -474,7 +497,7 @@ const AdminDashboard = () => {
                 <RegistrationsAdmin />
               </motion.div>
             )}
-            
+
             {activeTab === 'contacts' && (
               <motion.div
                 key="contacts"
@@ -499,6 +522,31 @@ const AdminDashboard = () => {
               </motion.div>
             )}
 
+            {/* ← NUEVAS SECCIONES */}
+            {activeTab === 'workshop' && (
+              <motion.div
+                key="workshop"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <WorkshopAdmin />
+              </motion.div>
+            )}
+
+            {activeTab === 'wrapping' && (
+              <motion.div
+                key="wrapping"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <WrappingAdmin />
+              </motion.div>
+            )}
+
             {activeTab === 'dashboard' && (
               <motion.div
                 key="dashboard"
@@ -506,37 +554,11 @@ const AdminDashboard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-gray-400 text-sm">Membresías Activas</h3>
-                    <MembershipIcon className="w-5 h-5 text-gt-gold" />
-                  </div>
-                  <p className="text-3xl font-bold text-white mb-2">24</p>
-                  <p className="text-xs text-green-400">↑ 12% este mes</p>
-                </div>
-
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-gray-400 text-sm">Eventos Próximos</h3>
-                    <EventsIcon className="w-5 h-5 text-gt-gold" />
-                  </div>
-                  <p className="text-3xl font-bold text-white mb-2">3</p>
-                  <p className="text-xs text-blue-400">2 este mes</p>
-                </div>
-
-                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-gray-400 text-sm">Mensajes Nuevos</h3>
-                    <ContactsIcon className="w-5 h-5 text-gt-gold" />
-                  </div>
-                  <p className="text-3xl font-bold text-white mb-2">7</p>
-                  <p className="text-xs text-yellow-400">Pendientes</p>
-                </div>
+                <DashboardStats />
               </motion.div>
             )}
-
+            
             {activeTab === 'settings' && (
               <motion.div
                 key="settings"
