@@ -10,7 +10,7 @@ const Terms = () => {
     es: {
       title: 'Términos y Condiciones',
       subtitle: 'GT Race Marbella',
-      lastUpdated: 'Última actualización: 22 de Febrero de 2025',
+      lastUpdated: 'Última actualización: 22 de Febrero de 2026',
       
       section1Title: '1. Aceptación de los Términos',
       section1Content: `Al acceder y utilizar los servicios de GT Race Marbella, aceptas estar sujeto a estos Términos y Condiciones. Si no estás de acuerdo con alguna parte de estos términos, no debes utilizar nuestros servicios.
@@ -157,11 +157,7 @@ Horario de atención: Lunes a Viernes, 9:00 - 18:00 CET`,
     en: {
       title: 'Terms and Conditions',
       subtitle: 'GT Race Marbella',
-<<<<<<< HEAD
-      lastUpdated: 'Last updated: February 22, 2025',
-=======
       lastUpdated: 'Last updated: February 22, 2026',
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
       
       section1Title: '1. Acceptance of Terms',
       section1Content: `By accessing and using the services of GT Race Marbella, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you should not use our services.
@@ -323,11 +319,7 @@ Office hours: Monday to Friday, 9:00 AM - 6:00 PM CET`,
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-<<<<<<< HEAD
             <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
-=======
-            <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
               {t.title}
             </h1>
             <p className="text-xl text-gray-400">{t.subtitle}</p>
@@ -344,11 +336,7 @@ Office hours: Monday to Friday, 9:00 AM - 6:00 PM CET`,
             
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
               <div key={num}>
-<<<<<<< HEAD
                 <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t[`section${num}Title`]}</h2>
-=======
-                <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t[`section${num}Title`]}</h2>
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
                 <p className="text-gray-300 leading-relaxed whitespace-pre-line">{t[`section${num}Content`]}</p>
                 {num < 12 && <div className="border-t border-white/10 mt-8" />}
               </div>
