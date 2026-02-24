@@ -1,44 +1,33 @@
-/* ================================================
-   FUENTE PERSONALIZADA VOGA
-   Para GT Race Marbella
-   ================================================ */
+/* GT RACE MARBELLA - FUENTES */
 
 @font-face {
-  font-family: 'Voga';
-  src: url('/assets/fonts/Voga-Medium.otf') format('opentype');
-  font-weight: 500;
+  font-family: 'March';
+  src: url('/fonts/March_Personal_Use_Only.otf') format('opentype');
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-/* ================================================
-   CLASES UTILITY PARA VOGA
-   ================================================ */
-
-.font-voga {
-  font-family: 'Voga', serif;
+:root {
+  --font-march: 'March', serif;
+  --font-heading: 'March', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* Para títulos elegantes con letter-spacing */
-.heading-voga {
-  font-family: 'Voga', serif;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
+.font-march {
+  font-family: var(--font-march);
 }
 
-/* Para subtítulos */
-.subtitle-voga {
-  font-family: 'Voga', serif;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  line-height: 1.3;
+.font-heading {
+  font-family: var(--font-heading);
 }
 
-/* Para texto decorativo pequeño */
-.decorative-voga {
-  font-family: 'Voga', serif;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }

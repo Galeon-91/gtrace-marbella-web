@@ -7,26 +7,26 @@ import { Helmet } from 'react-helmet-async';
 const Home = () => {
   const { language } = useLanguage();
 
-  // ⭐ CARGAR VIDEO DESDE SUPABASE
+  // ⭐ CARGAR VIDEO DESDE SUPABASE (NO CAMBIA)
   const { url: heroVideoUrl } = useSupabaseAsset('videos/hero-video.mp4');
 
-  // ⭐ CARGAR IMÁGENES DE SERVICIOS DESDE SUPABASE
+  // ⭐ CARGAR IMÁGENES DE SERVICIOS DESDE SUPABASE (NO CAMBIA)
   const { url: clubEventoUrl } = useSupabaseAsset('services/club-evento.jpg');
   const { url: ventaCountachUrl } = useSupabaseAsset('services/venta-countach.jpg');
   const { url: competicionPilotosUrl } = useSupabaseAsset('services/competicion-pilotos.jpg');
   const { url: garageMulticolorUrl } = useSupabaseAsset('services/garage-multicolor.jpg');
   const { url: tallerGarageUrl } = useSupabaseAsset('services/taller-garage.jpg');
 
-  // ⭐ CARGAR IMÁGENES DEL GARAGE DESDE SUPABASE
+  // ⭐ CARGAR IMÁGENES DEL GARAGE DESDE SUPABASE (NO CAMBIA)
   const { url: garagePlataformasUrl } = useSupabaseAsset('gallery/garage-plataformas.jpg');
 
-  // ⭐ CARGAR IMÁGENES DE EVENTOS DESDE SUPABASE
+  // ⭐ CARGAR IMÁGENES DE EVENTOS DESDE SUPABASE (NO CAMBIA)
   const { url: concursoBellezaUrl } = useSupabaseAsset('events/concurso-belleza3.png');
   const { url: circuitoProfesionalUrl } = useSupabaseAsset('events/circuito-profesional.jpg');
   const { url: eventoTrackdayUrl } = useSupabaseAsset('events/eventotrackday.jpg');
 
   // ============================================
-  // TRADUCCIONES COMPLETAS
+  // TRADUCCIONES COMPLETAS (NO CAMBIA)
   // ============================================
   const t = {
     es: {
@@ -104,8 +104,8 @@ const Home = () => {
       viewEvents: 'Ver Próximos Eventos',
       
       // CTA
-      ctaTitle: 'Únete a la Comunidad',
-      ctaDescription: 'Experimenta el mundo del motor con acceso exclusivo a nuestra colección, eventos VIP y servicios premium.',
+      ctaTitle: 'Experimenta nuestro mundo',
+      ctaDescription: 'Acceso exclusivo a nuestra colección, eventos VIP y servicios premium.',
       requestMembership: 'Solicitar Membresía',
       contact: 'Contactar'
     },
@@ -192,7 +192,7 @@ const Home = () => {
     }
   }[language];
 
-  // Servicios principales basados en fotos reales - ORDEN ACTUALIZADO
+  // Servicios principales basados en fotos reales - ORDEN ACTUALIZADO (NO CAMBIA)
   const services = [
     {
       title: t.service1Title,
@@ -216,7 +216,7 @@ const Home = () => {
       title: t.service4Title,
       description: t.service4Desc,
       imageUrl: garageMulticolorUrl,
-      link: '/services/car-hotel' // ✅ CORREGIDO
+      link: '/services/car-hotel'
     },
     {
       title: t.service5Title,
@@ -226,7 +226,7 @@ const Home = () => {
     }
   ];
 
-  // Stats reales del negocio
+  // Stats reales del negocio (NO CAMBIA)
   const stats = [
     { number: '100+', label: t.stat1 },
     { number: '200+', label: t.stat2 },
@@ -234,9 +234,43 @@ const Home = () => {
     { number: '24/7', label: t.stat4 }
   ];
 
+  // Eventos (NO CAMBIA)
+  const events = [
+    {
+      title: t.event1Title,
+      description: t.event1Desc,
+      imageUrl: concursoBellezaUrl,
+      svgIcon: (
+        <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+      )
+    },
+    {
+      title: t.event2Title,
+      description: t.event2Desc,
+      imageUrl: circuitoProfesionalUrl,
+      svgIcon: (
+        <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+        </svg>
+      )
+    },
+    {
+      title: t.event3Title,
+      description: t.event3Desc,
+      imageUrl: eventoTrackdayUrl,
+      svgIcon: (
+        <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        </svg>
+      )
+    }
+  ];
+
   return (
     <>
-      {/* ⭐ SEO OPTIMIZATION */}
+      {/* ⭐ SEO OPTIMIZATION (NO CAMBIA) */}
       <Helmet>
         <title>{t.metaTitle}</title>
         <meta name="description" content={t.metaDescription} />
@@ -250,7 +284,7 @@ const Home = () => {
       </Helmet>
 
       <div className="min-h-screen">
-        {/* HERO SECTION */}
+        {/* HERO SECTION - Sin lazy loading, es lo primero que se ve */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden">
           {/* Video de fondo */}
           {heroVideoUrl && (
@@ -274,14 +308,18 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 drop-shadow-2xl">
-                {t.heroTitle}
+              {/* ✅ TEXTO CON GRADIENTE DORADO */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-march font-bold mb-6 drop-shadow-2xl">
+                <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                  {language === 'es' ? 'Bienvenido a' : 'Welcome to'}
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-gt-gold via-yellow-400 to-gt-gold bg-clip-text text-transparent animate-pulse">
+                  GT Race Marbella
+                </span>
               </h1>
-              <p className="text-xl sm:text-2xl md:text-3xl text-gray-200 mb-12 drop-shadow-lg">
-                {t.heroSubtitle}
-              </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                 <Link to="/cars" className="btn-primary text-lg px-8 py-4">
                   {t.viewCollection}
                 </Link>
@@ -304,7 +342,7 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* STATS SECTION */}
+        {/* STATS SECTION - TODO EL CONTENIDO IGUAL */}
         <section className="py-16 bg-gt-gray-dark">
           <div className="container-custom px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -317,7 +355,7 @@ const Home = () => {
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-4xl md:text-5xl font-voga font-bold text-gt-gold mb-2">
+                  <div className="text-4xl md:text-5xl font-march font-bold text-gt-gold mb-2">
                     {stat.number}
                   </div>
                   <div className="text-gray-300 text-sm md:text-base">
@@ -329,7 +367,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* SERVICES SECTION */}
+        {/* SERVICES SECTION - TODO EL CONTENIDO IGUAL */}
         <section className="py-20 bg-gt-black">
           <div className="container-custom px-4">
             <motion.div
@@ -338,7 +376,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-march font-bold mb-4">
                 <span className="text-white">{t.servicesTitle.split(' ')[0]} </span>
                 <span className="text-gt-gold">{t.servicesTitle.split(' ')[1]}</span>
               </h2>
@@ -366,13 +404,14 @@ const Home = () => {
                           src={service.imageUrl} 
                           alt={service.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          loading="lazy"
                         />
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="text-2xl font-voga font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
+                      <h3 className="text-2xl font-march font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
                         {service.title}
                       </h3>
                       <p className="text-gray-300 leading-relaxed">
@@ -392,7 +431,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* THE GARAGE */}
+        {/* THE GARAGE - TODO EL CONTENIDO IGUAL */}
         <section className="py-20 bg-gradient-to-b from-gt-black via-gt-gray-dark to-gt-black">
           <div className="container-custom px-4">
             <motion.div
@@ -401,7 +440,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-march font-bold mb-4">
                 <span className="text-white">The </span>
                 <span className="text-gt-gold">Garage</span>
               </h2>
@@ -422,11 +461,12 @@ const Home = () => {
                     src={garageMulticolorUrl} 
                     alt="Garage GT Race Marbella"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                 <div className="absolute bottom-6 left-6 z-20">
-                  <h3 className="text-2xl font-voga font-bold text-white mb-2">
+                  <h3 className="text-2xl font-march font-bold text-white mb-2">
                     {t.garageFeature1}
                   </h3>
                   <p className="text-gray-300">{t.garageFeature1Desc}</p>
@@ -445,11 +485,12 @@ const Home = () => {
                     src={garagePlataformasUrl} 
                     alt="Plataformas iluminadas GT Race"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                 <div className="absolute bottom-6 left-6 z-20">
-                  <h3 className="text-2xl font-voga font-bold text-white mb-2">
+                  <h3 className="text-2xl font-march font-bold text-white mb-2">
                     {t.garageFeature2}
                   </h3>
                   <p className="text-gray-300">{t.garageFeature2Desc}</p>
@@ -459,13 +500,12 @@ const Home = () => {
 
             <div className="text-center mt-12">
               <Link to="/services/car-hotel" className="btn-primary text-lg px-8 py-4">
-                {t.exploreGarage}
-              </Link>
+<Link to="/garage">Explorar el Garaje</Link>              </Link>
             </div>
           </div>
         </section>
 
-        {/* RACING TEAM */}
+        {/* RACING TEAM - TODO EL CONTENIDO IGUAL */}
         <section className="py-20 bg-gt-black">
           <div className="container-custom px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -475,14 +515,14 @@ const Home = () => {
                 viewport={{ once: true }}
               >
                 <div className="inline-block px-4 py-2 bg-gt-gold/10 rounded-full mb-6">
-                  <span className="text-gt-gold font-voga font-semibold flex items-center text-sm uppercase tracking-widest">
+                  <span className="text-gt-gold font-march font-semibold flex items-center text-sm uppercase tracking-widest">
                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
                     </svg>
                     {t.racingBadge}
                   </span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-voga font-bold mb-6">
+                <h2 className="text-4xl md:text-5xl font-march font-bold mb-6">
                   <span className="text-white">{t.racingTitle.split(' ')[0]} </span>
                   <span className="text-gt-gold">{t.racingTitle.split(' ')[1]}</span>
                 </h2>
@@ -535,11 +575,12 @@ const Home = () => {
                       src={competicionPilotosUrl} 
                       alt="GT Race Team"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
                     />
                   )}
                   <div className="absolute inset-0 border-4 border-gt-gold/20 rounded-lg" />
                 </div>
-                <div className="absolute -bottom-6 -right-6 bg-gt-gold text-black px-6 py-4 rounded-lg font-voga font-bold text-xl shadow-xl">
+                <div className="absolute -bottom-6 -right-6 bg-gt-gold text-black px-6 py-4 rounded-lg font-march font-bold text-xl shadow-xl">
                   {t.realCompetition}
                 </div>
               </motion.div>
@@ -547,7 +588,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* EVENTS */}
+        {/* EVENTS - TODO EL CONTENIDO IGUAL */}
         <section className="py-20 bg-gt-gray-dark">
           <div className="container-custom px-4">
             <motion.div
@@ -556,7 +597,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-voga font-bold mb-4">
+              <h2 className="text-4xl md:text-5xl font-march font-bold mb-4">
                 <span className="text-white">{t.eventsTitle.split(' ')[0]} </span>
                 <span className="text-gt-gold">{t.eventsTitle.split(' ')[1]}</span>
               </h2>
@@ -566,38 +607,7 @@ const Home = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: t.event1Title,
-                  description: t.event1Desc,
-                  imageUrl: concursoBellezaUrl,
-                  svgIcon: (
-                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                    </svg>
-                  )
-                },
-                {
-                  title: t.event2Title,
-                  description: t.event2Desc,
-                  imageUrl: circuitoProfesionalUrl,
-                  svgIcon: (
-                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
-                    </svg>
-                  )
-                },
-                {
-                  title: t.event3Title,
-                  description: t.event3Desc,
-                  imageUrl: eventoTrackdayUrl,
-                  svgIcon: (
-                    <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                    </svg>
-                  )
-                }
-              ].map((event, index) => (
+              {events.map((event, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -612,6 +622,7 @@ const Home = () => {
                         src={event.imageUrl}
                         alt={event.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
@@ -621,7 +632,7 @@ const Home = () => {
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-2xl font-voga font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
+                    <h3 className="text-2xl font-march font-bold text-white mb-3 group-hover:text-gt-gold transition-colors">
                       {event.title}
                     </h3>
                     <p className="text-gray-300 leading-relaxed">
@@ -640,7 +651,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* CTA FINAL */}
+        {/* CTA FINAL - TODO EL CONTENIDO IGUAL */}
         <section className="py-20 bg-gradient-to-br from-gt-black via-gt-gray-dark to-gt-black relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gt-gold rounded-full blur-3xl" />
@@ -654,7 +665,7 @@ const Home = () => {
               viewport={{ once: true }}
               className="text-center max-w-4xl mx-auto"
             >
-              <h2 className="text-4xl md:text-6xl font-voga font-bold mb-6">
+              <h2 className="text-4xl md:text-6xl font-march font-bold mb-6">
                 <span className="text-white">{t.ctaTitle.split(' ')[0]} </span>
                 <span className="text-white">{t.ctaTitle.split(' ')[1]} </span>
                 <span className="text-gt-gold">{t.ctaTitle.split(' ')[2]}</span>

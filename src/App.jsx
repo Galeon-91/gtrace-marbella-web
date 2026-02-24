@@ -7,6 +7,7 @@ import WhatsAppButton from './components/common/WhatsAppButton';
 import ScrollToTop from './components/common/ScrollToTop';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import GarageHotel from './pages/GarageHotel';
 
 // Loading de las páginas PÚBLICAS
 const Home = lazy(() => import('./pages/Home'));
@@ -83,6 +84,7 @@ function App() {
               <Route path="/services/racing" element={<Racing />} />
               <Route path="/services/workshop" element={<Workshop />} /> {/* ← AGREGADO */}
               <Route path="/services/:slug" element={<ServiceDetail />} />
+              <Route path="/garage" element={<GarageHotel />} />
               
               {/* Eventos */}
               <Route path="/events" element={<Events />} />

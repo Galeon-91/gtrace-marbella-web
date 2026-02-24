@@ -18,8 +18,8 @@ export default {
         'gt-gray-light': '#2A2A2A',
       },
       fontFamily: {
-        'voga': ['Voga', 'serif'],
-        'heading': ['Voga', 'serif'],
+        'march': ['March', 'serif'],
+        'heading': ['March', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in-out',

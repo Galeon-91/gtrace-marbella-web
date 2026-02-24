@@ -287,7 +287,7 @@ const AdminDashboard = ({ embedded = false }) => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8 sm:mb-12"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-voga font-bold text-white mb-2 sm:mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-march font-bold text-white mb-2 sm:mb-4">
               {t.title}
             </h1>
             <p className="text-lg sm:text-xl text-gray-300">{t.subtitle}</p>
@@ -414,7 +414,7 @@ const AdminDashboard = ({ embedded = false }) => {
                 {/* Header */}
                 <div className="flex justify-between items-start mb-6 sm:mb-8">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl font-voga font-bold text-white mb-2">
+                    <h2 className="text-2xl sm:text-3xl font-march font-bold text-white mb-2">
                       {selectedApp.first_name} {selectedApp.last_name}
                     </h2>
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusBadge(selectedApp.status)}`}>
@@ -433,7 +433,7 @@ const AdminDashboard = ({ embedded = false }) => {
 
                 {/* Información Personal */}
                 <div className="mb-6">
-                  <h3 className="text-lg sm:text-xl font-voga font-bold text-gt-gold mb-4">{t.personalInfo}</h3>
+                  <h3 className="text-lg sm:text-xl font-march font-bold text-gt-gold mb-4">{t.personalInfo}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 rounded-xl p-4 sm:p-6">
                     <div>
                       <p className="text-gray-400 text-xs sm:text-sm">{t.email}</p>
@@ -453,7 +453,7 @@ const AdminDashboard = ({ embedded = false }) => {
                 {/* Dirección */}
                 {(selectedApp.address || selectedApp.city) && (
                   <div className="mb-6">
-                    <h3 className="text-lg sm:text-xl font-voga font-bold text-gt-gold mb-4">{t.addressInfo}</h3>
+                    <h3 className="text-lg sm:text-xl font-march font-bold text-gt-gold mb-4">{t.addressInfo}</h3>
                     <div className="bg-white/5 rounded-xl p-4 sm:p-6">
                       <p className="text-white text-sm sm:text-base">{selectedApp.address}</p>
                       <p className="text-gray-300 text-sm sm:text-base">{selectedApp.city} {selectedApp.postal_code}</p>
@@ -464,7 +464,7 @@ const AdminDashboard = ({ embedded = false }) => {
 
                 {/* Información Adicional */}
                 <div className="mb-6">
-                  <h3 className="text-lg sm:text-xl font-voga font-bold text-gt-gold mb-4">{t.additionalInfo}</h3>
+                  <h3 className="text-lg sm:text-xl font-march font-bold text-gt-gold mb-4">{t.additionalInfo}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 rounded-xl p-4 sm:p-6">
                     <div>
                       <p className="text-gray-400 text-xs sm:text-sm">{t.livesInMarbella}</p>
@@ -490,7 +490,7 @@ const AdminDashboard = ({ embedded = false }) => {
                 {/* Intención Coche */}
                 {selectedApp.car_intention && selectedApp.car_intention !== 'none' && (
                   <div className="mb-6">
-                    <h3 className="text-lg sm:text-xl font-voga font-bold text-gt-gold mb-4">
+                    <h3 className="text-lg sm:text-xl font-march font-bold text-gt-gold mb-4">
                       {t.carIntention}: {t[selectedApp.car_intention]}
                     </h3>
 
@@ -598,7 +598,7 @@ const AdminDashboard = ({ embedded = false }) => {
                 {/* Notas adicionales */}
                 {selectedApp.additional_info && (
                   <div className="mb-6">
-                    <h3 className="text-lg sm:text-xl font-voga font-bold text-gt-gold mb-4">{t.notes}</h3>
+                    <h3 className="text-lg sm:text-xl font-march font-bold text-gt-gold mb-4">{t.notes}</h3>
                     <div className="bg-white/5 rounded-xl p-4 sm:p-6">
                       <p className="text-gray-300 text-sm sm:text-base">{selectedApp.additional_info}</p>
                     </div>

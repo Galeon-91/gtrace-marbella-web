@@ -425,7 +425,7 @@ const Events = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-voga font-bold mb-6 bg-gradient-to-r from-gt-gold via-yellow-500 to-gt-gold bg-clip-text text-transparent"
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-march font-bold mb-6 bg-gradient-to-r from-gt-gold via-yellow-500 to-gt-gold bg-clip-text text-transparent"
             >
               {t.hero.title}
             </motion.h1>
@@ -527,7 +527,7 @@ const Events = () => {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-voga font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
               {t.sections.upcoming}
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
@@ -604,7 +604,7 @@ const Events = () => {
               >
                 📅
               </motion.div>
-              <h3 className="text-2xl font-voga font-bold text-gray-300 mb-4">{t.empty.noUpcoming}</h3>
+              <h3 className="text-2xl font-march font-bold text-gray-300 mb-4">{t.empty.noUpcoming}</h3>
               <p className="text-gray-500">{t.empty.checkBack}</p>
             </motion.div>
           )}
@@ -625,7 +625,7 @@ const Events = () => {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-voga font-bold mb-4 bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent">
               {t.sections.finished}
             </h2>
             <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
@@ -691,7 +691,7 @@ const Events = () => {
               >
                 📸
               </motion.div>
-              <h3 className="text-2xl font-voga font-bold text-gray-300 mb-4">{t.empty.noFinished}</h3>
+              <h3 className="text-2xl font-march font-bold text-gray-300 mb-4">{t.empty.noFinished}</h3>
               <p className="text-gray-500">{t.empty.checkBack}</p>
             </motion.div>
           )}
@@ -794,7 +794,7 @@ const EventCard = ({ event, index, categories, getCategoryInfo, formatShortDate,
           </div>
 
           <div className="flex-1">
-            <h3 className="text-xl font-voga font-bold text-white mb-1 line-clamp-2 group-hover:text-gt-gold transition-colors">
+            <h3 className="text-xl font-march font-bold text-white mb-1 line-clamp-2 group-hover:text-gt-gold transition-colors">
               {event.title}
             </h3>
           </div>
@@ -898,7 +898,7 @@ const EventModal = ({ event, setShowModal, getCategoryInfo, formatDate, t, langu
 
         {/* Contenido */}
         <div className="p-6 sm:p-8">
-          <h2 className="text-3xl sm:text-4xl font-voga font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl font-march font-bold text-white mb-6">
             {event.title}
           </h2>
 
@@ -936,7 +936,7 @@ const EventModal = ({ event, setShowModal, getCategoryInfo, formatDate, t, langu
 
           {event.description && (
             <div className="mb-8">
-              <h3 className="text-xl font-voga font-bold text-gt-gold mb-4">Descripción</h3>
+              <h3 className="text-xl font-march font-bold text-gt-gold mb-4">Descripción</h3>
               <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
                 {event.description}
               </p>

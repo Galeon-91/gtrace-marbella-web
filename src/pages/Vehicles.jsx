@@ -93,7 +93,7 @@ const Vehicles = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl sm:text-6xl font-voga font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-xl text-gray-400">{t.subtitle}</p>
@@ -185,7 +185,7 @@ const Vehicles = () => {
 
                     {/* Contenido */}
                     <div className="p-6">
-                      <h3 className="text-2xl font-voga font-bold text-white mb-2 group-hover:text-gt-gold transition-colors">
+                      <h3 className="text-2xl font-march font-bold text-white mb-2 group-hover:text-gt-gold transition-colors">
                         {vehicle.marca} {vehicle.modelo}
                       </h3>
                       

@@ -68,7 +68,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
       <div className="min-h-screen bg-black flex items-center justify-center px-4">
         <div className="max-w-md text-center">
           <div className="text-6xl mb-6">🚫</div>
-          <h1 className="text-4xl font-voga font-bold text-white mb-4">Acceso Denegado</h1>
+          <h1 className="text-4xl font-march font-bold text-white mb-4">Acceso Denegado</h1>
           <p className="text-gray-300 mb-8">No tienes permisos para acceder a esta página.</p>
           <a href="/" className="px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold hover:bg-gt-gold-light transition-all inline-block">
             Volver al Inicio

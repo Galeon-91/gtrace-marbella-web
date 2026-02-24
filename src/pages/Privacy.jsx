@@ -224,7 +224,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             className="text-center mb-12"
           >
 <<<<<<< HEAD
-            <h1 className="text-4xl md:text-6xl font-voga font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
 =======
             <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -245,7 +245,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 1 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section1Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section1Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section1Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -257,7 +257,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 2 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section2Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section2Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section2Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -269,7 +269,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 3 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section3Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section3Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section3Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -281,7 +281,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 4 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section4Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section4Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section4Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -293,7 +293,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 5 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section5Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section5Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section5Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -305,7 +305,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 6 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section6Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section6Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section6Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -317,7 +317,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 7 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section7Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section7Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section7Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -329,7 +329,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 8 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section8Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section8Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section8Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -341,7 +341,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 9 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section9Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section9Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section9Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -353,7 +353,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 10 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section10Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section10Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section10Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -365,7 +365,7 @@ Data Protection Officer: members@gtracemarbella.com`,
             {/* Section 11 */}
             <div>
 <<<<<<< HEAD
-              <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t.section11Title}</h2>
+              <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section11Title}</h2>
 =======
               <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t.section11Title}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b

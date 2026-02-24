@@ -60,7 +60,7 @@ const ServiceFormModal = ({ serviceType, onClose, language, isSubmitting, submit
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-voga font-bold text-white">
+          <h3 className="text-2xl font-march font-bold text-white">
             {t.requestService}
           </h3>
           <button
@@ -437,12 +437,12 @@ const Wrapping = () => {
                 className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                            border border-gt-gold/30 rounded-full mb-6"
               >
-                <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+                <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                   {t.badge}
                 </span>
               </motion.div>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-voga font-bold text-white mb-6 drop-shadow-2xl">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-march font-bold text-white mb-6 drop-shadow-2xl">
                 {t.title}
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -459,7 +459,7 @@ const Wrapping = () => {
                 className="mb-20"
               >
                 <div className="text-center mb-6">
-                  <h2 className="text-3xl font-voga font-bold text-white">
+                  <h2 className="text-3xl font-march font-bold text-white">
                     {t.videoTitle}
                   </h2>
                 </div>
@@ -505,7 +505,7 @@ const Wrapping = () => {
                     <div className="w-20 h-20 text-gt-gold mb-6">
                       <PaintIcon />
                     </div>
-                    <h2 className="text-4xl font-voga font-bold text-white mb-4">{t.wrappingTitle}</h2>
+                    <h2 className="text-4xl font-march font-bold text-white mb-4">{t.wrappingTitle}</h2>
                     <p className="text-gray-300 text-lg leading-relaxed mb-8">
                       {t.wrappingDescription}
                     </p>
@@ -577,7 +577,7 @@ const Wrapping = () => {
                     <div className="w-20 h-20 text-gt-gold mb-6">
                       <ShieldLayerIcon />
                     </div>
-                    <h2 className="text-4xl font-voga font-bold text-white mb-4">{t.ppfTitle}</h2>
+                    <h2 className="text-4xl font-march font-bold text-white mb-4">{t.ppfTitle}</h2>
                     <p className="text-gray-300 text-lg leading-relaxed mb-8">
                       {t.ppfDescription}
                     </p>
@@ -602,7 +602,7 @@ const Wrapping = () => {
               className="mb-16"
             >
               <div className="bg-gradient-to-r from-gt-gold/10 to-transparent backdrop-blur-2xl rounded-3xl p-8 lg:p-12 border border-gt-gold/30">
-                <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.experienceTitle}</h2>
+                <h2 className="text-3xl font-march font-bold text-white mb-4">{t.experienceTitle}</h2>
                 <p className="text-gray-300 text-lg leading-relaxed max-w-3xl">
                   {t.experienceText}
                 </p>
@@ -612,7 +612,7 @@ const Wrapping = () => {
             {/* WHY CHOOSE US */}
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-                <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.whyChoose}</h2>
+                <h2 className="text-3xl font-march font-bold text-white mb-4">{t.whyChoose}</h2>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-center gap-3 text-gray-300">
                     <div className="w-2 h-2 rounded-full bg-gt-gold"></div>
@@ -641,7 +641,7 @@ const Wrapping = () => {
               </div>
 
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-                <h2 className="text-3xl font-voga font-bold text-white mb-4">
+                <h2 className="text-3xl font-march font-bold text-white mb-4">
                   {language === 'es' ? 'Contáctanos' : 'Contact Us'}
                 </h2>
                 <p className="text-gray-300 mb-4">

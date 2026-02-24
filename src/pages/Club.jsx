@@ -45,7 +45,9 @@ const Club = () => {
   // Fondo formulario
   const { url: formularioBgUrl } = useSupabaseAsset('gallery/garage-multicolor.jpg');
 
-  // Galería con URLs de Supabase
+  // ============================================
+  // ✅ GALERÍA - "INTERIOR EXCLUSIVO" REDIRIGE A /GARAGE
+  // ============================================
   const galeria = [
     {
       url: galeriaImg1,
@@ -65,7 +67,7 @@ const Club = () => {
     {
       url: galeriaImg4,
       alt: language === 'es' ? 'Interior exclusivo' : 'Exclusive interior',
-      link: '/services/rental'
+      link: '/garage' // ✅ REDIRIGE A LA PÁGINA DEL GARAGE HOTEL
     },
     {
       url: galeriaImg5,
@@ -349,7 +351,7 @@ const Club = () => {
             {/* Badge */}
             <div className="inline-block px-4 sm:px-6 py-2 bg-gt-gold/10 backdrop-blur-lg 
                             border border-gt-gold/30 rounded-full mb-4 sm:mb-6">
-              <span className="text-gt-gold font-voga font-semibold flex items-center text-xs sm:text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold flex items-center text-xs sm:text-sm uppercase tracking-widest">
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
@@ -358,7 +360,7 @@ const Club = () => {
             </div>
 
             {/* Título */}
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-voga font-black text-white mb-4 sm:mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-march font-black text-white mb-4 sm:mb-6">
               GT RACE MARBELLA
               <span className="block text-gt-gold mt-2">CLUB</span>
             </h1>
@@ -421,11 +423,11 @@ const Club = () => {
             className="text-center mb-12 sm:mb-16"
           >
             <div className="inline-block px-4 py-2 bg-gt-gold/10 rounded-full mb-4">
-              <span className="text-gt-gold font-voga font-semibold text-xs sm:text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-xs sm:text-sm uppercase tracking-widest">
                 {tr.lifestyle.badge}
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-voga font-bold text-white mb-4 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-march font-bold text-white mb-4 px-4">
               {tr.lifestyle.title}
             </h2>
             <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
@@ -456,15 +458,15 @@ const Club = () => {
               <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8">
                 <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   <div className="bg-black/60 backdrop-blur-lg rounded-xl p-2 sm:p-4 border border-gt-gold/20">
-                    <div className="text-xl sm:text-3xl font-bold font-voga text-gt-gold">100+</div>
+                    <div className="text-xl sm:text-3xl font-bold font-march text-gt-gold">200+</div>
                     <div className="text-xs sm:text-sm text-gray-300">{tr.lifestyle.stat1}</div>
                   </div>
                   <div className="bg-black/60 backdrop-blur-lg rounded-xl p-2 sm:p-4 border border-gt-gold/20">
-                    <div className="text-xl sm:text-3xl font-bold font-voga text-gt-gold">50+</div>
+                    <div className="text-xl sm:text-3xl font-bold font-march text-gt-gold">50+</div>
                     <div className="text-xs sm:text-sm text-gray-300">{tr.lifestyle.stat2}</div>
                   </div>
                   <div className="bg-black/60 backdrop-blur-lg rounded-xl p-2 sm:p-4 border border-gt-gold/20">
-                    <div className="text-xl sm:text-3xl font-bold font-voga text-gt-gold">2024</div>
+                    <div className="text-xl sm:text-3xl font-bold font-march text-gt-gold">2025</div>
                     <div className="text-xs sm:text-sm text-gray-300">{tr.lifestyle.stat3}</div>
                   </div>
                 </div>
@@ -479,7 +481,7 @@ const Club = () => {
               viewport={{ once: true }}
               className="px-4"
             >
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-voga font-bold text-white mb-4 sm:mb-6">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-march font-bold text-white mb-4 sm:mb-6">
                 {tr.lifestyle.heading}
               </h3>
               
@@ -516,7 +518,7 @@ const Club = () => {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-voga font-bold text-white mb-4 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-march font-bold text-white mb-4 px-4">
               {tr.gallery.title}
             </h2>
             <p className="text-gray-400 text-base sm:text-lg px-4">
@@ -570,7 +572,7 @@ const Club = () => {
                                       transition-all duration-300">
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 
                                         rounded-xl p-3 sm:p-4">
-                          <h3 className="text-white text-base sm:text-xl font-voga font-bold mb-1">
+                          <h3 className="text-white text-base sm:text-xl font-march font-bold mb-1">
                             {item.alt}
                           </h3>
                           <div className="flex items-center text-gt-gold text-xs sm:text-sm">
@@ -589,7 +591,7 @@ const Club = () => {
                                       border border-gt-gold/30
                                       opacity-0 group-hover:opacity-100
                                       transition-all duration-300">
-                        <span className="text-gt-gold font-voga font-bold text-sm sm:text-base">
+                        <span className="text-gt-gold font-march font-bold text-sm sm:text-base">
                           {(index % galeria.length) + 1}
                         </span>
                       </div>
@@ -624,7 +626,7 @@ const Club = () => {
             viewport={{ once: true }}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-voga font-bold text-white mb-4 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-march font-bold text-white mb-4 px-4">
               {tr.accordion.title}
             </h2>
             <p className="text-gray-400 text-base sm:text-lg px-4">
@@ -676,7 +678,7 @@ const Club = () => {
                     `}>
                       {section.icon}
                     </div>
-                    <h3 className="text-lg sm:text-2xl font-voga font-bold text-white">
+                    <h3 className="text-lg sm:text-2xl font-march font-bold text-white">
                       {section.title}
                     </h3>
                   </div>
@@ -737,12 +739,12 @@ const Club = () => {
           >
             <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-black/40 backdrop-blur-xl 
                             border border-gt-gold/30 rounded-full mb-6 sm:mb-8">
-              <span className="text-gt-gold font-voga font-semibold text-xs sm:text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-xs sm:text-sm uppercase tracking-widest">
                 {tr.experience.badge}
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-voga font-black text-white mb-4 sm:mb-6 
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-march font-black text-white mb-4 sm:mb-6 
                            drop-shadow-2xl px-4">
               {tr.experience.title.split(' GT Race')[0]}
               <span className="block text-gt-gold mt-2">GT Race</span>
@@ -799,7 +801,7 @@ const Club = () => {
             viewport={{ once: true }}
             className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-voga font-bold text-white mb-4 px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-march font-bold text-white mb-4 px-4">
               {tr.form.title}
             </h2>
             <p className="text-gray-400 text-base sm:text-lg px-4">

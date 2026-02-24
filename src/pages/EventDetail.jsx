@@ -422,7 +422,7 @@ const EventDetail = () => {
         >
           😕
         </motion.div>
-        <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.notFound}</h2>
+        <h2 className="text-3xl font-march font-bold text-white mb-4">{t.notFound}</h2>
         <Link to="/events">
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -533,7 +533,7 @@ const EventDetail = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-voga font-bold mb-6 max-w-4xl"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-march font-bold mb-6 max-w-4xl"
             >
               {event.title}
             </motion.h1>
@@ -624,7 +624,7 @@ const EventDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-3xl sm:text-4xl font-voga font-bold mb-6 text-gt-gold">
+                <h2 className="text-3xl sm:text-4xl font-march font-bold mb-6 text-gt-gold">
                   {t.description}
                 </h2>
                 <div className="prose prose-invert prose-lg max-w-none">
@@ -640,7 +640,7 @@ const EventDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-2xl sm:text-3xl font-voga font-bold mb-6 text-white">
+                <h3 className="text-2xl sm:text-3xl font-march font-bold mb-6 text-white">
                   {t.whatsIncluded}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -667,7 +667,7 @@ const EventDetail = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                 >
-                  <h3 className="text-2xl sm:text-3xl font-voga font-bold mb-6 text-white">
+                  <h3 className="text-2xl sm:text-3xl font-march font-bold mb-6 text-white">
                     {t.requirements}
                   </h3>
                   <div className="space-y-3">
@@ -700,7 +700,7 @@ const EventDetail = () => {
 
                 {/* Event Details Card */}
                 <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 space-y-6">
-                  <h3 className="text-xl font-voga font-bold text-white border-b border-white/10 pb-4">
+                  <h3 className="text-xl font-march font-bold text-white border-b border-white/10 pb-4">
                     {t.details}
                   </h3>
 
@@ -784,7 +784,7 @@ const EventDetail = () => {
 
                 {/* Contact Card */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
-                  <h4 className="font-voga font-bold text-white mb-4">{t.contact}</h4>
+                  <h4 className="font-march font-bold text-white mb-4">{t.contact}</h4>
                   <div className="space-y-3 text-sm text-gray-300">
                     <a href="tel:+34687999427" className="flex items-center gap-2 hover:text-gt-gold transition-colors">
                       <span>📞</span>
@@ -812,7 +812,7 @@ const EventDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-voga font-bold mb-12 text-center bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent"
+              className="text-3xl sm:text-4xl lg:text-5xl font-march font-bold mb-12 text-center bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent"
             >
               {t.relatedEvents}
             </motion.h2>
@@ -903,7 +903,7 @@ const RelatedEventCard = ({ event, index, formatShortDate, categoryIcons, getCat
                 <span className="text-xs text-gt-gold uppercase">{dateInfo.month}</span>
               </div>
 
-              <h3 className="text-lg font-voga font-bold text-white line-clamp-2 group-hover:text-gt-gold transition-colors flex-1">
+              <h3 className="text-lg font-march font-bold text-white line-clamp-2 group-hover:text-gt-gold transition-colors flex-1">
                 {event.title}
               </h3>
             </div>
@@ -1000,7 +1000,7 @@ const RegistrationModal = ({ event, onClose, onSuccess, t }) => {
       >
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-2xl font-voga font-bold text-white mb-2">{t.registerTitle}</h2>
+            <h2 className="text-2xl font-march font-bold text-white mb-2">{t.registerTitle}</h2>
             <p className="text-gray-400">{t.registerSubtitle}</p>
           </div>
           <button onClick={onClose} className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-xl">×</button>

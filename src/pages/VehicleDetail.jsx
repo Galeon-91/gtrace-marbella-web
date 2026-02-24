@@ -138,7 +138,7 @@ const VehicleDetail = () => {
           {/* Información Principal */}
           <div>
             <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }}>
-              <h1 className="text-4xl sm:text-5xl font-voga font-bold mb-2">{vehicle.marca} {vehicle.modelo}</h1>
+              <h1 className="text-4xl sm:text-5xl font-march font-bold mb-2">{vehicle.marca} {vehicle.modelo}</h1>
               <p className="text-xl text-gray-400 mb-6">{vehicle.year}</p>
 
               <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 mb-6">
@@ -182,14 +182,14 @@ const VehicleDetail = () => {
         {/* Descripción */}
         {vehicle.description && (
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-            <h2 className="text-3xl font-voga font-bold mb-4 text-gt-gold">{t.description}</h2>
+            <h2 className="text-3xl font-march font-bold mb-4 text-gt-gold">{t.description}</h2>
             <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{vehicle.description}</p>
           </motion.div>
         )}
 
         {/* Especificaciones Técnicas */}
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-          <h2 className="text-3xl font-voga font-bold mb-6 text-gt-gold">{t.specs}</h2>
+          <h2 className="text-3xl font-march font-bold mb-6 text-gt-gold">{t.specs}</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {vehicle.seats && (
@@ -224,7 +224,7 @@ const VehicleDetail = () => {
 
         {/* Prestaciones y Consumo - Estilo OcasionPlus */}
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-          <h2 className="text-3xl font-voga font-bold mb-8 text-center text-gt-gold">{t.performance}</h2>
+          <h2 className="text-3xl font-march font-bold mb-8 text-center text-gt-gold">{t.performance}</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {vehicle.max_speed && (
@@ -277,7 +277,7 @@ const VehicleDetail = () => {
         {/* Dimensiones - Estilo OcasionPlus */}
         {(vehicle.length_cm || vehicle.weight_kg || vehicle.trunk_liters || vehicle.tank_liters) && (
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-12 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8">
-            <h2 className="text-3xl font-voga font-bold mb-8 text-center text-gt-gold">{t.dimensions}</h2>
+            <h2 className="text-3xl font-march font-bold mb-8 text-center text-gt-gold">{t.dimensions}</h2>
 
             {/* ⭐ NUEVO: Coche tecnológico animado */}
             <TechCar />

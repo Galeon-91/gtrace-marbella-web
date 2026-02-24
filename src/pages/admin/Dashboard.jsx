@@ -315,11 +315,11 @@ const AdminDashboard = () => {
                     }}
                   />
                   <div className="hidden items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-voga font-bold text-black">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-march font-bold text-black">
                       GT
                     </div>
                     <div>
-                      <h2 className="font-voga font-bold text-lg text-white">GT Race</h2>
+                      <h2 className="font-march font-bold text-lg text-white">GT Race</h2>
                       <p className="text-xs text-gray-400">Marbella</p>
                     </div>
                   </div>
@@ -331,7 +331,7 @@ const AdminDashboard = () => {
                   exit={{ opacity: 0 }}
                   className="flex items-center justify-center w-full"
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-voga font-bold text-black">
+                  <div className="w-10 h-10 bg-gradient-to-br from-gt-gold to-yellow-600 rounded-xl flex items-center justify-center font-march font-bold text-black">
                     GT
                   </div>
                 </motion.div>
@@ -454,7 +454,7 @@ const AdminDashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <h1 className="text-3xl sm:text-4xl font-voga font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl font-march font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-600 bg-clip-text text-transparent">
               {t.title}
             </h1>
             <p className="text-gray-400">{t.subtitle}</p>

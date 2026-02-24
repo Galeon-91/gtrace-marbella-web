@@ -419,13 +419,13 @@ const Services = () => {
               className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                          border border-gt-gold/30 rounded-full mb-6"
             >
-              <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                 {t.badge}
               </span>
             </motion.div>
 
             {/* Título Principal */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-march font-bold text-white mb-6 
                          drop-shadow-2xl leading-tight">
               {t.title}
             </h1>
@@ -470,7 +470,7 @@ const Services = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-4">
               {t.videoTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -533,7 +533,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.servicesTitle}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -565,7 +565,7 @@ const Services = () => {
                   </div>
 
                   {/* Título */}
-                  <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                  <h3 className="text-2xl font-march font-bold text-white mb-3">
                     {service.title}
                   </h3>
 
@@ -615,7 +615,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.galleryTitle}
             </h2>
           </motion.div>
@@ -641,7 +641,7 @@ const Services = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent
                             flex items-end">
                 <div className="p-8 w-full">
-                  <p className="text-white text-2xl font-voga">
+                  <p className="text-white text-2xl font-march">
                     {galleryImages[currentImageIndex].alt}
                   </p>
                 </div>
@@ -701,7 +701,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.whyUs}
             </h2>
           </motion.div>
@@ -719,7 +719,7 @@ const Services = () => {
                 <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
                               hover:border-gt-gold/50 transition-all duration-300">
                   <motion.p
-                    className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2"
+                    className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -754,7 +754,7 @@ const Services = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gt-gold/10 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
-              <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
                 {language === 'es' 
                   ? '¿Listo para la Experiencia GT Race?' 
                   : 'Ready for the GT Race Experience?'}

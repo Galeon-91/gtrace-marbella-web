@@ -124,7 +124,7 @@ const AnimatedNumber = ({ value, suffix = '', color = 'text-white', duration = 2
 
   return (
     <motion.span
-      className={`${color} font-voga font-bold`}
+      className={`${color} font-march font-bold`}
       animate={{ scale: [1, 1.02, 1] }}
       transition={{ duration: 0.5 }}
     >
@@ -197,7 +197,7 @@ const LiveSectorTimes = ({ language }) => {
             key={sector.time}
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
-            className={`text-3xl font-voga font-bold ${
+            className={`text-3xl font-march font-bold ${
               sector.isBest ? 'text-gt-gold' : 'text-white'
             }`}
           >
@@ -218,7 +218,7 @@ const LiveSectorTimes = ({ language }) => {
           key={totalTime}
           initial={{ scale: 1.05 }}
           animate={{ scale: 1 }}
-          className="text-4xl font-voga font-bold text-gt-gold"
+          className="text-4xl font-march font-bold text-gt-gold"
         >
           {totalTime.toFixed(3)}
         </motion.p>
@@ -837,12 +837,12 @@ const closeVideoModal = () => {
                 className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                            border border-gt-gold/30 rounded-full mb-6"
               >
-                <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+                <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                   {t.badge}
                 </span>
               </motion.div>
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-march font-bold text-white mb-6 
                            drop-shadow-2xl leading-tight">
                 {t.title}
               </h1>
@@ -886,7 +886,7 @@ const closeVideoModal = () => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 text-center"
                 >
-                  <p className="text-4xl font-voga font-bold text-gt-gold">3</p>
+                  <p className="text-4xl font-march font-bold text-gt-gold">3</p>
                   <p className="text-gray-300 text-sm">
                     {language === 'es' ? 'Campeonatos' : 'Championships'}
                   </p>
@@ -895,7 +895,7 @@ const closeVideoModal = () => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 text-center"
                 >
-                  <p className="text-4xl font-voga font-bold text-gt-gold">9</p>
+                  <p className="text-4xl font-march font-bold text-gt-gold">9</p>
                   <p className="text-gray-300 text-sm">
                     {language === 'es' ? 'Pilotos' : 'Drivers'}
                   </p>
@@ -916,7 +916,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.statsTitle}
             </h2>
           </motion.div>
@@ -938,7 +938,7 @@ const closeVideoModal = () => {
                          hover:border-gt-gold/50 transition-all duration-300 text-center"
               >
                 <motion.p
-                  className="text-6xl md:text-7xl font-voga font-bold text-gt-gold mb-2"
+                  className="text-6xl md:text-7xl font-march font-bold text-gt-gold mb-2"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
@@ -964,7 +964,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.championshipsTitle}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -1010,7 +1010,7 @@ const closeVideoModal = () => {
                       {championship.icon}
                     </div>
                     
-                    <h3 className="text-4xl font-voga font-bold text-white mb-4">
+                    <h3 className="text-4xl font-march font-bold text-white mb-4">
                       {championship.title}
                     </h3>
                     
@@ -1040,7 +1040,7 @@ const closeVideoModal = () => {
                       <p className="text-gray-400 mb-2">
                         {language === 'es' ? 'Circuitos' : 'Circuits'}
                       </p>
-                      <p className="text-5xl font-voga font-bold text-gt-gold">
+                      <p className="text-5xl font-march font-bold text-gt-gold">
                         {championship.stats.circuits}
                       </p>
                     </div>
@@ -1049,7 +1049,7 @@ const closeVideoModal = () => {
                       <p className="text-gray-400 mb-2">
                         {language === 'es' ? 'Carreras' : 'Races'}
                       </p>
-                      <p className="text-5xl font-voga font-bold text-gt-gold">
+                      <p className="text-5xl font-march font-bold text-gt-gold">
                         {championship.stats.races}
                       </p>
                     </div>
@@ -1058,7 +1058,7 @@ const closeVideoModal = () => {
                       <p className="text-gray-400 mb-2">
                         {language === 'es' ? 'Pilotos' : 'Drivers'}
                       </p>
-                      <p className="text-5xl font-voga font-bold text-gt-gold">
+                      <p className="text-5xl font-march font-bold text-gt-gold">
                         {championship.stats.drivers}
                       </p>
                     </div>
@@ -1079,7 +1079,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.galleryTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1109,7 +1109,7 @@ const closeVideoModal = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent
                             flex items-end">
                 <div className="p-8 w-full">
-                  <p className="text-white text-3xl font-voga mb-2">
+                  <p className="text-white text-3xl font-march mb-2">
                     {galleryImages[currentGalleryIndex].alt}
                   </p>
                   <p className="text-gray-400">
@@ -1195,7 +1195,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.videosTitle}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1269,7 +1269,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {t.servicesTitle}
             </h2>
           </motion.div>
@@ -1319,7 +1319,7 @@ const closeVideoModal = () => {
             
             <div className="relative z-10">
               <div className="text-center mb-8">
-                <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">
+                <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
                   {t.joinTitle}
                 </h2>
                 <p className="text-xl text-gray-300 mb-4">
@@ -1403,7 +1403,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
               {t.ctaTitle}
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -1442,7 +1442,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {language === 'es' ? 'Datos y Telemetría' : 'Data & Telemetry'}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1460,7 +1460,7 @@ const closeVideoModal = () => {
               viewport={{ once: true }}
               className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10"
             >
-              <h3 className="text-2xl font-voga font-bold text-white mb-6">
+              <h3 className="text-2xl font-march font-bold text-white mb-6">
                 {language === 'es' ? 'Análisis de Velocidad' : 'Speed Analysis'}
               </h3>
 
@@ -1535,7 +1535,7 @@ const closeVideoModal = () => {
               viewport={{ once: true }}
               className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10"
             >
-              <h3 className="text-2xl font-voga font-bold text-white mb-6">
+              <h3 className="text-2xl font-march font-bold text-white mb-6">
                 {language === 'es' ? 'Telemetría en Vivo' : 'Live Telemetry'}
               </h3>
 
@@ -1576,7 +1576,7 @@ const closeVideoModal = () => {
               viewport={{ once: true }}
               className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10"
             >
-              <h3 className="text-2xl font-voga font-bold text-white mb-6">
+              <h3 className="text-2xl font-march font-bold text-white mb-6">
                 {language === 'es' ? 'Tiempos por Sector' : 'Sector Times'}
               </h3>
 
@@ -1595,7 +1595,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {language === 'es' ? 'Nuestra Historia' : 'Our History'}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1655,7 +1655,7 @@ const closeVideoModal = () => {
                                 ${milestone.highlight 
                                   ? 'bg-gt-gold text-black scale-110' 
                                   : 'bg-white/5 backdrop-blur-xl border border-white/10 text-white'}`}>
-                    <span className="text-lg font-voga font-bold">{milestone.year}</span>
+                    <span className="text-lg font-march font-bold">{milestone.year}</span>
                   </div>
 
                   <motion.div
@@ -1666,7 +1666,7 @@ const closeVideoModal = () => {
                         : 'border-white/10 hover:border-white/20'
                     }`}
                   >
-                    <h3 className={`text-2xl font-voga font-bold mb-3 ${
+                    <h3 className={`text-2xl font-march font-bold mb-3 ${
                       milestone.highlight ? 'text-gt-gold' : 'text-white'
                     }`}>
                       {milestone.title}
@@ -1691,7 +1691,7 @@ const closeVideoModal = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {language === 'es' ? 'Lo Que Dicen de Nosotros' : 'What They Say About Us'}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1779,7 +1779,7 @@ const closeVideoModal = () => {
       viewport={{ once: true }}
       className="text-center mb-16"
     >
-      <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+      <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
         {language === 'es' ? 'Nuestros Patrocinadores' : 'Our Sponsors'}
       </h2>
       <p className="text-xl text-gray-300">
@@ -1826,7 +1826,7 @@ const closeVideoModal = () => {
             <TrophyIcon />
           </div>
           
-          <h3 className="text-3xl font-voga font-bold text-gt-gold mb-2 tracking-wide">
+          <h3 className="text-3xl font-march font-bold text-gt-gold mb-2 tracking-wide">
             LEGEND SPONSORS
           </h3>
           
@@ -1874,7 +1874,7 @@ const closeVideoModal = () => {
             <SpeedIcon />
           </div>
           
-          <h3 className="text-3xl font-voga font-bold text-gray-200 mb-2 tracking-wide">
+          <h3 className="text-3xl font-march font-bold text-gray-200 mb-2 tracking-wide">
             PRO SPONSORS
           </h3>
           
@@ -1922,7 +1922,7 @@ const closeVideoModal = () => {
             <HelmetIcon />
           </div>
           
-          <h3 className="text-3xl font-voga font-bold text-orange-300 mb-2 tracking-wide">
+          <h3 className="text-3xl font-march font-bold text-orange-300 mb-2 tracking-wide">
             ROOKIE SPONSORS
           </h3>
           

@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../../supabase/supabaseClient';
 
-const WorkshopAdmin = () => {
+// ============================================
+// COMPONENTE ADMIN - GARAGE REQUESTS
+// ============================================
+
+const GarageRequestsAdmin = () => {
   const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
   const [filter, setFilter] = useState('pending');
@@ -13,8 +17,12 @@ const WorkshopAdmin = () => {
 
     // Suscripción en tiempo real
     const subscription = supabase
-      .channel('workshop-requests-changes')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'workshop_requests' }, () => {
+      .channel('garage-requests-changes')
+      .on('postgres_changes', { 
+        event: '*', 
+        schema: 'public', 
+        table: 'garage_requests' 
+      }, () => {
         fetchRequests();
       })
       .subscribe();
@@ -31,14 +39,14 @@ const WorkshopAdmin = () => {
   const fetchRequests = async () => {
     try {
       const { data, error } = await supabase
-        .from('workshop_requests')
+        .from('garage_requests')
         .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
       setRequests(data || []);
     } catch (error) {
-      console.error('Error fetching workshop requests:', error);
+      console.error('Error fetching garage requests:', error);
     } finally {
       setLoading(false);
     }
@@ -55,7 +63,7 @@ const WorkshopAdmin = () => {
   const updateStatus = async (id, newStatus) => {
     try {
       const { error } = await supabase
-        .from('workshop_requests')
+        .from('garage_requests')
         .update({ status: newStatus })
         .eq('id', id);
 
@@ -90,16 +98,52 @@ const WorkshopAdmin = () => {
     );
   };
 
+  const getLanguageFlag = (lang) => {
+    return lang === 'es' ? '🇪🇸' : '🇬🇧';
+  };
+
   return (
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-march font-bold text-white mb-2">
-          🔧 Taller Premium
+          🏎️ Car Hotel Premium
         </h1>
         <p className="text-gray-400">
-          Gestiona las solicitudes de servicio de taller
+          Gestiona las solicitudes de almacenamiento y servicios del garaje
         </p>
+      </div>
+
+      {/* Estadísticas */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
+          <p className="text-gray-400 text-sm">Total</p>
+          <p className="text-2xl font-bold text-white">{requests.length}</p>
+        </div>
+        <div className="bg-yellow-500/10 backdrop-blur-xl rounded-xl p-4 border border-yellow-500/30">
+          <p className="text-gray-400 text-sm">Pendientes</p>
+          <p className="text-2xl font-bold text-yellow-500">
+            {requests.filter(r => r.status === 'pending').length}
+          </p>
+        </div>
+        <div className="bg-blue-500/10 backdrop-blur-xl rounded-xl p-4 border border-blue-500/30">
+          <p className="text-gray-400 text-sm">Contactadas</p>
+          <p className="text-2xl font-bold text-blue-500">
+            {requests.filter(r => r.status === 'contacted').length}
+          </p>
+        </div>
+        <div className="bg-purple-500/10 backdrop-blur-xl rounded-xl p-4 border border-purple-500/30">
+          <p className="text-gray-400 text-sm">Agendadas</p>
+          <p className="text-2xl font-bold text-purple-500">
+            {requests.filter(r => r.status === 'scheduled').length}
+          </p>
+        </div>
+        <div className="bg-green-500/10 backdrop-blur-xl rounded-xl p-4 border border-green-500/30">
+          <p className="text-gray-400 text-sm">Completadas</p>
+          <p className="text-2xl font-bold text-green-500">
+            {requests.filter(r => r.status === 'completed').length}
+          </p>
+        </div>
       </div>
 
       {/* Filtros */}
@@ -181,27 +225,39 @@ const WorkshopAdmin = () => {
                 className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10
                          hover:border-gt-gold/50 transition-all duration-300"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   {/* Info */}
                   <div className="flex-grow">
-                    <div className="flex items-center gap-4 mb-3">
+                    <div className="flex items-center gap-4 mb-3 flex-wrap">
                       <h3 className="text-xl font-semibold text-white">
                         {request.name}
                       </h3>
                       {getStatusBadge(request.status)}
+                      <span className="text-lg">{getLanguageFlag(request.language)}</span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400">
-                      <p>📧 {request.email}</p>
-                      <p>📱 {request.phone}</p>
-                      <p>🛠️ {request.service}</p>
-                      {request.vehicle_brand && (
-                        <p>🚗 {request.vehicle_brand} {request.vehicle_model}</p>
-                      )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400 mb-4">
+                      <p className="flex items-center gap-2">
+                        <span>📧</span>
+                        <a href={`mailto:${request.email}`} className="hover:text-gt-gold transition-colors">
+                          {request.email}
+                        </a>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span>📱</span>
+                        <a href={`tel:${request.phone}`} className="hover:text-gt-gold transition-colors">
+                          {request.phone}
+                        </a>
+                      </p>
+                      <p className="flex items-center gap-2 md:col-span-2">
+                        <span>🏎️</span>
+                        <span className="font-semibold text-gt-gold">{request.vehicle}</span>
+                      </p>
                     </div>
 
                     {request.message && (
-                      <div className="mt-3 p-3 bg-white/5 rounded-xl">
+                      <div className="mt-3 p-3 bg-white/5 rounded-xl border border-white/10">
+                        <p className="text-xs text-gray-500 mb-1">Mensaje:</p>
                         <p className="text-sm text-gray-300">{request.message}</p>
                       </div>
                     )}
@@ -224,25 +280,39 @@ const WorkshopAdmin = () => {
                         <button
                           onClick={() => updateStatus(request.id, 'contacted')}
                           className="px-4 py-2 bg-blue-500/20 text-blue-500 rounded-xl
-                                   hover:bg-blue-500/30 transition-all font-semibold text-sm"
+                                   hover:bg-blue-500/30 transition-all font-semibold text-sm
+                                   border border-blue-500/30"
                         >
                           📞 Contactar
                         </button>
                         <button
                           onClick={() => updateStatus(request.id, 'scheduled')}
                           className="px-4 py-2 bg-purple-500/20 text-purple-500 rounded-xl
-                                   hover:bg-purple-500/30 transition-all font-semibold text-sm"
+                                   hover:bg-purple-500/30 transition-all font-semibold text-sm
+                                   border border-purple-500/30"
                         >
                           📅 Agendar
                         </button>
                       </>
                     )}
                     
+                    {request.status === 'contacted' && (
+                      <button
+                        onClick={() => updateStatus(request.id, 'scheduled')}
+                        className="px-4 py-2 bg-purple-500/20 text-purple-500 rounded-xl
+                                 hover:bg-purple-500/30 transition-all font-semibold text-sm
+                                 border border-purple-500/30"
+                      >
+                        📅 Agendar Visita
+                      </button>
+                    )}
+                    
                     {request.status === 'scheduled' && (
                       <button
                         onClick={() => updateStatus(request.id, 'completed')}
                         className="px-4 py-2 bg-green-500/20 text-green-500 rounded-xl
-                                 hover:bg-green-500/30 transition-all font-semibold text-sm"
+                                 hover:bg-green-500/30 transition-all font-semibold text-sm
+                                 border border-green-500/30"
                       >
                         ✅ Completar
                       </button>
@@ -252,9 +322,22 @@ const WorkshopAdmin = () => {
                       <button
                         onClick={() => updateStatus(request.id, 'cancelled')}
                         className="px-4 py-2 bg-red-500/20 text-red-500 rounded-xl
-                                 hover:bg-red-500/30 transition-all font-semibold text-sm"
+                                 hover:bg-red-500/30 transition-all font-semibold text-sm
+                                 border border-red-500/30"
                       >
                         ❌ Cancelar
+                      </button>
+                    )}
+
+                    {/* Botón para volver a pending */}
+                    {request.status !== 'pending' && request.status !== 'completed' && (
+                      <button
+                        onClick={() => updateStatus(request.id, 'pending')}
+                        className="px-4 py-2 bg-yellow-500/20 text-yellow-500 rounded-xl
+                                 hover:bg-yellow-500/30 transition-all font-semibold text-sm
+                                 border border-yellow-500/30"
+                      >
+                        ↩️ Pendiente
                       </button>
                     )}
                   </div>
@@ -268,4 +351,4 @@ const WorkshopAdmin = () => {
   );
 };
 
-export default WorkshopAdmin;
+export default GarageRequestsAdmin;

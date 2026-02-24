@@ -228,7 +228,7 @@ const Login = () => {
           </motion.div>
 
           <motion.h1 
-            className="text-4xl font-voga font-bold text-white mb-2"
+            className="text-4xl font-march font-bold text-white mb-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -376,7 +376,7 @@ const Login = () => {
                     className="text-center py-8"
                   >
                     <div className="text-6xl mb-4">📧</div>
-                    <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                    <h3 className="text-2xl font-march font-bold text-white mb-3">
                       Email Enviado
                     </h3>
                     <p className="text-gray-300 mb-6">
@@ -395,7 +395,7 @@ const Login = () => {
                 ) : (
                   <>
                     <div className="text-center mb-6">
-                      <h3 className="text-2xl font-voga font-bold text-white mb-2">
+                      <h3 className="text-2xl font-march font-bold text-white mb-2">
                         Recuperar Contraseña
                       </h3>
                       <p className="text-gray-400">

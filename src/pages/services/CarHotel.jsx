@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../../context/LanguageContext';
 
 // Iconos SVG personalizados
@@ -58,6 +59,10 @@ const CarHotel = () => {
       requestService: 'Solicitar Plaza',
       whyChoose: 'Por qué Car Hotel',
       contact: 'Contáctanos',
+      // SEO
+      seoTitle: 'Car Hotel Premium Marbella | Almacenamiento de Lujo 24/7 | GT Race',
+      seoDescription: 'Hotel de 5 estrellas para tu superdeportivo en Marbella. Seguridad 24/7, control climático, iluminación LED y servicios de conserjería. Solo 15 plazas VIP.',
+      seoKeywords: 'car hotel marbella, almacenamiento coches lujo marbella, garaje premium marbella, storage supercars marbella, car storage puerto banus, garaje climatizado marbella'
     },
     en: {
       badge: 'Premium Car Hotel',
@@ -68,6 +73,10 @@ const CarHotel = () => {
       requestService: 'Request Space',
       whyChoose: 'Why Car Hotel',
       contact: 'Contact Us',
+      // SEO
+      seoTitle: 'Premium Car Hotel Marbella | 24/7 Luxury Storage | GT Race',
+      seoDescription: '5-star hotel for your supercar in Marbella. 24/7 security, climate control, LED lighting and concierge services. Only 15 VIP spaces.',
+      seoKeywords: 'car hotel marbella, luxury car storage marbella, premium garage marbella, supercar storage marbella, car storage puerto banus, climate controlled garage marbella'
     }
   };
 
@@ -145,6 +154,26 @@ const CarHotel = () => {
 
   return (
     <div className="min-h-screen bg-black pt-20">
+      {/* ============================================ */}
+      {/* SEO - HELMET */}
+      {/* ============================================ */}
+      <Helmet>
+        <title>{t.seoTitle}</title>
+        <meta name="description" content={t.seoDescription} />
+        <meta name="keywords" content={t.seoKeywords} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={t.seoTitle} />
+        <meta property="og:description" content={t.seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://gtracemarbella.com/services/car-hotel" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={t.seoTitle} />
+        <meta name="twitter:description" content={t.seoDescription} />
+      </Helmet>
+
       {/* HERO SECTION */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gt-gray-dark via-black to-black" />
@@ -164,12 +193,12 @@ const CarHotel = () => {
               className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                          border border-gt-gold/30 rounded-full mb-6"
             >
-              <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                 {t.badge}
               </span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-voga font-bold text-white mb-6 drop-shadow-2xl">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-march font-bold text-white mb-6 drop-shadow-2xl">
               {t.title}
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -204,7 +233,7 @@ const CarHotel = () => {
             transition={{ delay: 0.3 }}
             className="mb-20"
           >
-            <h2 className="text-3xl font-voga font-bold text-white text-center mb-12">{t.features}</h2>
+            <h2 className="text-3xl font-march font-bold text-white text-center mb-12">{t.features}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => (
                 <motion.div
@@ -232,7 +261,7 @@ const CarHotel = () => {
             transition={{ delay: 0.5 }}
             className="mb-20"
           >
-            <h2 className="text-3xl font-voga font-bold text-white text-center mb-12">{t.services}</h2>
+            <h2 className="text-3xl font-march font-bold text-white text-center mb-12">{t.services}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {autoServices.map((service, index) => (
                 <motion.div
@@ -258,7 +287,7 @@ const CarHotel = () => {
           {/* CTA & CONTACT SECTION */}
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-              <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.whyChoose}</h2>
+              <h2 className="text-3xl font-march font-bold text-white mb-4">{t.whyChoose}</h2>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-3 text-gray-300">
                   <div className="w-2 h-2 rounded-full bg-gt-gold"></div>
@@ -287,7 +316,7 @@ const CarHotel = () => {
             </div>
 
             <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-              <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.contact}</h2>
+              <h2 className="text-3xl font-march font-bold text-white mb-4">{t.contact}</h2>
               <p className="text-gray-300 mb-6">
                 {language === 'es' 
                   ? 'Visita nuestras instalaciones y descubre el mejor hotel para tu vehículo.' 

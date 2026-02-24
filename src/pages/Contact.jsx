@@ -154,13 +154,13 @@ const Contact = () => {
                          border border-gt-gold/30 rounded-full mb-6
                          hover:bg-gt-gold/20 transition-all duration-300"
             >
-              <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                 {t.badge}
               </span>
             </motion.div>
 
             {/* Título */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-voga font-bold text-white mb-6
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-march font-bold text-white mb-6
                            drop-shadow-2xl">
               {t.title}
             </h1>
@@ -180,7 +180,7 @@ const Contact = () => {
                               rounded-3xl p-8 lg:p-10
                               hover:border-gt-gold/30 transition-all duration-500
                               shadow-2xl">
-                <h2 className="text-3xl font-voga font-bold text-white mb-8">
+                <h2 className="text-3xl font-march font-bold text-white mb-8">
                   {t.infoTitle}
                 </h2>
 
@@ -304,7 +304,7 @@ const Contact = () => {
                               rounded-3xl p-8 lg:p-10
                               hover:border-gt-gold/30 transition-all duration-500
                               shadow-2xl">
-                <h2 className="text-3xl font-voga font-bold text-white mb-6">
+                <h2 className="text-3xl font-march font-bold text-white mb-6">
                   {t.formTitle}
                 </h2>
 

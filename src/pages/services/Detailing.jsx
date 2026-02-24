@@ -183,12 +183,12 @@ const Detailing = () => {
               className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
                          border border-gt-gold/30 rounded-full mb-6"
             >
-              <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
+              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
                 {t.badge}
               </span>
             </motion.div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-voga font-bold text-white mb-6 drop-shadow-2xl">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-march font-bold text-white mb-6 drop-shadow-2xl">
               {t.title}
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -234,7 +234,7 @@ const Detailing = () => {
                            hover:border-gt-gold/30 transition-all duration-300"
                 >
                   <div className="text-center mb-6">
-                    <h3 className="text-2xl font-voga font-bold text-white mb-2">{pkg.name}</h3>
+                    <h3 className="text-2xl font-march font-bold text-white mb-2">{pkg.name}</h3>
                     <p className="text-4xl font-bold text-gt-gold">{pkg.price}</p>
                   </div>
                   <ul className="space-y-3">
@@ -266,7 +266,7 @@ const Detailing = () => {
                   <div className="w-16 h-16 text-gt-gold mb-4 mx-auto">
                     <PolishIcon />
                   </div>
-                  <h3 className="text-2xl font-voga font-bold text-white text-center mb-2">{pkg.name}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white text-center mb-2">{pkg.name}</h3>
                   <p className="text-3xl font-bold text-gt-gold text-center mb-4">{pkg.price}</p>
                   <p className="text-gray-300 text-center">{pkg.description}</p>
                 </div>
@@ -327,7 +327,7 @@ const Detailing = () => {
             transition={{ delay: 0.3 }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-voga font-bold text-white text-center mb-8">{t.maintenance}</h2>
+            <h2 className="text-3xl font-march font-bold text-white text-center mb-8">{t.maintenance}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {maintenanceGuides.map((guide, index) => (
                 <div
@@ -345,7 +345,7 @@ const Detailing = () => {
           {/* CONTACTO */}
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-              <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.contact}</h2>
+              <h2 className="text-3xl font-march font-bold text-white mb-4">{t.contact}</h2>
               <div className="space-y-3 mb-6">
                 <a href="tel:+34620705937" className="flex items-center gap-3 text-gt-gold hover:text-gt-gold-light transition-colors">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -370,7 +370,7 @@ const Detailing = () => {
             </div>
 
             <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10">
-              <h2 className="text-3xl font-voga font-bold text-white mb-4">{t.schedule}</h2>
+              <h2 className="text-3xl font-march font-bold text-white mb-4">{t.schedule}</h2>
               <div className="space-y-3 text-gray-300">
                 <div className="flex justify-between">
                   <span>{language === 'es' ? 'Lunes - Viernes' : 'Monday - Friday'}</span>

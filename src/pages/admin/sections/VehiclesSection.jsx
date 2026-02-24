@@ -233,7 +233,7 @@ const VehiclesSection = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-voga font-bold text-white">Gestión de Vehículos</h2>
+        <h2 className="text-3xl font-march font-bold text-white">Gestión de Vehículos</h2>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -324,7 +324,7 @@ const VehiclesSection = () => {
               className="bg-gt-gray-dark/95 backdrop-blur-xl rounded-3xl border border-white/20 
                 max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl shadow-gt-gold/10"
             >
-              <h2 className="text-2xl font-voga font-bold text-white mb-6">
+              <h2 className="text-2xl font-march font-bold text-white mb-6">
                 {editingVehicle ? 'Editar Vehículo' : 'Nuevo Vehículo'}
               </h2>
 

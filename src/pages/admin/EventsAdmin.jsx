@@ -613,7 +613,7 @@ const EventsAdmin = ({ embedded = false }) => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-6 sm:mb-8"
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-voga font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-march font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-600 bg-clip-text text-transparent">
               {t.title}
             </h1>
             <p className="text-gray-400 text-sm sm:text-base">{t.subtitle}</p>
@@ -748,7 +748,7 @@ const EventsAdmin = ({ embedded = false }) => {
                     </div>
 
                     <div className="p-4 sm:p-6">
-                      <h3 className="text-lg sm:text-xl font-voga font-bold text-white mb-2 line-clamp-2">
+                      <h3 className="text-lg sm:text-xl font-march font-bold text-white mb-2 line-clamp-2">
                         {event.title}
                       </h3>
 
@@ -844,7 +844,7 @@ const EventsAdmin = ({ embedded = false }) => {
               className="bg-gt-gray-dark rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 max-w-4xl w-full border border-white/10 my-4 sm:my-8 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-start mb-4 sm:mb-6">
-                <h3 className="text-2xl sm:text-3xl font-voga font-bold text-white">
+                <h3 className="text-2xl sm:text-3xl font-march font-bold text-white">
                   {modalMode === 'create' && t.modal.titleCreate}
                   {modalMode === 'edit' && t.modal.titleEdit}
                   {modalMode === 'view' && selectedEvent?.title}

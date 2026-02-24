@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../../context/LanguageContext';
 import { supabase } from '../../../supabase/supabaseClient';
 
@@ -14,12 +14,11 @@ const getSupabaseUrl = (path) => {
 };
 
 // ============================================
-// ICONOS SVG ANIMADOS
+// ICONOS SVG ANIMADOS TECNOLÓGICOS
 // ============================================
 
 const WrenchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Glow effect */}
     <motion.circle
       cx="12"
       cy="12"
@@ -30,7 +29,6 @@ const WrenchIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Outer ring */}
     <motion.circle
       cx="12"
       cy="12"
@@ -44,7 +42,6 @@ const WrenchIcon = () => (
       style={{ transformOrigin: "center" }}
     />
     
-    {/* Wrench body */}
     <motion.path
       d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
       stroke="currentColor"
@@ -61,7 +58,6 @@ const WrenchIcon = () => (
       style={{ transformOrigin: "center" }}
     />
     
-    {/* Tech lines */}
     {[0, 1, 2, 3].map((i) => (
       <motion.line
         key={i}
@@ -86,13 +82,8 @@ const WrenchIcon = () => (
   </svg>
 );
 
-// ============================================
-// 2. DIAGNÓSTICO ELECTRÓNICO - Circuito Digital
-// ============================================
-
 const DiagnosticIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Pulse background */}
     <motion.circle
       cx="12"
       cy="12"
@@ -106,7 +97,6 @@ const DiagnosticIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Circuit board pattern */}
     <motion.g
       animate={{ opacity: [0.3, 0.7, 0.3] }}
       transition={{ duration: 2, repeat: Infinity }}
@@ -117,7 +107,6 @@ const DiagnosticIcon = () => (
             opacity="0.3" />
     </motion.g>
     
-    {/* Shield outline */}
     <motion.path
       d="M12 2L3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"
       stroke="currentColor"
@@ -132,7 +121,6 @@ const DiagnosticIcon = () => (
       style={{ transformOrigin: "center" }}
     />
     
-    {/* Checkmark animation */}
     <motion.path
       d="M9 12l2 2 4-4"
       stroke="currentColor"
@@ -151,7 +139,6 @@ const DiagnosticIcon = () => (
       }}
     />
     
-    {/* Scanning lines */}
     {[0, 1, 2].map((i) => (
       <motion.line
         key={i}
@@ -177,13 +164,8 @@ const DiagnosticIcon = () => (
   </svg>
 );
 
-// ============================================
-// 3. MOTOR Y TRANSMISIÓN - Engranajes Dinámicos
-// ============================================
-
 const EngineIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Energy pulse */}
     <motion.circle
       cx="12"
       cy="12"
@@ -199,7 +181,6 @@ const EngineIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Main gear */}
     <motion.g
       animate={{ rotate: 360 }}
       transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -215,7 +196,6 @@ const EngineIcon = () => (
         opacity="0.2" 
       />
       
-      {/* Gear teeth */}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
         <motion.rect
           key={i}
@@ -237,11 +217,9 @@ const EngineIcon = () => (
         />
       ))}
       
-      {/* Inner circle */}
       <circle cx="12" cy="12" r="2.5" fill="currentColor" opacity="0.5" />
     </motion.g>
     
-    {/* Orbit particles */}
     {[0, 120, 240].map((angle, i) => (
       <motion.circle
         key={i}
@@ -264,13 +242,8 @@ const EngineIcon = () => (
   </svg>
 );
 
-// ============================================
-// 4. SISTEMA DE FRENOS - Disco Rotativo
-// ============================================
-
 const BrakeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Heat effect */}
     <motion.circle
       cx="12"
       cy="12"
@@ -284,7 +257,6 @@ const BrakeIcon = () => (
       transition={{ duration: 1.5, repeat: Infinity }}
     />
     
-    {/* Outer disc */}
     <circle 
       cx="12" 
       cy="12" 
@@ -295,13 +267,11 @@ const BrakeIcon = () => (
       opacity="0.1" 
     />
     
-    {/* Rotating disc */}
     <motion.g
       animate={{ rotate: -360 }}
       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
       style={{ transformOrigin: "center" }}
     >
-      {/* Disc holes */}
       {[0, 60, 120, 180, 240, 300].map((angle, i) => (
         <motion.circle
           key={i}
@@ -320,7 +290,6 @@ const BrakeIcon = () => (
         />
       ))}
       
-      {/* Disc vents */}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
         <motion.line
           key={i}
@@ -336,7 +305,6 @@ const BrakeIcon = () => (
       ))}
     </motion.g>
     
-    {/* Center hub */}
     <motion.circle 
       cx="12" 
       cy="12" 
@@ -349,7 +317,6 @@ const BrakeIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Brake caliper indicator */}
     <motion.rect
       x="16"
       y="10"
@@ -367,13 +334,8 @@ const BrakeIcon = () => (
   </svg>
 );
 
-// ============================================
-// 5. NEUMÁTICOS Y SUSPENSIÓN - Rueda Dinámica
-// ============================================
-
 const TireIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Bounce effect */}
     <motion.circle
       cx="12"
       cy="12"
@@ -387,13 +349,11 @@ const TireIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Tire rotating */}
     <motion.g
       animate={{ rotate: 360 }}
       transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
       style={{ transformOrigin: "center" }}
     >
-      {/* Outer tire */}
       <circle 
         cx="12" 
         cy="12" 
@@ -404,7 +364,6 @@ const TireIcon = () => (
         opacity="0.1" 
       />
       
-      {/* Tire treads */}
       {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => (
         <motion.rect
           key={i}
@@ -427,10 +386,8 @@ const TireIcon = () => (
         />
       ))}
       
-      {/* Inner rim */}
       <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5" fill="none" />
       
-      {/* Spokes */}
       {[0, 72, 144, 216, 288].map((angle, i) => (
         <motion.line
           key={i}
@@ -445,7 +402,6 @@ const TireIcon = () => (
       ))}
     </motion.g>
     
-    {/* Center cap */}
     <motion.circle 
       cx="12" 
       cy="12" 
@@ -458,7 +414,6 @@ const TireIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Suspension indicators */}
     <motion.g
       animate={{ y: [0, -2, 0] }}
       transition={{ duration: 2, repeat: Infinity }}
@@ -469,13 +424,8 @@ const TireIcon = () => (
   </svg>
 );
 
-// ============================================
-// 6. SISTEMA ELÉCTRICO - Batería Cargando
-// ============================================
-
 const BatteryIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Energy field */}
     <motion.rect
       x="1"
       y="6"
@@ -491,7 +441,6 @@ const BatteryIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Battery body */}
     <rect 
       x="2" 
       y="7" 
@@ -504,7 +453,6 @@ const BatteryIcon = () => (
       opacity="0.2" 
     />
     
-    {/* Battery terminal */}
     <path 
       d="M20 10h2v4h-2" 
       stroke="currentColor" 
@@ -512,7 +460,6 @@ const BatteryIcon = () => (
       strokeLinecap="round" 
     />
     
-    {/* Charging animation */}
     <motion.rect
       x="5"
       y="10"
@@ -531,7 +478,6 @@ const BatteryIcon = () => (
       }}
     />
     
-    {/* Energy particles */}
     {[0, 1, 2].map((i) => (
       <motion.circle
         key={i}
@@ -552,7 +498,6 @@ const BatteryIcon = () => (
       />
     ))}
     
-    {/* Plus/Minus symbols */}
     <motion.g
       animate={{ opacity: [0.4, 0.8, 0.4] }}
       transition={{ duration: 2, repeat: Infinity }}
@@ -564,13 +509,8 @@ const BatteryIcon = () => (
   </svg>
 );
 
-// ============================================
-// 7. AIRE ACONDICIONADO - Flujo de Aire
-// ============================================
-
 const OilIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Cooling wave */}
     <motion.circle
       cx="12"
       cy="12"
@@ -584,7 +524,6 @@ const OilIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* AC unit */}
     <rect 
       x="8" 
       y="6" 
@@ -597,7 +536,6 @@ const OilIcon = () => (
       opacity="0.2" 
     />
     
-    {/* Vent lines */}
     {[0, 1, 2, 3, 4].map((i) => (
       <motion.line
         key={i}
@@ -621,7 +559,6 @@ const OilIcon = () => (
       />
     ))}
     
-    {/* Cold air flow - left */}
     {[0, 1, 2].map((i) => (
       <motion.path
         key={`left-${i}`}
@@ -645,7 +582,6 @@ const OilIcon = () => (
       />
     ))}
     
-    {/* Cold air flow - right */}
     {[0, 1, 2].map((i) => (
       <motion.path
         key={`right-${i}`}
@@ -669,7 +605,6 @@ const OilIcon = () => (
       />
     ))}
     
-    {/* Temperature indicator */}
     <motion.circle
       cx="12"
       cy="12"
@@ -684,13 +619,8 @@ const OilIcon = () => (
   </svg>
 );
 
-// ============================================
-// 8. COCHES CLÁSICOS - Motor Vintage Animado
-// ============================================
-
 const TransmissionIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-    {/* Vintage glow */}
     <motion.circle
       cx="12"
       cy="12"
@@ -704,7 +634,6 @@ const TransmissionIcon = () => (
       transition={{ duration: 3, repeat: Infinity }}
     />
     
-    {/* Transmission case */}
     <motion.rect
       x="4"
       y="4"
@@ -719,7 +648,6 @@ const TransmissionIcon = () => (
       transition={{ duration: 2, repeat: Infinity }}
     />
     
-    {/* Gear shafts */}
     {[0, 1, 2].map((i) => (
       <motion.line
         key={i}
@@ -743,7 +671,6 @@ const TransmissionIcon = () => (
       />
     ))}
     
-    {/* Gears */}
     {[8, 12, 16].map((x, i) => (
       <motion.g
         key={i}
@@ -784,7 +711,6 @@ const TransmissionIcon = () => (
       </motion.g>
     ))}
     
-    {/* Oil drops */}
     {[0, 1].map((i) => (
       <motion.circle
         key={i}
@@ -805,7 +731,6 @@ const TransmissionIcon = () => (
       />
     ))}
     
-    {/* Power indicator */}
     <motion.circle
       cx="12"
       cy="12"
@@ -819,20 +744,7 @@ const TransmissionIcon = () => (
     />
   </svg>
 );
-<<<<<<< HEAD
 
-export { 
-  WrenchIcon, 
-  DiagnosticIcon, 
-  EngineIcon, 
-  BrakeIcon, 
-  TireIcon, 
-  BatteryIcon, 
-  OilIcon, 
-  TransmissionIcon 
-};
-=======
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
 // ============================================
 // COMPONENTE PRINCIPAL
 // ============================================
@@ -853,7 +765,6 @@ const Workshop = () => {
 
   // Video URL
   const videoUrl = getSupabaseUrl('racing/videos/taller.mp4');
-  console.log(' VIDEO URL WORKSHOP:', videoUrl);
 
   // ============================================
   // CONTENIDO BILINGÜE
@@ -864,6 +775,7 @@ const Workshop = () => {
       // SEO
       title: 'Taller Mecánico GT Race Marbella - Servicio Premium',
       description: 'Taller mecánico especializado en Marbella. Reparación, mantenimiento y diagnóstico de vehículos de alta gama. Servicio profesional y garantizado.',
+      keywords: 'taller mecánico marbella, reparación coches marbella, mantenimiento vehículos marbella, taller premium marbella, diagnóstico electrónico marbella',
       
       // Hero
       heroTitle: 'Taller Mecánico Premium',
@@ -1018,12 +930,12 @@ const Workshop = () => {
         },
         {
           name: 'Adrián Calvo Portillo',
-          text: ' 10 de 10 para Daniel. Volvió a poner de stock la centralita de mi GSXR (estaba mapeada) y no sólo eso, sino que me aclaró muchas dudas y me explicó cosas muy interesantes y además de manera que hasta alguien que no entiende del tema (yo) pueda entenderlo y eso no sabe hacerlo cualquiera. Sin duda es una persona que siente pasión por lo que hace, lo recomendaría mil veces. De nuevo, 10 de 10 para Daniel, mil gracias por todo.',
+          text: '10 de 10 para Daniel. Volvió a poner de stock la centralita de mi GSXR (estaba mapeada) y no sólo eso, sino que me aclaró muchas dudas y me explicó cosas muy interesantes y además de manera que hasta alguien que no entiende del tema (yo) pueda entenderlo y eso no sabe hacerlo cualquiera. Sin duda es una persona que siente pasión por lo que hace, lo recomendaría mil veces. De nuevo, 10 de 10 para Daniel, mil gracias por todo.',
           rating: 5
         },
         {
           name: 'Didi Lilova',
-          text: 'So much more than a car club.. it’s a family! They take care of us as individuals, everyone is so friendly and we really feel comfortable. For every occasion there is a special event and everything is always so well organised. Our cars are in safe hands and we trust them.',
+          text: 'So much more than a car club.. it\'s a family! They take care of us as individuals, everyone is so friendly and we really feel comfortable. For every occasion there is a special event and everything is always so well organised. Our cars are in safe hands and we trust them.',
           rating: 5
         }
       ],
@@ -1038,6 +950,7 @@ const Workshop = () => {
       // SEO
       title: 'GT Race Marbella Workshop - Premium Service',
       description: 'Specialized mechanical workshop in Marbella. Repair, maintenance and diagnostics for high-end vehicles. Professional and guaranteed service.',
+      keywords: 'mechanical workshop marbella, car repair marbella, vehicle maintenance marbella, premium workshop marbella, electronic diagnostic marbella',
       
       // Hero
       heroTitle: 'Premium Automotive Workshop',
@@ -1266,608 +1179,71 @@ const Workshop = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black">
-      
+    <>
       {/* SEO */}
-      <title>{t.title}</title>
-      <meta name="description" content={t.description} />
+      <Helmet>
+        <title>{t.title}</title>
+        <meta name="description" content={t.description} />
+        <meta name="keywords" content={t.keywords} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={t.title} />
+        <meta property="og:description" content={t.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://gtracemarbella.com/services/workshop" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={t.title} />
+        <meta name="twitter:description" content={t.description} />
+      </Helmet>
 
-      {/* ============================================ */}
-      {/* HERO SECTION WITH VIDEO */}
-      {/* ============================================ */}
-      
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0">
-<video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            src={videoUrl}
-            onError={(e) => {
-              console.error('❌ Error cargando video:', videoUrl);
-              console.log('Verifica que existe: racing/videos/taller.mp4');
-            }}
-            onLoadedData={() => {
-              console.log('✅ Video cargado correctamente');
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 container mx-auto max-w-7xl px-4 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
-                       border border-gt-gold/30 rounded-full mb-6"
-            >
-<<<<<<< HEAD
-              <span className="text-gt-gold font-voga font-semibold text-sm uppercase tracking-widest">
-=======
-              <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                GT Race Workshop
-              </span>
-            </motion.div>
-
-<<<<<<< HEAD
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6 
-=======
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-march font-bold text-white mb-6 
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                         drop-shadow-2xl leading-tight">
-              {t.heroTitle}
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
-              {t.heroSubtitle}
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="#form"
-                className="px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
-                         hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
-                         shadow-lg shadow-gt-gold/50"
-              >
-                {t.heroCTA1}
-              </a>
-              <a
-                href="#services"
-                className="px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/20 
-                         text-white rounded-xl font-semibold text-lg
-                         hover:bg-white/10 hover:border-gt-gold/50 transition-all duration-300"
-              >
-                {t.heroCTA2}
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-gt-gold/50 flex items-start justify-center p-2">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-gt-gold rounded-full"
+      <div className="min-h-screen bg-black">
+        
+        {/* ============================================ */}
+        {/* HERO SECTION WITH VIDEO */}
+        {/* ============================================ */}
+        
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Video Background */}
+          <div className="absolute inset-0">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              src={videoUrl}
             />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
           </div>
-        </motion.div>
-      </section>
 
-      {/* ============================================ */}
-      {/* STATS SECTION */}
-      {/* ============================================ */}
-      
-      <section className="relative py-20 px-4 bg-gradient-to-b from-black via-gt-gray-dark/50 to-black">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.statsTitle}
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: t.stat1, label: t.stat1Label, delay: 0.1 },
-              { value: t.stat2, label: t.stat2Label, delay: 0.2 },
-              { value: t.stat3, label: t.stat3Label, delay: 0.3 },
-              { value: t.stat4, label: t.stat4Label, delay: 0.4 }
-            ].map((stat, index) => (
+          {/* Content */}
+          <div className="relative z-10 container mx-auto max-w-7xl px-4 py-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center"
+            >
               <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: stat.delay }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                         hover:border-gt-gold/50 transition-all duration-300 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-block px-6 py-3 bg-gt-gold/10 backdrop-blur-xl 
+                         border border-gt-gold/30 rounded-full mb-6"
               >
-<<<<<<< HEAD
-                <p className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">
-=======
-                <p className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                  {stat.value}
-                </p>
-                <p className="text-gray-300 font-semibold">
-                  {stat.label}
-                </p>
+                <span className="text-gt-gold font-march font-semibold text-sm uppercase tracking-widest">
+                  GT Race Workshop
+                </span>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ============================================ */}
-      {/* SERVICES SECTION */}
-      {/* ============================================ */}
-      
-      <section id="services" className="relative py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.servicesTitle}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {t.servicesSubtitle}
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {t.services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                         hover:border-gt-gold/50 transition-all duration-300 group"
-              >
-                <div className="w-16 h-16 text-gt-gold mb-6 transform group-hover:scale-110 
-                              group-hover:rotate-12 transition-all duration-300">
-                  {service.icon}
-                </div>
-                
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {service.title}
-                </h3>
-                
-                <p className="text-gray-400 leading-relaxed">
-                  {service.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* WHY US SECTION */}
-      {/* ============================================ */}
-      
-      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.whyTitle}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {t.whySubtitle}
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {t.reasons.map((reason, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                         hover:border-gt-gold/50 transition-all duration-300"
-              >
-<<<<<<< HEAD
-                <h3 className="text-2xl font-voga font-bold text-gt-gold mb-4">
-=======
-                <h3 className="text-2xl font-march font-bold text-gt-gold mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                  {reason.title}
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  {reason.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* PROCESS SECTION */}
-      {/* ============================================ */}
-      
-      <section className="relative py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.processTitle}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {t.processSubtitle}
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gt-gold via-gt-gold/50 to-transparent hidden md:block" />
-
-            <div className="space-y-12">
-              {t.steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex gap-8 items-start"
-                >
-                  <div className="flex-shrink-0 w-20 h-20 rounded-full bg-gt-gold text-black 
-<<<<<<< HEAD
-                                flex items-center justify-center text-2xl font-voga font-bold 
-=======
-                                flex items-center justify-center text-2xl font-march font-bold 
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                                shadow-lg shadow-gt-gold/50">
-                    {step.number}
-                  </div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="flex-grow bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10
-                             hover:border-gt-gold/50 transition-all duration-300"
-                  >
-<<<<<<< HEAD
-                    <h3 className="text-2xl font-voga font-bold text-white mb-3">
-=======
-                    <h3 className="text-2xl font-march font-bold text-white mb-3">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* FORM SECTION */}
-      {/* ============================================ */}
-      
-      <section id="form" className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/50 to-transparent">
-        <div className="container mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.formTitle}
-            </h2>
-            <p className="text-xl text-gray-300">
-              {t.formSubtitle}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10"
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formName}
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formEmail}
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formPhone}
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formService}
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  >
-                    <option value="" className="bg-gt-gray-dark">
-                      {t.formServicePlaceholder}
-                    </option>
-                    {t.serviceOptions.map((option, index) => (
-                      <option key={index} value={option} className="bg-gt-gray-dark">
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formBrand}
-                  </label>
-                  <input
-                    type="text"
-                    name="vehicleBrand"
-                    value={formData.vehicleBrand}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white mb-2 font-semibold">
-                    {t.formModel}
-                  </label>
-                  <input
-                    type="text"
-                    name="vehicleModel"
-                    value={formData.vehicleModel}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                             transition-all duration-300"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-white mb-2 font-semibold">
-                  {t.formMessage}
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="4"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
-                           text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
-                           transition-all duration-300 resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
-                         hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
-                         shadow-lg shadow-gt-gold/50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? t.formSubmitting : t.formButton}
-              </button>
-
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-500/20 border border-green-500/50 rounded-xl text-green-500 text-center"
-                >
-                  {t.formSuccess}
-                </motion.div>
-              )}
-
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-500 text-center"
-                >
-                  {t.formError}
-                </motion.div>
-              )}
-            </form>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* TESTIMONIALS SECTION */}
-      {/* ============================================ */}
-      
-      <section className="relative py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-<<<<<<< HEAD
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
-=======
-            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-              {t.testimonialsTitle}
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {t.testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
-                         hover:border-gt-gold/30 transition-all duration-300"
-              >
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-gt-gold" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-
-                <p className="text-gray-300 mb-6 leading-relaxed italic">
-                  "{testimonial.text}"
-                </p>
-
-                <div className="border-t border-white/10 pt-6">
-                  <p className="text-white font-semibold text-lg">{testimonial.name}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* CTA FINAL */}
-      {/* ============================================ */}
-      
-      <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-black">
-        <div className="container mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative bg-gradient-to-r from-gt-gold/20 via-gt-gold/10 to-transparent 
-                     backdrop-blur-2xl rounded-3xl p-12 border border-gt-gold/30 overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gt-gold/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gt-gold/10 rounded-full blur-3xl" />
-            
-            <div className="relative z-10 text-center">
-<<<<<<< HEAD
-              <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">
-=======
-              <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
->>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
-                {t.ctaTitle}
-              </h2>
-              <p className="text-xl text-gray-300 mb-8">
-                {t.ctaSubtitle}
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-march font-bold text-white mb-6 
+                           drop-shadow-2xl leading-tight">
+                {t.heroTitle}
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8 max-w-3xl mx-auto">
+                {t.heroSubtitle}
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
@@ -1877,23 +1253,517 @@ const Workshop = () => {
                            hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
                            shadow-lg shadow-gt-gold/50"
                 >
-                  {t.ctaButton}
+                  {t.heroCTA1}
                 </a>
                 <a
-                  href="tel:+34687999427"
-                  className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 
+                  href="#services"
+                  className="px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/20 
                            text-white rounded-xl font-semibold text-lg
-                           hover:bg-white/20 transition-all duration-300"
+                           hover:bg-white/10 hover:border-gt-gold/50 transition-all duration-300"
                 >
-                  {t.ctaButton2}
+                  {t.heroCTA2}
                 </a>
               </div>
+            </motion.div>
+          </div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          >
+            <div className="w-6 h-10 rounded-full border-2 border-gt-gold/50 flex items-start justify-center p-2">
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-1.5 h-1.5 bg-gt-gold rounded-full"
+              />
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-    </div>
+        {/* ============================================ */}
+        {/* STATS SECTION */}
+        {/* ============================================ */}
+        
+        <section className="relative py-20 px-4 bg-gradient-to-b from-black via-gt-gray-dark/50 to-black">
+          <div className="container mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.statsTitle}
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { value: t.stat1, label: t.stat1Label, delay: 0.1 },
+                { value: t.stat2, label: t.stat2Label, delay: 0.2 },
+                { value: t.stat3, label: t.stat3Label, delay: 0.3 },
+                { value: t.stat4, label: t.stat4Label, delay: 0.4 }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: stat.delay }}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
+                           hover:border-gt-gold/50 transition-all duration-300 text-center"
+                >
+                  <p className="text-4xl md:text-5xl font-march font-bold text-gt-gold mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-gray-300 font-semibold">
+                    {stat.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* SERVICES SECTION */}
+        {/* ============================================ */}
+        
+        <section id="services" className="relative py-20 px-4">
+          <div className="container mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.servicesTitle}
+              </h2>
+              <p className="text-xl text-gray-300">
+                {t.servicesSubtitle}
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {t.services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
+                           hover:border-gt-gold/50 transition-all duration-300 group"
+                >
+                  <div className="w-16 h-16 text-gt-gold mb-6 transform group-hover:scale-110 
+                                group-hover:rotate-12 transition-all duration-300">
+                    {service.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 leading-relaxed">
+                    {service.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* WHY US SECTION */}
+        {/* ============================================ */}
+        
+        <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
+          <div className="container mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.whyTitle}
+              </h2>
+              <p className="text-xl text-gray-300">
+                {t.whySubtitle}
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {t.reasons.map((reason, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
+                           hover:border-gt-gold/50 transition-all duration-300"
+                >
+                  <h3 className="text-2xl font-march font-bold text-gt-gold mb-4">
+                    {reason.title}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed">
+                    {reason.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* PROCESS SECTION */}
+        {/* ============================================ */}
+        
+        <section className="relative py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.processTitle}
+              </h2>
+              <p className="text-xl text-gray-300">
+                {t.processSubtitle}
+              </p>
+            </motion.div>
+
+            <div className="relative">
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gt-gold via-gt-gold/50 to-transparent hidden md:block" />
+
+              <div className="space-y-12">
+                {t.steps.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex gap-8 items-start"
+                  >
+                    <div className="flex-shrink-0 w-20 h-20 rounded-full bg-gt-gold text-black 
+                                  flex items-center justify-center text-2xl font-march font-bold 
+                                  shadow-lg shadow-gt-gold/50">
+                      {step.number}
+                    </div>
+
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      className="flex-grow bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10
+                               hover:border-gt-gold/50 transition-all duration-300"
+                    >
+                      <h3 className="text-2xl font-march font-bold text-white mb-3">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-300 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* FORM SECTION */}
+        {/* ============================================ */}
+        
+        <section id="form" className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/50 to-transparent">
+          <div className="container mx-auto max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.formTitle}
+              </h2>
+              <p className="text-xl text-gray-300">
+                {t.formSubtitle}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10"
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formName}
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formEmail}
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formPhone}
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formService}
+                    </label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    >
+                      <option value="" className="bg-gt-gray-dark">
+                        {t.formServicePlaceholder}
+                      </option>
+                      {t.serviceOptions.map((option, index) => (
+                        <option key={index} value={option} className="bg-gt-gray-dark">
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formBrand}
+                    </label>
+                    <input
+                      type="text"
+                      name="vehicleBrand"
+                      value={formData.vehicleBrand}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-white mb-2 font-semibold">
+                      {t.formModel}
+                    </label>
+                    <input
+                      type="text"
+                      name="vehicleModel"
+                      value={formData.vehicleModel}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                               text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                               transition-all duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-white mb-2 font-semibold">
+                    {t.formMessage}
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl
+                             text-white placeholder-gray-500 focus:border-gt-gold focus:outline-none
+                             transition-all duration-300 resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
+                           hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
+                           shadow-lg shadow-gt-gold/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? t.formSubmitting : t.formButton}
+                </button>
+
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-green-500/20 border border-green-500/50 rounded-xl text-green-500 text-center"
+                  >
+                    {t.formSuccess}
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-500 text-center"
+                  >
+                    {t.formError}
+                  </motion.div>
+                )}
+              </form>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* TESTIMONIALS SECTION */}
+        {/* ============================================ */}
+        
+        <section className="relative py-20 px-4">
+          <div className="container mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
+                {t.testimonialsTitle}
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {t.testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10
+                           hover:border-gt-gold/30 transition-all duration-300"
+                >
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-gt-gold" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed italic">
+                    "{testimonial.text}"
+                  </p>
+
+                  <div className="border-t border-white/10 pt-6">
+                    <p className="text-white font-semibold text-lg">{testimonial.name}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================ */}
+        {/* CTA FINAL */}
+        {/* ============================================ */}
+        
+        <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-black">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative bg-gradient-to-r from-gt-gold/20 via-gt-gold/10 to-transparent 
+                       backdrop-blur-2xl rounded-3xl p-12 border border-gt-gold/30 overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gt-gold/20 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gt-gold/10 rounded-full blur-3xl" />
+              
+              <div className="relative z-10 text-center">
+                <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">
+                  {t.ctaTitle}
+                </h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  {t.ctaSubtitle}
+                </p>
+
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a
+                    href="#form"
+                    className="px-8 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg
+                             hover:bg-gt-gold-light hover:scale-105 transition-all duration-300
+                             shadow-lg shadow-gt-gold/50"
+                  >
+                    {t.ctaButton}
+                  </a>
+                  <a
+                    href="tel:+34687999427"
+                    className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 
+                             text-white rounded-xl font-semibold text-lg
+                             hover:bg-white/20 transition-all duration-300"
+                  >
+                    {t.ctaButton2}
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+      </div>
+    </>
   );
 };
 

@@ -920,7 +920,7 @@ const Membership = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-voga font-bold text-white mb-6"
+              className="text-5xl md:text-7xl lg:text-8xl font-march font-bold text-white mb-6"
             >
               {content.heroSubtitle}
             </motion.h1>
@@ -995,7 +995,7 @@ const Membership = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">{content.plansTitle}</h2>
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">{content.plansTitle}</h2>
             <p className="text-xl text-gray-300">{content.plansSubtitle}</p>
           </motion.div>
 
@@ -1025,7 +1025,7 @@ const Membership = () => {
                     <Icon />
                   </div>
 
-                  <h3 className="text-3xl font-voga font-bold text-white mb-2 text-center">{plan.name}</h3>
+                  <h3 className="text-3xl font-march font-bold text-white mb-2 text-center">{plan.name}</h3>
 
                   {/* Precios removidos por solicitud del cliente */}
 
@@ -1066,19 +1066,19 @@ const Membership = () => {
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">200+</div>
+              <div className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">200+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Miembros' : 'Members'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">50+</div>
+              <div className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">50+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Eventos' : 'Events'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">200+</div>
+              <div className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">200+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Coches' : 'Cars'}</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center">
-              <div className="text-5xl md:text-6xl font-voga font-bold text-gt-gold mb-2">3+</div>
+              <div className="text-5xl md:text-6xl font-march font-bold text-gt-gold mb-2">3+</div>
               <div className="text-gray-300 text-lg">{language === 'es' ? 'Países' : 'Countries'}</div>
             </motion.div>
           </div>
@@ -1093,7 +1093,7 @@ const Membership = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">{content.benefitsTitle}</h2>
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">{content.benefitsTitle}</h2>
             <p className="text-xl text-gray-300">{content.benefitsSubtitle}</p>
           </motion.div>
 
@@ -1112,7 +1112,7 @@ const Membership = () => {
                   <div className="w-16 h-16 text-gt-gold mb-6 group-hover:scale-110 transition-transform duration-300">
                     <Icon />
                   </div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{benefit.title}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{benefit.title}</h3>
                   <p className="text-gray-300">{benefit.description}</p>
                 </motion.div>
               );
@@ -1135,7 +1135,7 @@ const Membership = () => {
               className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 md:p-12 border border-white/10"
             >
               <div className="text-center mb-8">
-                <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-4">{content.formTitle}</h2>
+                <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-4">{content.formTitle}</h2>
                 <p className="text-xl text-gray-300 mb-6">{content.formSubtitle}</p>
 
                 <div className="inline-flex items-center px-6 py-3 rounded-xl bg-gt-gold/20 border border-gt-gold/30">
@@ -1156,7 +1156,7 @@ const Membership = () => {
 
                 {/* INFORMACIÓN PERSONAL */}
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.personalInfo}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{content.personalInfo}</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-gray-300 mb-2">{content.firstName} *</label>
@@ -1188,7 +1188,7 @@ const Membership = () => {
 
                 {/* DIRECCIÓN */}
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.addressInfo}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{content.addressInfo}</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="md:col-span-2">
                       <label className="block text-gray-300 mb-2">{content.address}</label>
@@ -1215,7 +1215,7 @@ const Membership = () => {
 
                 {/* INFORMACIÓN ADICIONAL */}
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.additionalInfo}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{content.additionalInfo}</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-gray-300 mb-2">{content.livesInMarbella}</label>
@@ -1265,7 +1265,7 @@ const Membership = () => {
 
                 {/* INTENCIÓN COCHE */}
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.carIntentionTitle}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{content.carIntentionTitle}</h3>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {['none', 'buy', 'sell'].map((option) => (
                       <label key={option}
@@ -1287,7 +1287,7 @@ const Membership = () => {
                 {/* FORMULARIO VENDER */}
                 {formData.carIntention === 'sell' && (
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>
-                    <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.sellCarTitle}</h3>
+                    <h3 className="text-2xl font-march font-bold text-white mb-4">{content.sellCarTitle}</h3>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-gray-300 mb-2">{content.sellCarBrand}</label>
@@ -1383,7 +1383,7 @@ const Membership = () => {
                 {/* FORMULARIO COMPRAR */}
                 {formData.carIntention === 'buy' && (
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>
-                    <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.buyCarTitle}</h3>
+                    <h3 className="text-2xl font-march font-bold text-white mb-4">{content.buyCarTitle}</h3>
                     <div>
                       <label className="block text-gray-300 mb-2">{content.buyCarDescription}</label>
                       <textarea name="buyCarDescription" value={formData.buyCarDescription} onChange={handleInputChange} rows="8"
@@ -1395,7 +1395,7 @@ const Membership = () => {
 
                 {/* CONTRASEÑA */}
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-4">{content.accountInfo}</h3>
+                  <h3 className="text-2xl font-march font-bold text-white mb-4">{content.accountInfo}</h3>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-gray-300 mb-2">{content.password} *</label>
@@ -1454,7 +1454,7 @@ const Membership = () => {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
               className="bg-white/5 backdrop-blur-2xl rounded-3xl p-12 border border-gt-gold/50 text-center">
               <div className="w-24 h-24 mx-auto mb-6 text-gt-gold"><CheckCircleIcon /></div>
-              <h2 className="text-4xl font-voga font-bold text-white mb-4">{content.successTitle}</h2>
+              <h2 className="text-4xl font-march font-bold text-white mb-4">{content.successTitle}</h2>
               <p className="text-xl text-gray-300 mb-8">{content.successMessage}</p>
               <button onClick={() => { setSuccess(false); setShowForm(false); setSelectedPlan(null); document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
                 className="px-10 py-4 bg-gt-gold text-black rounded-xl font-semibold text-lg hover:bg-gt-gold-light hover:scale-105 transition-all duration-300 shadow-lg shadow-gt-gold/50">
@@ -1469,7 +1469,7 @@ const Membership = () => {
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">{content.testimonialsTitle}</h2>
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">{content.testimonialsTitle}</h2>
             <p className="text-xl text-gray-300">{content.testimonialsSubtitle}</p>
           </motion.div>
 
@@ -1497,7 +1497,7 @@ const Membership = () => {
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">{content.faqTitle}</h2>
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">{content.faqTitle}</h2>
             <p className="text-xl text-gray-300">{content.faqSubtitle}</p>
           </motion.div>
 
@@ -1523,7 +1523,7 @@ const Membership = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="bg-white/5 backdrop-blur-2xl rounded-3xl p-12 md:p-16 border border-white/10 text-center">
             <div className="w-20 h-20 mx-auto mb-6 text-gt-gold"><CrownIcon /></div>
-            <h2 className="text-4xl md:text-5xl font-voga font-bold text-white mb-6">{content.ctaTitle}</h2>
+            <h2 className="text-4xl md:text-5xl font-march font-bold text-white mb-6">{content.ctaTitle}</h2>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">{content.ctaDescription}</p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <button onClick={() => document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
@@ -1541,7 +1541,7 @@ const Membership = () => {
       <section className="relative py-20 px-4 bg-gradient-to-b from-transparent via-gt-gray-dark/30 to-transparent">
         <div className="container mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {language === 'es' ? '¿Por Qué Elegirnos?' : 'Why Choose Us?'}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1557,7 +1557,7 @@ const Membership = () => {
                   <span className="text-black font-bold text-2xl">1</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                  <h3 className="text-2xl font-march font-bold text-white mb-3">
                     {language === 'es' ? 'Ubicación Privilegiada' : 'Prime Location'}
                   </h3>
                   <p className="text-gray-300">
@@ -1576,7 +1576,7 @@ const Membership = () => {
                   <span className="text-black font-bold text-2xl">2</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                  <h3 className="text-2xl font-march font-bold text-white mb-3">
                     {language === 'es' ? 'Instalaciones de Lujo' : 'Luxury Facilities'}
                   </h3>
                   <p className="text-gray-300">
@@ -1595,7 +1595,7 @@ const Membership = () => {
                   <span className="text-black font-bold text-2xl">3</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                  <h3 className="text-2xl font-march font-bold text-white mb-3">
                     {language === 'es' ? 'Equipo Experto' : 'Expert Team'}
                   </h3>
                   <p className="text-gray-300">
@@ -1614,7 +1614,7 @@ const Membership = () => {
                   <span className="text-black font-bold text-2xl">4</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                  <h3 className="text-2xl font-march font-bold text-white mb-3">
                     {language === 'es' ? 'Red Exclusiva' : 'Exclusive Network'}
                   </h3>
                   <p className="text-gray-300">
@@ -1634,7 +1634,7 @@ const Membership = () => {
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-7xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-voga font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-march font-bold text-white mb-4">
               {language === 'es' ? 'Tu Camino a la Membresía' : 'Your Path to Membership'}
             </h2>
             <p className="text-xl text-gray-300">
@@ -1647,9 +1647,9 @@ const Membership = () => {
               <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-gt-gold to-transparent -translate-x-4" />
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 text-center hover:border-gt-gold/50 transition-all duration-300">
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-gt-gold to-yellow-600 rounded-full flex items-center justify-center">
-                  <span className="text-black font-voga font-bold text-2xl">01</span>
+                  <span className="text-black font-march font-bold text-2xl">01</span>
                 </div>
-                <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                <h3 className="text-2xl font-march font-bold text-white mb-3">
                   {language === 'es' ? 'Solicitud' : 'Application'}
                 </h3>
                 <p className="text-gray-300">
@@ -1662,9 +1662,9 @@ const Membership = () => {
               <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-gt-gold to-transparent -translate-x-4" />
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 text-center hover:border-gt-gold/50 transition-all duration-300">
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-gt-gold to-yellow-600 rounded-full flex items-center justify-center">
-                  <span className="text-black font-voga font-bold text-2xl">02</span>
+                  <span className="text-black font-march font-bold text-2xl">02</span>
                 </div>
-                <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                <h3 className="text-2xl font-march font-bold text-white mb-3">
                   {language === 'es' ? 'Revisión' : 'Review'}
                 </h3>
                 <p className="text-gray-300">
@@ -1677,9 +1677,9 @@ const Membership = () => {
               <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-gt-gold to-transparent -translate-x-4" />
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 text-center hover:border-gt-gold/50 transition-all duration-300">
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-gt-gold to-yellow-600 rounded-full flex items-center justify-center">
-                  <span className="text-black font-voga font-bold text-2xl">03</span>
+                  <span className="text-black font-march font-bold text-2xl">03</span>
                 </div>
-                <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                <h3 className="text-2xl font-march font-bold text-white mb-3">
                   {language === 'es' ? 'Visita' : 'Visit'}
                 </h3>
                 <p className="text-gray-300">
@@ -1691,9 +1691,9 @@ const Membership = () => {
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.45 }} className="relative">
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 text-center hover:border-gt-gold/50 transition-all duration-300">
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-gt-gold to-yellow-600 rounded-full flex items-center justify-center">
-                  <span className="text-black font-voga font-bold text-2xl">04</span>
+                  <span className="text-black font-march font-bold text-2xl">04</span>
                 </div>
-                <h3 className="text-2xl font-voga font-bold text-white mb-3">
+                <h3 className="text-2xl font-march font-bold text-white mb-3">
                   {language === 'es' ? 'Bienvenida' : 'Welcome'}
                 </h3>
                 <p className="text-gray-300">

@@ -186,7 +186,7 @@ const RegistrationsAdmin = () => {
         
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-voga font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-march font-bold mb-2 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
             Gestión de Inscripciones
           </h1>
           <p className="text-gray-400">Administra todas las inscripciones a eventos</p>
@@ -413,7 +413,7 @@ const DetailModal = ({ registration, onClose, onUpdateStatus, onUpdatePayment, o
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h2 className="text-2xl font-voga font-bold text-white mb-2">Detalle de Inscripción</h2>
+            <h2 className="text-2xl font-march font-bold text-white mb-2">Detalle de Inscripción</h2>
             <p className="text-gray-400">ID: {registration.id.slice(0, 8)}...</p>
           </div>
           <button

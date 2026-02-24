@@ -324,7 +324,7 @@ Office hours: Monday to Friday, 9:00 AM - 6:00 PM CET`,
             className="text-center mb-12"
           >
 <<<<<<< HEAD
-            <h1 className="text-4xl md:text-6xl font-voga font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
 =======
             <h1 className="text-4xl md:text-6xl font-march font-bold mb-4 bg-gradient-to-r from-gt-gold to-yellow-500 bg-clip-text text-transparent">
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
@@ -345,7 +345,7 @@ Office hours: Monday to Friday, 9:00 AM - 6:00 PM CET`,
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
               <div key={num}>
 <<<<<<< HEAD
-                <h2 className="text-2xl font-voga font-bold text-gt-gold mb-4">{t[`section${num}Title`]}</h2>
+                <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t[`section${num}Title`]}</h2>
 =======
                 <h2 className="text-2xl font-march font-bold text-gt-gold mb-4">{t[`section${num}Title`]}</h2>
 >>>>>>> f25943209545c56670f20683564d6aa7e80cb14b
