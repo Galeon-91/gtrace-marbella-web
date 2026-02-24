@@ -220,9 +220,9 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-white font-semibold mb-1 text-lg">{t.email}</h3>
-                      <a href="mailto:info@gtracemarbella.com" 
+                      <a href="mailto:members@gtracemarbella.com" 
                          className="text-gray-400 hover:text-gt-gold transition-colors">
-                        info@gtracemarbella.com
+                        members@gtracemarbella.com
                       </a>
                     </div>
                   </motion.div>
