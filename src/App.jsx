@@ -116,6 +116,12 @@ function App() {
                   </ProtectedRoute>
                 } 
               />
+
+              {/* ========================================== */}
+              {/* PARCHE PARA GOOGLE (reedirigimos los enlaces antiguos)        */}
+              {/* ========================================== */}
+              {/* Atrapo cualquier ruta que empiece por /es/ y manda al inicio */}
+              <Route path="/es/*" element={<Navigate to="/" replace />} />
               
               {/* ========================================== */}
               {/* 404                                        */}
