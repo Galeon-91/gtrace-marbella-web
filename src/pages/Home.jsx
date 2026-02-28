@@ -11,14 +11,14 @@ const Home = () => {
   const { url: heroVideoUrl } = useSupabaseAsset('videos/hero-video.mp4');
 
   // ⭐ CARGAR IMÁGENES DE SERVICIOS DESDE SUPABASE (NO CAMBIA)
-  const { url: clubEventoUrl } = useSupabaseAsset('services/club-evento.jpg');
-  const { url: ventaCountachUrl } = useSupabaseAsset('services/venta-countach.jpg');
-  const { url: competicionPilotosUrl } = useSupabaseAsset('services/competicion-pilotos.jpg');
-  const { url: garageMulticolorUrl } = useSupabaseAsset('services/garage-multicolor.jpg');
-  const { url: tallerGarageUrl } = useSupabaseAsset('services/taller-garage.jpg');
+  const { url: clubEventoUrl } = useSupabaseAsset('services/club-evento.webp');
+  const { url: ventaCountachUrl } = useSupabaseAsset('services/venta-countach.webp');
+  const { url: competicionPilotosUrl } = useSupabaseAsset('services/competicion-pilotos.webp');
+  const { url: garageMulticolorUrl } = useSupabaseAsset('services/garage-multicolor.webp');
+  const { url: tallerGarageUrl } = useSupabaseAsset('services/taller-garage.webp');
 
   // ⭐ CARGAR IMÁGENES DEL GARAGE DESDE SUPABASE (NO CAMBIA)
-  const { url: garagePlataformasUrl } = useSupabaseAsset('gallery/garage-plataformas.jpg');
+  const { url: garagePlataformasUrl } = useSupabaseAsset('gallery/garage-plataformas.webp');
 
   // ⭐ CARGAR IMÁGENES DE EVENTOS DESDE SUPABASE (NO CAMBIA)
   const { url: concursoBellezaUrl } = useSupabaseAsset('events/concurso-belleza3.png');

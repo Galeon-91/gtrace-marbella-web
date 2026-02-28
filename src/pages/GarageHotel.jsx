@@ -170,12 +170,12 @@ const GarageHotel = () => {
   const { url: garageVideoUrl } = useSupabaseAsset('videos/garage.mp4');
   
   // Imágenes del garaje
-  const { url: garageImg1 } = useSupabaseAsset('gallery/garage-plataformas.jpg');
-  const { url: garageImg2 } = useSupabaseAsset('gallery/lucescirculares.jpg');
-  const { url: garageImg3 } = useSupabaseAsset('services/garage2.jpg');
-  const { url: garageImg4 } = useSupabaseAsset('services/taller-garage.jpg');
-  const { url: garageImg5 } = useSupabaseAsset('club/venta-countach.jpg');
-  const { url: garageImg6 } = useSupabaseAsset('services/garage3.jpg');
+  const { url: garageImg1 } = useSupabaseAsset('gallery/garage-plataformas.webp');
+  const { url: garageImg2 } = useSupabaseAsset('gallery/lucescirculares.webp');
+  const { url: garageImg3 } = useSupabaseAsset('services/garage2.webp');
+  const { url: garageImg4 } = useSupabaseAsset('services/taller-garage.webp');
+  const { url: garageImg5 } = useSupabaseAsset('club/venta-countach.webp');
+  const { url: garageImg6 } = useSupabaseAsset('services/garage3.webp');
 
   // ============================================
   // TRADUCCIONES

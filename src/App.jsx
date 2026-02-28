@@ -42,20 +42,20 @@ const Workshop = lazy(() => import('./pages/services/Workshop')); // ← AGREGAD
 const Privacy = lazy(() => import('./pages/Privacy')); // ← AGREGADO
 const Terms = lazy(() => import('./pages/Terms')); // ← AGREGADO
 
-// ⭐ ADMIN - SOLO Login y Dashboard
+// ADMIN - SOLO Login y Dashboard
 const AdminLogin = lazy(() => import('./pages/admin/Login'));
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
 
 function App() {
   const location = useLocation();
   
-  // ⭐ Detectar si estamos en rutas admin
+  // Detectar si estamos en rutas admin
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
     <HelmetProvider> {/* ← AGREGADO - WRAPPER PRINCIPAL */}
       <div className="min-h-screen bg-gt-black text-white flex flex-col">
-        {/* ⭐ Navbar SOLO en rutas públicas */}
+        {/* Navbar SOLO en rutas públicas */}
         {!isAdminRoute && <Navbar />}
         
         <main className="flex-grow">
@@ -101,7 +101,7 @@ function App() {
 
               
               {/* ========================================== */}
-              {/* RUTAS DE ADMIN - SOLO 2 RUTAS ⭐⭐⭐        */}
+              {/* RUTAS DE ADMIN - SOLO 2 RUTAS         */}
               {/* ========================================== */}
               
               {/* 1. Login - Sin protección */}
@@ -132,7 +132,7 @@ function App() {
           </Suspense>
         </main>
         
-        {/* ⭐ Footer, WhatsApp y ScrollToTop SOLO en rutas públicas */}
+        {/* Footer, WhatsApp y ScrollToTop SOLO en rutas públicas */}
         {!isAdminRoute && <Footer />}
         {!isAdminRoute && <WhatsAppButton />}
         {!isAdminRoute && <ScrollToTop />}

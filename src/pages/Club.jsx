@@ -27,20 +27,20 @@ const Club = () => {
   const { url: heroVideoUrl } = useSupabaseAsset('videos/ferrari.mp4');
   
   // Imágenes principales
-  const { url: estiloVidaImageUrl } = useSupabaseAsset('club/venta-countach.jpg');
+  const { url: estiloVidaImageUrl } = useSupabaseAsset('club/venta-countach.webp');
   
   // Galería (6 fotos)
-  const { url: galeriaImg1 } = useSupabaseAsset('gallery/lucescirculares.jpg');
-  const { url: galeriaImg2 } = useSupabaseAsset('gallery/garage-plataformas.jpg');
-  const { url: galeriaImg3 } = useSupabaseAsset('services/taller-garage.jpg');
-  const { url: galeriaImg4 } = useSupabaseAsset('club/alquiler-interior.jpg');
-  const { url: galeriaImg5 } = useSupabaseAsset('services/competicion-pilotos.jpg');
-  const { url: galeriaImg6 } = useSupabaseAsset('services/club-evento.jpg');
+  const { url: galeriaImg1 } = useSupabaseAsset('gallery/lucescirculares.webp');
+  const { url: galeriaImg2 } = useSupabaseAsset('gallery/garage-plataformas.webp');
+  const { url: galeriaImg3 } = useSupabaseAsset('services/taller-garage.webp');
+  const { url: galeriaImg4 } = useSupabaseAsset('club/alquiler-interior.webp');
+  const { url: galeriaImg5 } = useSupabaseAsset('services/competicion-pilotos.webp');
+  const { url: galeriaImg6 } = useSupabaseAsset('services/club-evento.webp');
   
   // Fondos de acordeón
   const { url: networkingBgUrl } = useSupabaseAsset('club/networking-bg.jpg');
   const { url: eventosBgUrl } = useSupabaseAsset('club/eventos-bg.jpg');
-  const { url: serviciosBgUrl } = useSupabaseAsset('services/taller-garage.jpg');
+  const { url: serviciosBgUrl } = useSupabaseAsset('services/taller-garage.webp');
   
   // Fondo formulario
   const { url: formularioBgUrl } = useSupabaseAsset('gallery/garage-multicolor.jpg');
